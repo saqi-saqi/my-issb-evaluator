@@ -1,0 +1,46 @@
+---
+source_type: official
+dimension: general
+topic: testing_schedule
+authority_level: 1
+title: Official ISSB Four-Day Selection Schedule
+---
+
+# ISSB FOUR-DAY SELECTION SCHEDULE
+Source: Inter Services Selection Board (issb.gov.pk)
+Authority Level: Official (Level 1)
+Dimension: Process & Schedule
+
+## Arrival Day (Day 0 / Call-up Day)
+- Arrival of candidates at ISSB Centre (Kohat, Gujranwala, Malir, or Quetta).
+- Reception, document verification, allotment of chest numbers, room allotment, and opening briefing.
+
+## Day 1: Psychological & Screening Tests
+- Intelligence Tests: Verbal and Non-Verbal Intelligence Tests.
+- Mechanical Aptitude Test (MAT).
+- Psychological Tests (Written Battery):
+  * Thematic Apperception Test (TAT / Picture Story Writing).
+  * Word Association Test (WAT - 60 words, 10 seconds each).
+  * Sentence Completion Tests (English and Urdu).
+  * Self-Description / Biodata questionnaire.
+
+## Day 2: Outdoor Group Tasks (GTO Day 1) & Deputy President Interviews
+- Group Discussions (GD) on current social and political topics.
+- Group Planning Exercise (GPE / Military Planning).
+- Progressive Group Task (PGT).
+- Half Group Task (HGT).
+- Deputy President Interviews begin (half of the candidates interviewed on Day 2).
+
+## Day 3: Individual Obstacles, Command Tasks & Deputy President Interviews
+- Individual Obstacles (running, jumping, vaulting, rope climbing, high ditch).
+- Command Tasks (each candidate acts as Commander with 2-3 subordinates).
+- Final Group Task (FGT).
+- Deputy President Interviews continue for remaining candidates.
+- Psychologist Structured Interviews for selected candidates requiring deeper psychological probing.
+
+## Day 4: Board Conference & Departure
+- The Board Conference convenes with the President, Deputy President, Senior Psychologists, and GTOs.
+- Composite profile of each candidate is reviewed.
+- Candidate may be called in front of the board for a brief final conference interview if further clarification is needed.
+- Final recommendations determined.
+- Departure of candidates. Results are subsequently dispatched to respective Service Headquarters (GHQ, NHQ, AHQ).

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "COM_001",
+    "category": "communication",
+    "question": "Have you ever given a speech or presentation in front of a large audience? Tell me about the experience — how did you prepare and how did it go?",
+    "difficulty": 1,
+    "persona": "both",
+    "intent": "Assesses baseline public speaking exposure and the candidate's self-awareness about their verbal delivery, preparation habits, and comfort with being the center of attention.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "What was the most nervous moment during that speech, and how did you push through it?",
+      "If you noticed the audience losing interest midway, what would you do to re-engage them?",
+      "How do you think your speaking ability compares to your peers — and what are you doing to improve it?"
+    ]
+  },
+  {
+    "id": "COM_002",
+    "category": "communication",
+    "question": "Describe a situation where a miscommunication between you and someone else led to a problem. What happened and how did you fix it?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Probes the candidate's ability to recognize their own role in communication failures, take ownership of misunderstandings, and implement corrective measures.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "Do you think the miscommunication was more your fault or the other person's? What makes you say that?",
+      "After resolving it, did you change how you communicate to prevent similar issues in the future?",
+      "If the other person blamed you entirely for the miscommunication, how would you respond?"
+    ]
+  },
+  {
+    "id": "COM_003",
+    "category": "communication",
+    "question": "Have you ever participated in a formal debate or argument where you had to defend a position you did not personally agree with? How did you approach it?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Evaluates intellectual flexibility, persuasive reasoning ability, and whether the candidate can construct coherent arguments independently of personal bias — a key indicator of cognitive adaptability.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "How did you research and build arguments for a position you disagreed with — what was your strategy?",
+      "Did defending that position change your own views on the topic at all, even slightly?",
+      "If your opponent made a point you privately agreed with, how did you handle that moment during the debate?"
+    ]
+  },
+  {
+    "id": "COM_004",
+    "category": "communication",
+    "question": "Tell me about a time when you had to listen carefully to someone — a teacher, friend, or family member — before responding, even though you wanted to interrupt. What was the situation?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Measures active listening capacity and impulse control in conversation, revealing whether the candidate values understanding others before asserting their own viewpoint.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "What made you hold back from interrupting — was it respect, strategy, or something else?",
+      "After listening fully, did your intended response change from what you originally wanted to say?",
+      "In group settings, do you tend to speak first or listen first — and why do you think that is?"
+    ]
+  },
+  {
+    "id": "COM_005",
+    "category": "communication",
+    "question": "If you were appointed as a squad leader and had to brief your team on a complex mission plan with only five minutes to prepare, how would you structure your communication?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests the candidate's ability to organize thoughts rapidly under time pressure, prioritize critical information, and deliver clear instructions — essential for military communication contexts.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "How would you ensure every team member understood the plan — especially the weaker ones who might hesitate to ask questions?",
+      "If midway through your briefing a team member challenged your plan in front of everyone, how would you handle it?",
+      "What would you do if after the briefing you realized you forgot to mention a critical detail?"
+    ]
+  }
+]

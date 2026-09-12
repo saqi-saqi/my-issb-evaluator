@@ -1,0 +1,44 @@
+[
+  {
+    "id": "DEC_001",
+    "category": "decision_making",
+    "question": "Walk me through the toughest decision you have had to make in the past two years. What alternatives did you consider and why did you choose that path?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses structured reasoning, awareness of trade-offs, and decisive action.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Did you consult anyone before making that decision?",
+      "Were there unexpected negative consequences that arose later?",
+      "Would you make the exact same choice today with the knowledge you now possess?"
+    ]
+  },
+  {
+    "id": "DEC_002",
+    "category": "decision_making",
+    "question": "You are commanding a small patrol in rough terrain. A civilian approaches you claiming an injured child needs immediate medical evacuation, but diverting your patrol violates your operational timeline for securing a vital bridge. What do you do?",
+    "difficulty": 4,
+    "persona": "deputy_president",
+    "intent": "Evaluates ethical balance, mission primacy, tactical problem-solving, and communication with higher headquarters.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "Can you split your patrol, or does that violate tactical security?",
+      "What if you cannot establish radio contact with headquarters?",
+      "How do you ensure this civilian is not an adversary decoy or trap?"
+    ]
+  },
+  {
+    "id": "DEC_003",
+    "category": "decision_making",
+    "question": "You discover that a close friend who is also a candidate at ISSB is using forbidden notes during a written test. What action do you take?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Tests the intersection of loyalty, honor, friendship, and institutional rules.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Would you confront your friend privately or immediately report to the presiding officer?",
+      "What if your friend begs you, saying their entire family's future depends on passing?",
+      "How does integrity affect the trust between officers in combat?"
+    ]
+  }
+]

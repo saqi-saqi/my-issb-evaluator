@@ -1,0 +1,272 @@
+[
+  {
+    "id": "Q01",
+    "query": "What are the 14 Officer Like Qualities and their four fundamental categories in ISSB?",
+    "expected_source_type": "official",
+    "expected_dimension": "general",
+    "expected_topics": ["fourteen_olqs"],
+    "relevant_terms": ["planning", "social adaptability", "dynamic", "character", "reasoning"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q02",
+    "query": "What happens during Day 2 of the four day selection schedule at ISSB centres?",
+    "expected_source_type": "official",
+    "expected_dimension": "general",
+    "expected_topics": ["testing_schedule"],
+    "relevant_terms": ["psychological", "interview", "tests", "schedule"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q03",
+    "query": "What is the official candidate guideline regarding honesty and admitting when you do not know?",
+    "expected_source_type": ["official", "preparation"],
+    "expected_dimension": "general",
+    "expected_topics": ["candidate_guidelines"],
+    "relevant_terms": ["honesty", "admit", "straightforwardness", "guidelines"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q04",
+    "query": "How does the Deputy President assess candidates in the interview room according to selection dimensions?",
+    "expected_source_type": "official",
+    "expected_dimension": "general",
+    "expected_topics": ["selection_dimensions"],
+    "relevant_terms": ["deputy president", "intellect", "general awareness", "temperament"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q05",
+    "query": "What is the whole person concept and board conference philosophy in the ISSB selection system?",
+    "expected_source_type": "official",
+    "expected_dimension": "general",
+    "expected_topics": ["selection_system"],
+    "relevant_terms": ["board conference", "whole person", "independent"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q06",
+    "query": "Gross emotion regulation model and cognitive reappraisal under military interview stress",
+    "expected_source_type": "academic",
+    "expected_dimension": "psychologist",
+    "expected_topics": ["emotional_regulation_stress"],
+    "relevant_terms": ["reappraisal", "suppression", "gross", "resilience"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q07",
+    "query": "Transformational leadership competencies and small group peer dynamics in assessment centers",
+    "expected_source_type": "academic",
+    "expected_dimension": "deputy_president",
+    "expected_topics": ["leadership_competencies"],
+    "relevant_terms": ["transformational", "peer", "cohesion", "competencies"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q08",
+    "query": "Predictive validity of multi-method assessment centers and military psychology selection",
+    "expected_source_type": "academic",
+    "expected_dimension": "general",
+    "expected_topics": ["military_psychology_and_selection"],
+    "relevant_terms": ["predictive validity", "assessment center", "high reliability"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q09",
+    "query": "Situational judgment theory construct-driven dilemmas in officer candidate testing",
+    "expected_source_type": ["academic", "official"],
+    "expected_dimension": "deputy_president",
+    "expected_topics": ["situational_judgment_theory"],
+    "relevant_terms": ["situational judgment", "dilemma", "cognitive load"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q10",
+    "query": "Observable positive indicators and weaknesses for leadership and personal accountability",
+    "expected_source_type": "evaluation",
+    "expected_dimension": "deputy_president",
+    "expected_topics": ["leadership"],
+    "relevant_terms": ["initiative", "accountability", "delegation", "credit"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q11",
+    "query": "Observable behavioral indicators for verbal communication clarity and expression",
+    "expected_source_type": "evaluation",
+    "expected_dimension": "deputy_president",
+    "expected_topics": ["communication"],
+    "relevant_terms": ["verbal clarity", "articulation", "structured delivery", "evasion"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q12",
+    "query": "Observable criteria for teamwork social adaptability and peer collaboration",
+    "expected_source_type": "evaluation",
+    "expected_dimension": "deputy_president",
+    "expected_topics": ["teamwork"],
+    "relevant_terms": ["cooperation", "collaborative", "peer", "ego"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q13",
+    "query": "Observable indicators for stress response emotional poise and non-defensiveness",
+    "expected_source_type": "evaluation",
+    "expected_dimension": "psychologist",
+    "expected_topics": ["stress_response"],
+    "relevant_terms": ["poise", "counter-probes", "defensiveness", "volatility"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q14",
+    "query": "Observable indicators for integrity moral foundation and acknowledging mistakes",
+    "expected_source_type": ["evaluation", "official"],
+    "expected_dimension": "psychologist",
+    "expected_topics": ["integrity_responsibility"],
+    "relevant_terms": ["integrity", "ownership", "responsibility", "truthfulness"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q15",
+    "query": "Observable indicators for genuine career motivation vs superficial armed forces glamour",
+    "expected_source_type": "evaluation",
+    "expected_dimension": "psychologist",
+    "expected_topics": ["motivation"],
+    "relevant_terms": ["service motivation", "values", "intrinsic", "glamour"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q16",
+    "query": "Observable criteria for decision making under uncertainty and risk analysis",
+    "expected_source_type": "evaluation",
+    "expected_dimension": "deputy_president",
+    "expected_topics": ["decision_making"],
+    "relevant_terms": ["options", "decisive", "risk", "analysis paralysis"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q17",
+    "query": "Observable indicators for self-confidence initiative and handling counter-arguments",
+    "expected_source_type": ["evaluation", "official"],
+    "expected_dimension": "deputy_president",
+    "expected_topics": ["confidence_initiative"],
+    "relevant_terms": ["conviction", "initiative", "counter-arguments", "poise"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q18",
+    "query": "Observable indicators for general knowledge analytical reasoning and intellectual faculty",
+    "expected_source_type": "evaluation",
+    "expected_dimension": "deputy_president",
+    "expected_topics": ["general_knowledge_intellect"],
+    "relevant_terms": ["grasp", "analytical", "facts", "confabulation"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q19",
+    "query": "Essential dos and donts for ISSB interview posture and honesty",
+    "expected_source_type": "preparation",
+    "expected_dimension": "general",
+    "expected_topics": ["dos_and_donts"],
+    "relevant_terms": ["posture", "bluff", "fidgeting", "eye contact"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q20",
+    "query": "Interview preparation guidance using the STAR method for personal experiences",
+    "expected_source_type": "preparation",
+    "expected_dimension": "general",
+    "expected_topics": ["interview_preparation_guidance"],
+    "relevant_terms": ["STAR", "situation", "task", "action", "result"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q21",
+    "query": "Pakistan Armed Forces modernization JF-17 Block 3 and Hangor submarines",
+    "expected_source_type": "current_affairs",
+    "expected_dimension": "general_knowledge",
+    "expected_topics": ["pakistan_defence"],
+    "relevant_terms": ["JF-17", "Hangor", "modernization", "AIP"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q22",
+    "query": "Nuclear deterrence Full Spectrum Deterrence and National Command Authority NCA",
+    "expected_source_type": "current_affairs",
+    "expected_dimension": "general_knowledge",
+    "expected_topics": ["pakistan_defence"],
+    "relevant_terms": ["Full Spectrum Deterrence", "NCA", "Shaheen", "Ababeel"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q23",
+    "query": "Pakistan economy IMF Extended Fund Facility EFF and Special Investment Facilitation Council SIFC",
+    "expected_source_type": "current_affairs",
+    "expected_dimension": "general_knowledge",
+    "expected_topics": ["pakistan_economy"],
+    "relevant_terms": ["IMF", "SIFC", "circular debt", "fiscal"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q24",
+    "query": "Indus Waters Treaty 1960 western rivers Tarbela Mangla Diamer Bhasha dams",
+    "expected_source_type": "current_affairs",
+    "expected_dimension": "general_knowledge",
+    "expected_topics": ["pakistan_geography_water"],
+    "relevant_terms": ["Indus Waters Treaty", "Tarbela", "Mangla", "rivers"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q25",
+    "query": "CPEC Phase 2 Gwadar Port and international geopolitical alliances",
+    "expected_source_type": "current_affairs",
+    "expected_dimension": "general_knowledge",
+    "expected_topics": ["international_geopolitics"],
+    "relevant_terms": ["CPEC", "Gwadar", "geopolitics", "SCO"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q26",
+    "query": "Nishan-e-Haider recipients and highest military gallantry awards in Pakistan",
+    "expected_source_type": "current_affairs",
+    "expected_dimension": "general_knowledge",
+    "expected_topics": ["pakistan_defence"],
+    "relevant_terms": ["Nishan-e-Haider", "Sarwar", "Aziz Bhatti", "Rashid Minhas"],
+    "should_abstain": false
+  },
+  {
+    "id": "Q27",
+    "query": "What is the recipe for baking a chocolate cake with vanilla frosting?",
+    "expected_source_type": null,
+    "expected_dimension": null,
+    "expected_topics": [],
+    "relevant_terms": [],
+    "should_abstain": true
+  },
+  {
+    "id": "Q28",
+    "query": "How to write a React 18 component using TypeScript and Tailwind CSS?",
+    "expected_source_type": null,
+    "expected_dimension": null,
+    "expected_topics": [],
+    "relevant_terms": [],
+    "should_abstain": true
+  },
+  {
+    "id": "Q29",
+    "query": "Stock prices and cryptocurrency Bitcoin prices for today",
+    "expected_source_type": null,
+    "expected_dimension": null,
+    "expected_topics": [],
+    "relevant_terms": [],
+    "should_abstain": true
+  },
+  {
+    "id": "Q30",
+    "query": "What is the capital of Mars and alien civilization history?",
+    "expected_source_type": null,
+    "expected_dimension": null,
+    "expected_topics": [],
+    "relevant_terms": [],
+    "should_abstain": true
+  }
+]

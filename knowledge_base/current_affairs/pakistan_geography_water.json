@@ -1,0 +1,61 @@
+{
+  "source_type": "current_affairs",
+  "category": "pakistan_geography_water",
+  "last_updated": "2026-09-01",
+  "topics": [
+    {
+      "title": "Pakistan River Systems and Points of Origin",
+      "date": "2026-08-15",
+      "summary": "Pakistan's hydro-network is anchored by the Indus River and its eastern and western tributaries, vital for national agriculture, drinking water, and hydro-power generation.",
+      "key_facts": [
+        "Indus River (Sindhu): Originates near Lake Mansarovar in Tibetan Plateau, enters Pakistan through Gilgit-Baltistan, flows approx 3,180 km into Arabian Sea.",
+        "Jhelum River: Originates from Verinag Spring in Indian-administered Jammu and Kashmir, joins Chenab at Trimmu.",
+        "Chenab River: Originates from Baralacha Pass in Himachal Pradesh (Chandra and Bhaga streams), joins Indus at Panjnad.",
+        "Ravi River: Originates near Rohtang Pass in Himachal Pradesh (Bara Bhangal).",
+        "Sutlej River: Originates from Lake Rakshastal near Mount Kailash in Tibet.",
+        "Panjnad: The confluence where Jhelum, Chenab, Ravi, Beas, and Sutlej unite before discharging into the Indus at Mithankot."
+      ],
+      "potential_interview_questions": [
+        "Name the five major rivers of Pakistan and their points of origin.",
+        "What is the strategic and economic significance of Panjnad?",
+        "Why is the Indus basin termed the lifeline of Pakistan's economy?"
+      ]
+    },
+    {
+      "title": "The Indus Waters Treaty (IWT) of 1960 and Strategic Water Security",
+      "date": "2026-08-20",
+      "summary": "The landmark water distribution treaty between Pakistan and India brokered by the World Bank, under heightened strategic scrutiny due to upstream hydro-project disputes and climate stress.",
+      "key_facts": [
+        "Signed on September 19, 1960, in Karachi by Field Marshal Ayub Khan and Prime Minister Jawaharlal Nehru with World Bank mediation.",
+        "Water Allocation: Eastern Rivers (Ravi, Beas, Sutlej) allocated exclusively to India; Western Rivers (Indus, Jhelum, Chenab) allocated to Pakistan, with limited upstream non-consumptive and run-of-the-river power rights granted to India under strict design constraints.",
+        "Dispute Resolution Mechanism: 3-tier system: Permanent Indus Commission (PIC), Neutral Expert, and Court of Arbitration at The Hague.",
+        "Key Disputes: Kishanganga Hydroelectric Project on Neelum/Jhelum and Ratle Hydroelectric Plant on Chenab River.",
+        "Current Challenge: Indian notices seeking unilateral modifications or renegotiation, which Pakistan firmly contests under the treaty's binding international provisions.",
+        "Strategic Water Storage: Pakistan's storage capacity is critically low at approximately 30-35 days of average demand compared to the international benchmark of 120-150 days."
+      ],
+      "potential_interview_questions": [
+        "Why is the Indus Water Treaty of 1960 of existential strategic significance for Pakistan?",
+        "Which rivers were allocated to Pakistan and India respectively under the 1960 Treaty?",
+        "Why are storage dams like Diamer-Bhasha and Mohmand critical for national water and energy security?"
+      ]
+    },
+    {
+      "title": "Major Dams, Storage Infrastructure, and Glacial Melting",
+      "date": "2026-07-30",
+      "summary": "National dam construction initiatives and climate vulnerabilities stemming from Himalayan-Karakoram-Hindukush glacier retreat.",
+      "key_facts": [
+        "Tarbela Dam: World's largest earth-filled dam on the Indus River in Haripur, Khyber Pakhtunkhwa, commissioned in 1976.",
+        "Mangla Dam: On Jhelum River in Mirpur, AJK, commissioned in 1967 and raised in 2009 for enhanced storage.",
+        "Diamer-Bhasha Dam: Under construction on the Indus River (Gilgit-Baltistan/KPK border); planned live storage of 6.4 MAF and 4,500 MW hydro-power.",
+        "Mohmand Dam: Under construction on Swat River; flood mitigation for Peshawar/Charsadda and 800 MW hydro capacity.",
+        "Glacial Vulnerability: Pakistan has over 7,200 glaciers\u2014the most outside polar regions; climate change causes Glacial Lake Outburst Floods (GLOF) and long-term water depletion."
+      ],
+      "potential_interview_questions": [
+        "How will Diamer-Bhasha and Mohmand dams impact Pakistan's water storage capacity?",
+        "What is the threat of climate change and glacial retreat to Pakistan's future water security?"
+      ]
+    }
+  ],
+  "dimension": "general_knowledge",
+  "authority_level": 4
+}

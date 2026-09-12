@@ -1,0 +1,44 @@
+[
+  {
+    "id": "EDU_001",
+    "category": "education",
+    "question": "What led you to choose your field of study in Matric/FSc or A-Levels/Intermediate, and which subject did you enjoy the most?",
+    "difficulty": 1,
+    "persona": "both",
+    "intent": "Evaluates intellectual curiosity, autonomy in decision making, and conceptual clarity.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Was this field primarily your own deliberate choice or suggested by parents/teachers?",
+      "Explain the fundamental scientific or practical concept behind that favorite subject.",
+      "Which subject was your least favorite, and why?"
+    ]
+  },
+  {
+    "id": "EDU_002",
+    "category": "education",
+    "question": "I see your marks in your intermediate examination were lower than matriculation (or vice-versa). What was the actual reason for this difference?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses honesty, locus of control (internal vs blaming examiners/system), and accountability.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Do you believe the grading was unfair, or did your study habits change?",
+      "What adjustments did you make when you realized your performance was dipping?",
+      "How did your family react to your exam results?"
+    ]
+  },
+  {
+    "id": "EDU_003",
+    "category": "education",
+    "question": "Have you ever faced an ethical dilemma in an academic setting—for example, seeing a peer cheat or being asked to share exam answers?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests moral courage, boundary setting, and ethical judgment under peer pressure.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Did you report the incident, speak to the student directly, or remain silent?",
+      "If remaining silent, why didn't you intervene?",
+      "What is your philosophy on loyalty to a friend versus loyalty to an ethical rule?"
+    ]
+  }
+]

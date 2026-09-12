@@ -1,0 +1,44 @@
+[
+  {
+    "id": "SIT_001",
+    "category": "situational",
+    "question": "You are traveling on a remote mountain road with your family late at night. You come across a vehicle overturned in a ravine with injured passengers, but your own car has only a quarter tank of fuel and no mobile network. What is your sequence of actions?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Evaluates practical crisis prioritization, safety of dependents, triage, and resourcefulness.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "Do you leave your family in the car while you climb down the ravine?",
+      "How do you secure medical help without running out of fuel?",
+      "If one injured person is bleeding heavily, how do you provide first aid with what is available?"
+    ]
+  },
+  {
+    "id": "SIT_002",
+    "category": "situational",
+    "question": "During an outdoor military planning exercise, two candidates in your group start a physical scuffle over who should lead. The clock is ticking with only 10 minutes left to present the solution to the GTO. What do you do?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Assesses intervention courage, de-escalation, focus on mission accomplishment, and peer influence.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "Do you call the GTO over immediately, or handle it within the group?",
+      "How do you get both individuals back to contributing before the timer expires?",
+      "If neither agrees to present, what is your next move?"
+    ]
+  },
+  {
+    "id": "SIT_003",
+    "category": "situational",
+    "question": "You are placed in charge of a budget to organize your college sports gala. Three days before the event, the main equipment supplier cancels the delivery and prices everywhere else have doubled. How do you ensure the event proceeds successfully?",
+    "difficulty": 2,
+    "persona": "deputy_president",
+    "intent": "Tests contingency planning, negotiation, resource mobilization, and calm under crisis.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Which sports events would you trim or adapt if budget cannot be expanded?",
+      "How do you communicate the change to the college administration without inducing panic?",
+      "What preventive measures should have been in the contract initially?"
+    ]
+  }
+]

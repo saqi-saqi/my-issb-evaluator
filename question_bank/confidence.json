@@ -1,0 +1,72 @@
+[
+  {
+    "id": "CON_001",
+    "category": "confidence",
+    "question": "Describe a situation where your peers openly disagreed with your idea or plan. How did you handle the pressure, and what was the outcome?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses self-assurance when facing collective opposition and the candidate's ability to maintain composure under social pressure without becoming defensive or submissive.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "At what point during the disagreement did you feel most uncertain, and what kept you from backing down?",
+      "If your peers had escalated their opposition by mocking your idea publicly, how would your response have changed?",
+      "Looking back, was there a moment you considered abandoning your position just to restore harmony? Why or why not?"
+    ]
+  },
+  {
+    "id": "CON_002",
+    "category": "confidence",
+    "question": "Tell me about a time someone ridiculed you in front of others — perhaps a teacher, senior, or colleague. How did you react in that moment and in the days that followed?",
+    "difficulty": 3,
+    "persona": "psychologist",
+    "intent": "Evaluates emotional resilience and ego stability when subjected to public humiliation, probing whether the candidate internalizes shame or channels it constructively.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Did the ridicule change the way you interacted with that person afterwards, and if so, how?",
+      "How long did the sting of that experience last, and what did you do to move past it?",
+      "If you witnessed the same ridicule happening to a junior or friend, how would you intervene?"
+    ]
+  },
+  {
+    "id": "CON_003",
+    "category": "confidence",
+    "question": "Have you ever publicly defended a viewpoint that most people around you considered wrong or unpopular? Walk me through what happened.",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Measures moral courage and intellectual confidence — the willingness to stand alone for a belief while maintaining respectful engagement with dissenters.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "What evidence or reasoning gave you the conviction to hold your ground despite majority opposition?",
+      "How did you distinguish between being stubbornly rigid and being principled in that situation?",
+      "If defending that position had cost you a friendship or a professional opportunity, would you still have done it?"
+    ]
+  },
+  {
+    "id": "CON_004",
+    "category": "confidence",
+    "question": "Recall a time you made an embarrassing mistake in a public or formal setting — perhaps during a presentation, ceremony, or competition. How did you recover in real time?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Probes the candidate's capacity for rapid emotional recovery and composure restoration after a public failure, revealing self-regulation under acute social stress.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "What was the first thought that went through your mind the instant you realized the mistake?",
+      "Did you use any specific strategy — humor, acknowledgment, redirection — to regain control of the situation?",
+      "How did that experience change your preparation or approach for similar high-visibility situations afterward?"
+    ]
+  },
+  {
+    "id": "CON_005",
+    "category": "confidence",
+    "question": "Imagine you are the only officer in a meeting who believes a planned operation is flawed, but every senior officer supports it. The commanding officer asks if anyone has objections. What do you do and say?",
+    "difficulty": 4,
+    "persona": "deputy_president",
+    "intent": "Tests the candidate's ability to assert professional judgment against hierarchical and social pressure in a high-stakes military context, balancing respect for authority with duty to speak truth.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "If the commanding officer dismisses your objection curtly and moves on, do you raise it again or let it go? Why?",
+      "How would you frame your objection to maximize the chance of being heard without appearing insubordinate?",
+      "If the operation proceeds unchanged and fails as you predicted, how do you handle the aftermath with your seniors and peers?"
+    ]
+  }
+]

@@ -1,0 +1,48 @@
+---
+source_type: official
+dimension: general
+topic: selection_dimensions
+authority_level: 1
+title: Official Selection Dimensions - Deputy President and Psychologist
+---
+
+# OFFICIAL SELECTION DIMENSIONS: DEPUTY PRESIDENT & PSYCHOLOGIST
+Source: Inter Services Selection Board (issb.gov.pk/selection-system)
+Authority Level: Official (Level 1)
+Dimension: Deputy President & Psychologist Specifications
+
+## The Deputy President Dimension
+The Deputy President of the ISSB conducts an extensive, structured interview with each candidate.
+
+Key Focus Areas:
+1. Intellect and General Awareness:
+   - Evaluates cognitive capability, logical thinking, grasp of current geopolitical/economic developments, and understanding of national interests.
+   - Probes academic background, favorite subjects, and general reading habits.
+
+2. Emotional Pattern and Temperament:
+   - Tests emotional stability, presence of mind, and reactions under conversational pressure or counter-questioning.
+   - Identifies whether the candidate is defensive, irritable, dismissive, or remains polite, composed, and firm.
+
+3. Social Behavior and Adjustment:
+   - Assesses sociability, relationships with family, friends, classmates, and colleagues.
+   - Evaluates participation in sports, extracurricular activities, hobbies, and community engagement.
+
+4. Moral Foundation and Expression:
+   - Observes truthfulness, sincerity, humility, and willingness to acknowledge personal mistakes or knowledge gaps.
+   - Evaluates communication clarity, fluency in English/Urdu, eye contact, and demeanor.
+
+## The Psychologist Dimension
+The Psychologist dimension conducts written psychological test batteries and in-depth psychological interviews.
+
+Key Focus Areas:
+1. Subconscious Tendencies and Personality Structure:
+   - Unveils deep motivations, fears, aggression levels, and social orientation through projective tests (TAT, WAT, SCT).
+   - Looks for internal consistency between biographical biodata, written projective responses, and verbal interview statements.
+
+2. Motivation and Self-Perception:
+   - Investigates why the candidate aspires to a military career. Is it parental pressure, romanticized glamour, economic necessity, or genuine patriotism and service?
+   - Examines realistic self-assessment: Does the candidate understand their own strengths, limitations, and emotional triggers?
+
+3. Stress Tolerance and Resilience:
+   - Analyzes coping strategies when confronted with personal trauma, failure, academic setback, or peer pressure.
+   - Distinguishes between healthy coping and maladaptive avoidance or externalized blame.

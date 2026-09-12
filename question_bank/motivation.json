@@ -1,0 +1,44 @@
+[
+  {
+    "id": "MOT_001",
+    "category": "motivation",
+    "question": "Why do you specifically want to join the Pakistan Armed Forces instead of pursuing a lucrative civilian corporate career or civil services?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Evaluates intrinsic vs extrinsic motivation, depth of thought, and authenticity.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "If you are offered a high-paying software or engineering job abroad tomorrow, would you still join?",
+      "What if you are not selected at ISSB? What is your concrete alternative plan?",
+      "Which specific arm or branch are you applying for, and what do they actually do in peace and war?"
+    ]
+  },
+  {
+    "id": "MOT_002",
+    "category": "motivation",
+    "question": "Military service demands grueling physical discipline, postings in remote or hazardous areas, and the potential sacrifice of life. Have you prepared yourself mentally and physically for this reality?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests realistic awareness of military hardships versus romanticized Hollywood/ISPR drama perceptions.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "Tell me about the hardest physical challenge or exertion you have endured in your own life.",
+      "How does your mother feel about you joining a combat arm where life is at risk?",
+      "What gives a military officer the moral courage to lead men under hostile artillery fire?"
+    ]
+  },
+  {
+    "id": "MOT_003",
+    "category": "motivation",
+    "question": "Suppose you are commissioned into an arm or corps that was your last preference (e.g. Services / Ordnance instead of Infantry / Armoured). How would you feel and perform?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Assesses professional loyalty, resilience, adaptability, and ego management.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "Would you feel demotivated or resentful toward the system?",
+      "Why are logistic and service arms indispensable to modern combat operations?",
+      "How would you motivate your subordinates if you were unhappy with your own branch?"
+    ]
+  }
+]

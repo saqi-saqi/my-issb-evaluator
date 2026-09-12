@@ -1,0 +1,44 @@
+[
+  {
+    "id": "LEA_001",
+    "category": "leadership",
+    "question": "Tell me about a real situation in your life where you had to lead a group or take responsibility for a team project.",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Evaluates practical leadership experience, team coordination, and outcome orientation.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "What was the single biggest obstacle your group encountered, and how did you resolve it?",
+      "Was there a team member who was not contributing? How specifically did you deal with them?",
+      "Did you take credit for the final result, or how was recognition shared?"
+    ]
+  },
+  {
+    "id": "LEA_002",
+    "category": "leadership",
+    "question": "Suppose your team fails to accomplish an important task strictly because of a tactical misjudgment you made as the leader. How do you address your team and your superiors?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests internal locus of control, moral courage, willingness to shoulder blame, and recovery planning.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "Would you admit the error explicitly in front of your juniors?",
+      "How do you rebuild trust and confidence among team members after such a failure?",
+      "What would you do if a subordinate openly says 'I told you so'?"
+    ]
+  },
+  {
+    "id": "LEA_003",
+    "category": "leadership",
+    "question": "In your view, what is the difference between being a commander and being a leader?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Assesses conceptual depth regarding leadership psychology, empathy, moral authority vs positional authority.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Can an officer command obedience through rank alone in modern warfare?",
+      "Which historical Pakistani military figure best exemplifies this leadership philosophy to you?",
+      "How do you win the hearts and minds of soldiers under your command?"
+    ]
+  }
+]

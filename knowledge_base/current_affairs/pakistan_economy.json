@@ -1,0 +1,56 @@
+{
+  "source_type": "current_affairs",
+  "category": "pakistan_economy",
+  "last_updated": "2026-09-01",
+  "topics": [
+    {
+      "title": "Macroeconomic Stability, Balance-of-Payments, and Structural Reforms",
+      "date": "2026-08-10",
+      "summary": "Pakistan's economic trajectory focused on fiscal discipline, broadening the tax net, containing inflation, restructuring state-owned enterprises, and securing sustained external sector financing.",
+      "key_facts": [
+        "Primary causes of balance-of-payments crises: Chronic trade deficit due to low-value-added exports, heavy reliance on imported energy and machinery, low domestic tax-to-GDP ratio (~9-10%), and heavy external debt servicing.",
+        "Key structural reforms: Broadening tax net through FBR digitalization (Tajir Dost scheme), curbing undocumented retail, rationalizing power tariffs to address circular debt, and privatizing loss-making SOEs (e.g. PIA, DISCOs).",
+        "Inflation and Monetary Policy: State Bank of Pakistan (SBP) policy rate recalibration based on headline CPI inflation trends, targeting single-digit inflation.",
+        "Foreign Exchange Reserves: Sustained through bilateral deposits (China, Saudi Arabia, UAE), IMF Extended Fund Facility (EFF) disbursements, and worker remittances exceeding $30 billion annually."
+      ],
+      "potential_interview_questions": [
+        "What is the primary cause of Pakistan's recurring balance-of-payments challenges?",
+        "What are two structural reforms required to resolve Pakistan's economic crisis permanently?",
+        "Why is export competitiveness more sustainable than relying on external loans or remittances?"
+      ]
+    },
+    {
+      "title": "Special Investment Facilitation Council (SIFC) and Economic Revival",
+      "date": "2026-08-05",
+      "summary": "Civil-military apex body established to act as a single-window facilitator for foreign direct investment (FDI) across strategic sectors.",
+      "key_facts": [
+        "Established in June 2023 with a hybrid civil-military leadership structure to eliminate bureaucratic delays.",
+        "Five Priority Focus Sectors: Agriculture & Livestock (corporate farming initiatives), Information Technology (IT exports and tech parks), Mines & Minerals (Reko Diq copper-gold project), Energy & Power (renewables, transmission overhaul), and Tourism.",
+        "Key Projects: Reko Diq mining agreements with Barrick Gold, Green Pakistan Initiative (GPI) for smart agriculture, and bilateral investment treaties with Gulf Cooperation Council (GCC) states."
+      ],
+      "potential_interview_questions": [
+        "What is the mandate of the SIFC and which priority sectors does it target?",
+        "How can the Reko Diq project transform Pakistan's mining and foreign exchange earnings?",
+        "What role does agricultural modernization play in food security and import substitution?"
+      ]
+    },
+    {
+      "title": "China-Pakistan Economic Corridor (CPEC) Phase 2 and Regional Connectivity",
+      "date": "2026-07-20",
+      "summary": "Transitioning from early-harvest energy and infrastructure projects to industrial cooperation, Special Economic Zones (SEZs), agriculture, and business-to-business (B2B) joint ventures.",
+      "key_facts": [
+        "CPEC Phase 1 completed major highways (Karakoram Highway upgrade, Sukkur-Multan Motorway), coal and hydro power plants, and early Gwadar Port infrastructure.",
+        "CPEC Phase 2 Focus: Five Corridors of Growth: Growth Corridor, Livelihood Corridor, Innovation Corridor, Green Corridor, and Open/Inclusive Corridor.",
+        "Priority SEZs: Rashakai SEZ (KPK), Dhabeji SEZ (Sindh), Allama Iqbal Industrial City (Punjab), and Boston SEZ (Balochistan).",
+        "Gwadar Strategic Role: Deep-sea port offering China shortest overland access to Arabian Sea; Gwadar International Airport commissioned to integrate logistics."
+      ],
+      "potential_interview_questions": [
+        "How does CPEC Phase 2 differ fundamentally from Phase 1?",
+        "What is the geoeconomic significance of Gwadar Port for Pakistan and landlocked Central Asian Republics?",
+        "How can Special Economic Zones boost domestic industrial productivity?"
+      ]
+    }
+  ],
+  "dimension": "general_knowledge",
+  "authority_level": 4
+}

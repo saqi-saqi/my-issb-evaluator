@@ -1,0 +1,72 @@
+[
+  {
+    "id": "RES_001",
+    "category": "responsibility",
+    "question": "Tell me about a time you made a serious mistake that affected others. How did you handle it — did you own it immediately, or did it take time?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses the candidate's instinct for personal accountability and transparency when their actions cause tangible harm, revealing honesty under consequence pressure.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "What stopped you — or what would have stopped you — from shifting blame to circumstances or other people?",
+      "How did the affected people react when you took responsibility, and did their reaction match what you expected?",
+      "If owning the mistake had resulted in a formal punishment or demotion, would you still have come forward? Why?"
+    ]
+  },
+  {
+    "id": "RES_002",
+    "category": "responsibility",
+    "question": "Have you ever witnessed a civic problem in your community — illegal dumping, unsafe road conditions, corruption at a local office — and taken personal action to address it? Describe what you did.",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Evaluates the candidate's sense of civic duty and initiative — whether they see community problems as someone else's job or as a personal call to action.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "What motivated you to act when most people around you chose to ignore the problem?",
+      "Did you face any resistance or backlash for getting involved, and how did you handle it?",
+      "If your efforts produced no visible result after weeks of trying, would you have continued or moved on? Explain your reasoning."
+    ]
+  },
+  {
+    "id": "RES_003",
+    "category": "responsibility",
+    "question": "Describe a situation where you were entrusted with managing money or resources — for a family event, a club, or a project. How did you ensure accountability and transparency?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Probes financial responsibility and trustworthiness — whether the candidate treats others' resources with the same discipline as their own and maintains transparent records.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "Was there a moment when you were tempted to cut corners or use the funds loosely because no one was closely monitoring? What did you do?",
+      "How did you report back to the people who entrusted you — proactively or only when asked?",
+      "If you discovered a small accounting error in your own favor at the end, how would you handle it?"
+    ]
+  },
+  {
+    "id": "RES_004",
+    "category": "responsibility",
+    "question": "Imagine you discover that a close friend in your unit has been falsifying attendance records. Reporting him could end his career; staying silent makes you complicit. What do you do?",
+    "difficulty": 4,
+    "persona": "psychologist",
+    "intent": "Tests moral courage and the candidate's hierarchy of loyalties — whether personal bonds override institutional integrity, and how they navigate the emotional cost of doing right.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "Would you confront your friend privately first, or go directly to the chain of command? What guides that choice?",
+      "If your friend begs you to stay silent and promises to stop, does that change your decision? Why or why not?",
+      "How would you cope with the guilt or social fallout if your report leads to his dismissal?"
+    ]
+  },
+  {
+    "id": "RES_005",
+    "category": "responsibility",
+    "question": "Describe a time when a group you were part of faced a crisis or urgent task but no one was stepping up to lead or take charge. What did you do?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Assesses the candidate's willingness to assume responsibility in a leadership vacuum — whether they wait for direction or self-mobilize when the situation demands it.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "What was the first action you took once you decided to step in, and how did you prioritize tasks?",
+      "How did the rest of the group respond to your initiative — did anyone resist, and how did you handle that?",
+      "After the crisis passed, did you continue in the leadership role or hand it back? What influenced that decision?"
+    ]
+  }
+]

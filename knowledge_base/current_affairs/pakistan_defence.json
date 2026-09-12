@@ -1,0 +1,74 @@
+{
+  "source_type": "current_affairs",
+  "category": "pakistan_defence",
+  "last_updated": "2026-09-01",
+  "topics": [
+    {
+      "title": "Pakistan Armed Forces Modernization and Tri-Services Integration",
+      "date": "2026-08-01",
+      "summary": "Continued modernization across Army, Navy, and Air Force emphasizing indigenization, electronic warfare, fifth-generation fighter concepts, air defense networks, and naval fleet expansion.",
+      "key_facts": [
+        "Indigenously upgraded JF-17 Thunder Block 3 with KLJ-7A active electronically scanned array (AESA) radar, helmet-mounted displays, and PL-15 beyond-visual-range (BVR) missiles.",
+        "Hangor-class submarine induction program with Pakistan Navy: 8 air-independent propulsion (AIP) submarines developed with China to enhance maritime anti-access/area-denial (A2/AD).",
+        "Operation Azm-e-Istehkam: A revitalized national counter-terrorism campaign under the revised National Action Plan (NAP) to dismantle terror syndicates and safeguard socioeconomic infrastructure.",
+        "Joint Staff Headquarters (JSHQ) and Chairman Joint Chiefs of Staff Committee (CJCSC) coordinating tri-service operational doctrine and integration.",
+        "Army Air Defence induction of HQ-9/P long-range surface-to-air missile systems, HQ-16FE medium-range systems, and SHORAD systems."
+      ],
+      "potential_interview_questions": [
+        "What is the significance of the JF-17 Block 3 induction for PAF's conventional deterrence?",
+        "Why is maritime security and the development of Gwadar Port vital for Pakistan's naval strategy?",
+        "What are the objectives and operational scope of Operation Azm-e-Istehkam?"
+      ]
+    },
+    {
+      "title": "Nuclear Doctrine: Full Spectrum Deterrence and Strategic Command",
+      "date": "2026-07-15",
+      "summary": "Pakistan's strategic posture designed to deter all forms of aggression across tactical, operational, and strategic levels, overseen by the National Command Authority (NCA).",
+      "key_facts": [
+        "Full Spectrum Deterrence (FSD): Designed to deter full range of military threats, denying space for conventional war under nuclear overhang.",
+        "National Command Authority (NCA): Chaired by Prime Minister, controls strategic policy, employment, and command of strategic nuclear assets; Strategic Plans Division (SPD) acts as executive secretariat.",
+        "Strategic Missile Systems: Shaheen-III (medium-range ballistic missile, 2,750 km range), Ababeel (MIRV capability to defeat ballistic missile defense), and Babur-3 (submarine-launched cruise missile ensuring assured second-strike capability).",
+        "Credible Minimum Deterrence: Dynamic posture calibrated strictly to threat environment without engaging in open-ended arms race."
+      ],
+      "potential_interview_questions": [
+        "What do you understand by Pakistan's posture of Full Spectrum Deterrence?",
+        "What is the role of the National Command Authority and Strategic Plans Division?",
+        "Why is an assured second-strike capability vital for strategic stability in South Asia?"
+      ]
+    },
+    {
+      "title": "Pakistan Armed Forces Structure, Officer Ranks, and High Military Honors",
+      "date": "2026-06-20",
+      "summary": "Hierarchical structure of Army, Navy, and Air Force, corresponding officer rank equivalents, and the highest gallantry award (Nishan-e-Haider).",
+      "key_facts": [
+        "Army Officer Ranks: Second Lieutenant, Lieutenant, Captain, Major, Lieutenant Colonel, Colonel, Brigadier, Major General, Lieutenant General, General, Field Marshal.",
+        "Navy Equivalent Ranks: Sub-Lieutenant, Lieutenant, Lieutenant Commander, Commander, Captain, Commodore, Rear Admiral, Vice Admiral, Admiral, Admiral of the Fleet.",
+        "PAF Equivalent Ranks: Flying Officer, Flight Lieutenant, Squadron Leader, Wing Commander, Group Captain, Air Commodore, Air Vice Marshal, Air Marshal, Air Chief Marshal, Marshal of the Air Force.",
+        "Nishan-e-Haider: Pakistan's highest military gallantry decoration, awarded posthumously to 11 heroic personnel: Captain Raja Muhammad Sarwar Shaheed (1948), Major Tufail Muhammad Shaheed (1958), Major Raja Aziz Bhatti Shaheed (1965), Major Muhammad Akram Shaheed (1971), Pilot Officer Rashid Minhas Shaheed (1971 - only PAF recipient), Major Shabbir Sharif Shaheed (1971), Sawar Muhammad Hussain Shaheed (1971), Lance Naik Muhammad Mahfuz Shaheed (1971), Captain Karnal Sher Khan Shaheed (1999), Havildar Lalak Jan Shaheed (1999), and Naik Saif Ali Janjua (Hilal-e-Kashmir / Nishan-e-Haider equivalent).",
+        "Operation Swift Retort (February 27, 2019): Retaliatory strike and dogfight downing Indian fighter jets (MiG-21 Bison, Su-30MKI), demonstrating PAF air combat precision and strategic resolve."
+      ],
+      "potential_interview_questions": [
+        "Compare equivalent officer ranks across the Pakistan Army, Navy, and Air Force.",
+        "Who was the youngest recipient of Nishan-e-Haider and what was his singular act of valor?",
+        "What operational lessons were demonstrated during Operation Swift Retort?"
+      ]
+    },
+    {
+      "title": "UN Peacekeeping Contributions and Global Humanitarian Engagements",
+      "date": "2026-06-10",
+      "summary": "Pakistan remains one of the largest and longest-standing troop-contributing nations to United Nations Peacekeeping Operations worldwide.",
+      "key_facts": [
+        "Over 200,000 Pakistani peacekeepers have served across more than 46 UN missions in 29 countries since 1960.",
+        "Notable deployments in Democratic Republic of Congo (MONUSCO), Central African Republic (MINUSCA), and South Sudan (UNMISS).",
+        "Over 180 Pakistani peacekeepers, including officers, have made the ultimate sacrifice in the line of duty under the UN flag.",
+        "Female Peacekeepers: Pakistan actively deploys Female Engagement Teams (FET) providing medical and social rehabilitation in conflict zones."
+      ],
+      "potential_interview_questions": [
+        "Why is Pakistan's continuous contribution to UN Peacekeeping important for its global diplomatic and military standing?",
+        "What unique role do Pakistani Female Engagement Teams play in UN missions?"
+      ]
+    }
+  ],
+  "dimension": "general_knowledge",
+  "authority_level": 4
+}

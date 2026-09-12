@@ -1,0 +1,30 @@
+[
+  {
+    "id": "FAM_001",
+    "category": "family",
+    "question": "Describe your family environment, your father's and mother's profession, and what specific responsibilities you handle at home.",
+    "difficulty": 1,
+    "persona": "both",
+    "intent": "Evaluates social grounding, maturity, domestic contribution, and family relationships.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Whom are you closest to among your family members, and why?",
+      "When a family disagreement occurs, what role do you usually play?",
+      "How do your parents guide you when you make an error in judgment?"
+    ]
+  },
+  {
+    "id": "FAM_002",
+    "category": "family",
+    "question": "Has there ever been a time when you strongly disagreed with a major decision made by your parents or elders? How did you express that disagreement?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Assesses respect for authority combined with independent thought and emotional maturity.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Did you obey reluctantly, argue passionately, or present a reasoned case?",
+      "In retrospect, who was right: you or your parents?",
+      "How do you handle situations where you must carry out an order you disagree with?"
+    ]
+  }
+]

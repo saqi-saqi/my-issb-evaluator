@@ -1,0 +1,58 @@
+[
+  {
+    "id": "PER_001",
+    "category": "personal",
+    "question": "Tell me about yourself, highlighting your daily routine and how you spend your free time.",
+    "difficulty": 1,
+    "persona": "both",
+    "intent": "Assesses self-expression, active vs passive lifestyle, time management, and clarity of thought.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "What is the most productive part of your day, and why?",
+      "If you had two extra hours every day, how would you invest them?",
+      "Do you follow this routine consistently on weekends as well?"
+    ]
+  },
+  {
+    "id": "PER_002",
+    "category": "personal",
+    "question": "What are your three greatest personal strengths, and what is one genuine weakness you are actively working on?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Evaluates self-awareness, honesty, avoidance of clichéd fake weaknesses ('I am too hardworking'), and realistic self-appraisal.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Give me a specific recent instance where that weakness caused an inconvenience or problem.",
+      "What concrete steps did you take this past month to address that weakness?",
+      "How do your close friends perceive this trait?"
+    ]
+  },
+  {
+    "id": "PER_003",
+    "category": "personal",
+    "question": "What is the biggest personal mistake or regret in your life so far, and how did you recover from it?",
+    "difficulty": 3,
+    "persona": "psychologist",
+    "intent": "Evaluates moral integrity, emotional resilience, learning capability, and non-defensiveness.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Did you openly apologize or admit your mistake to the people affected at the time?",
+      "If you could travel back in time, what would you do differently?",
+      "Did that incident change how you treat other people when they make mistakes?"
+    ]
+  },
+  {
+    "id": "PER_004",
+    "category": "personal",
+    "question": "Which sports or physical activities do you participate in regularly, and what role do you typically play in the team?",
+    "difficulty": 1,
+    "persona": "deputy_president",
+    "intent": "Evaluates physical orientation, competitive spirit, teamwork, and stamina.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Have you ever represented your school, college, or club at a competitive tournament?",
+      "How do you handle defeat after a hard-fought match?",
+      "If your captain makes a tactical blunder during a match, how do you react?"
+    ]
+  }
+]

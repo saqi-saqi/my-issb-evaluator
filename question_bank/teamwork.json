@@ -1,0 +1,72 @@
+[
+  {
+    "id": "TEA_001",
+    "category": "teamwork",
+    "question": "Describe a time when you worked on a group project where not everyone contributed equally. What role did you play and how did the team handle it?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses the candidate's ability to navigate unequal effort distribution in teams, revealing their tolerance for ambiguity, initiative-taking, and peer accountability style.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "Did you address the unequal contribution directly with the person, or did you choose to compensate silently? Why?",
+      "If the same situation happened in a military team where lives depended on equal effort, how would your approach change?",
+      "Looking back, what would you do differently to ensure fair contribution from the start?"
+    ]
+  },
+  {
+    "id": "TEA_002",
+    "category": "teamwork",
+    "question": "Have you ever had a serious disagreement with a teammate during a group assignment or activity? Walk me through what happened and how it was resolved.",
+    "difficulty": 2,
+    "persona": "deputy_president",
+    "intent": "Evaluates conflict resolution skills, emotional regulation under interpersonal friction, and whether the candidate prioritizes task completion over personal ego.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "At what point during the disagreement did you realize it needed to be resolved, and what was the first step you took?",
+      "Did the disagreement affect your personal relationship with that teammate afterwards? How did you handle that?",
+      "If a senior member of the team had sided against you, would you have accepted the decision or continued pushing your point?"
+    ]
+  },
+  {
+    "id": "TEA_003",
+    "category": "teamwork",
+    "question": "Tell me about a situation where you had to follow someone else's lead even though you disagreed with their plan. How did you handle it?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Probes followership quality — whether the candidate can subordinate personal judgment to group cohesion and support a leader's decision even when unconvinced.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "Did you voice your disagreement before committing to the plan, or did you stay quiet? What motivated that choice?",
+      "When the plan was being executed, did you give your full effort or did part of you hold back?",
+      "If the plan failed, how did you respond — did you say 'I told you so' or did you help recover without blame?"
+    ]
+  },
+  {
+    "id": "TEA_004",
+    "category": "teamwork",
+    "question": "Can you give an example of a collective goal you worked towards with a team — in sports, academics, or any organized activity? What was your specific contribution?",
+    "difficulty": 1,
+    "persona": "psychologist",
+    "intent": "Explores the candidate's understanding of collective achievement versus individual credit, and their ability to articulate personal contribution within a larger effort.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "If someone else on the team received more recognition than you for the outcome, how would that make you feel?",
+      "Was there a moment where the team's goal conflicted with something you personally wanted? How did you handle it?",
+      "What did you learn about yourself from that team experience that you still carry today?"
+    ]
+  },
+  {
+    "id": "TEA_005",
+    "category": "teamwork",
+    "question": "Imagine you are placed in a group task during ISSB and two members start arguing loudly, stalling the group's progress. What would you do?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests real-time social mediation instinct under pressure, revealing whether the candidate can de-escalate peer conflict while keeping the group focused on task completion.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Would you try to mediate between them yourself, or would you ask the group to intervene collectively? Why?",
+      "If one of the arguing members was clearly right but being aggressive, would you support their point or ask them to calm down first?",
+      "What if your attempt to calm them down made one of them turn hostile towards you — how would you react?"
+    ]
+  }
+]

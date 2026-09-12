@@ -1,0 +1,40 @@
+---
+source_type: official
+dimension: general
+topic: fourteen_olqs
+authority_level: 1
+title: Official ISSB Taxonomy - The 14 Officer Like Qualities (OLQs)
+---
+
+# OFFICIAL ISSB TAXONOMY: THE 14 OFFICER LIKE QUALITIES (OLQs)
+Source: Official Inter Services Selection Board Standards
+Authority Level: 1 (Highest Official Reference)
+
+The Inter Services Selection Board (ISSB) evaluates candidates across three independent testing dimensions (Psychologist, Group Testing Officer, and Deputy President) based on 14 core Officer Like Qualities (OLQs) grouped into four fundamental behavioral domains:
+
+## 1. PLANNING ABILITY & INTELLECTUAL FACULTY
+- Quality 1: Reasoning Ability: The cognitive capacity to grasp essentials of a situation, think logically, deconstruct complex problems, and arrive at rational solutions without confusion.
+- Quality 2: Organizing Ability: The capacity to arrange men, material, and time systematically to achieve maximum efficiency in executing a given task.
+- Quality 3: Power of Expression: The ability to express ideas and thoughts clearly, concisely, and persuasively both in speech and in writing.
+
+## 2. SOCIAL ADAPTABILITY & HUMAN RELATIONS
+- Quality 4: Social Adaptability: The ability to mix easily with people of all social strata and backgrounds, adjust quickly to unfamiliar environments, and respect diverse viewpoints.
+- Quality 5: Cooperation: The willingness to work harmoniously with peers toward common objectives, subordinating individual ambition to the collective welfare of the group.
+- Quality 6: Sense of Responsibility: Conscientious adherence to duty, understanding consequences of actions, and accepting personal accountability for results.
+
+## 3. DYNAMIC / COMBAT QUALITIES
+- Quality 7: Initiative: The drive to originate purposeful action without waiting for instructions or external prompting, especially in unexpected crises.
+- Quality 8: Courage (Physical & Moral): Physical courage to face bodily danger resolutely; moral courage to speak truth, defend ethical principles, and own mistakes.
+- Quality 9: Self-Confidence: Unshakable inner faith in one's capability to handle unexpected emergencies and overcome adversity calmly.
+- Quality 10: Determination: Tenacity of purpose; perseverance to drive a plan through to completion despite fatigue, obstacles, or setbacks.
+- Quality 11: Stamina (Mental & Physical): The capacity to endure prolonged physical exertion and intense mental stress without deterioration in judgment.
+
+## 4. CHARACTER & EMOTIONAL STABILITY
+- Quality 12: Integrity & General Ability: Moral uprightness, honesty in word and deed, dependability, and baseline intellectual competence.
+- Quality 13: Emotional Stability: Freedom from emotional outbursts, neuroses, chronic anxiety, or panic under pressure; maintaining dignity and poise.
+- Quality 14: Practical Ability & Common Sense: Shrewd practical judgment, realistic approach to everyday problems, and avoidance of impractical academic theorizing.
+
+## CRITICAL BOARD ASSESSMENT PRINCIPLES
+1. Whole Person Concept: No single quality makes or breaks a candidate. The Selection Board evaluates the harmonious balance and trainable potential of the whole personality.
+2. Natural Authenticity: Candidates are strictly advised to be natural and honest. Artificial coaching, bluffing, and memorized cliches are immediately detected and negatively scored across all three testing dimensions.
+3. Decisive Independence: Each testing officer (Psychologist, GTO, Deputy President) conducts independent evaluations before the collective final Board Conference.

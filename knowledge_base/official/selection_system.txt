@@ -1,0 +1,42 @@
+---
+source_type: official
+dimension: general
+topic: selection_system
+authority_level: 1
+title: Official ISSB Selection System and Philosophy
+---
+
+# OFFICIAL ISSB SELECTION SYSTEM
+Source: Inter Services Selection Board (issb.gov.pk)
+Authority Level: Official (Level 1)
+Dimension: General / System Architecture
+
+## Overview of the Selection System
+The Inter Services Selection Board (ISSB) is the premier human resource selection organization for the Commissioned Officers of the Pakistan Armed Forces (Pakistan Army, Pakistan Navy, and Pakistan Air Force).
+
+The selection system operates on a multi-dimensional assessment philosophy. It is designed to evaluate candidates on merit, potential, character, and mental and physical capacity to undergo military training and develop into effective military leaders.
+
+## The Three Assessment Dimensions
+The ISSB selection board evaluates every candidate independently through three distinct dimensions:
+
+1. The Psychologist Dimension:
+   - Evaluates the candidate's inner personality, mental constitution, subconscious inclinations, emotional stability, and psychological traits.
+   - Utilizes standardized psychological testing batteries: intelligence tests (verbal and non-verbal), mechanical aptitude tests, thematic apperception tests (TAT), word association tests (WAT), sentence completion tests, and structured psychological interviews.
+
+2. The Group Testing Officer (GTO) Dimension:
+   - Evaluates the candidate's behavior in practical outdoor and indoor group situations.
+   - Observes spontaneous social interactions, group dynamics, initiative, physical courage, problem-solving in real-time, and natural leadership emergence.
+   - Techniques include: Group Discussions, Group Planning Exercises (Military Planning), Progressive Group Tasks (PGT), Half Group Tasks (HGT), Command Tasks, Individual Obstacles, and Final Group Tasks (FGT).
+
+3. The Deputy President Dimension:
+   - Conducts an in-depth, structured, face-to-face interview with the candidate.
+   - Evaluates intellect, emotional pattern, social behavior, general awareness, communication expression, moral fabric, and career motivation through direct dialogue and probing situational questions.
+   - Assesses how candidates articulate thoughts, defend viewpoints under pressure, reflect on personal life events, and exhibit sound judgment.
+
+## Independent Evaluation and Final Recommendation
+- Each assessor (Psychologist, GTO, Deputy President) works independently without influencing one another during the 4-day assessment cycle.
+- At the conclusion of the tests, the Board convenes for the Board Conference.
+- Each assessor presents their independent assessment and grade for the candidate.
+- The President and the Board evaluate the composite profile of the candidate.
+- Final recommendations are made collectively by the Board.
+- Crucial Distinction: ISSB makes recommendations to the respective Service Headquarters (Army GHQ, Naval NHQ, Air AHQ). The final merit list and call-up letters for military academies (PMA, Pak Navy Academy, PAF Academy) are issued solely by the respective Service Headquarters based on medical board clearances, ISSB grading, and overall merit slots.

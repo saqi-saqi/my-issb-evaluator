@@ -1,0 +1,44 @@
+[
+  {
+    "id": "GK_001",
+    "category": "general_knowledge",
+    "question": "What is the primary cause of Pakistan's balance-of-payments challenges, and what are two structural reforms required to resolve them permanently?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Evaluates economic awareness, analytical grasp of macroeconomic issues, and articulate expression.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Why is export competitiveness more sustainable than relying on foreign loans or remittances?",
+      "What role can value-added agricultural technology play in reducing our import bill?",
+      "What is the current official inflation and interest rate trend in Pakistan?"
+    ]
+  },
+  {
+    "id": "GK_002",
+    "category": "general_knowledge",
+    "question": "Explain the geostrategic significance of the Strait of Malacca and the Strait of Hormuz to world maritime trade and Pakistan's energy security.",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Evaluates global geography, maritime awareness, chokepoints, and energy supply line understanding.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "What percentage of the world's petroleum flows through the Strait of Hormuz?",
+      "How does the development of Gwadar Port provide an alternative energy transit corridor?",
+      "Which regional powers maintain naval presence near these choke points?"
+    ]
+  },
+  {
+    "id": "GK_003",
+    "category": "general_knowledge",
+    "question": "Name the five major rivers of Pakistan, their points of origin, and why the Indus Water Treaty of 1960 is of existential strategic significance.",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses foundational national geography, water security, and historical treaty knowledge.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Which rivers were allocated to Pakistan and which to India under the 1960 Treaty?",
+      "Why are dams like Diamer-Bhasha and Mohmand vital for our future water storage capacity?",
+      "What is the impact of climate change on Himalayan glacier melting rates?"
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "STR_001",
+    "category": "stress",
+    "question": "What would you do if your team members strongly and vocalize their disagreement with your decision during a high-stakes group task?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Assesses non-defensiveness, patience, persuasion, de-escalation, and composure.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Would you shout to assert authority, or how would you get them to listen?",
+      "What if their proposed alternative plan is actually better than yours? Would you adopt it?",
+      "How do you handle a team member who refuses to work after an argument?"
+    ]
+  },
+  {
+    "id": "STR_002",
+    "category": "stress",
+    "question": "I've been observing your answers, and frankly, you sound too rehearsed and textbook. Are you pretending to be someone you are not just to get recommended?",
+    "difficulty": 4,
+    "persona": "both",
+    "intent": "Provocative pressure probe: tests whether candidate becomes nervous, angry, combative, or remains poised, respectful, and authentic.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Why should the board believe you are genuine rather than well-coached by an academy?",
+      "If you are rejected this time, what would that prove about your true personality?",
+      "Tell me one thing about yourself that you consciously tried to hide today."
+    ]
+  },
+  {
+    "id": "STR_003",
+    "category": "stress",
+    "question": "Suppose you are subjected to harsh criticism in front of your peers by a superior officer for a mistake you did not commit. How do you respond in that moment?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Evaluates military decorum, emotional stability, composure under humiliation, and proper chain-of-command redress.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Would you interrupt the senior officer to defend your innocence?",
+      "When and how is it appropriate to present the true facts of the incident?",
+      "How would you manage internal resentment so it doesn't affect your duty?"
+    ]
+  }
+]
