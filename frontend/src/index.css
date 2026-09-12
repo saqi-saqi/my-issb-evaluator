@@ -4,49 +4,56 @@
 
 @layer base {
   body {
-    background-color: #0B132B;
-    color: #F8FAFC;
+    background-color: #060b11;
+    background-image: 
+      linear-gradient(to right, rgba(21, 35, 53, 0.4) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(21, 35, 53, 0.4) 1px, transparent 1px);
+    background-size: 44px 44px;
+    background-attachment: fixed;
+    color: #f8fafc;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 }
 
-/* Custom Tactical Scrollbar */
+/* Custom Tactical Military Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B132B;
+  background: #060b11;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #152335;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #1f3652;
 }
 
-/* Glassmorphic Panel Styles */
-.glass-panel {
-  background: rgba(20, 30, 60, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Military Glassmorphic Card Styles */
+.military-card {
+  background-color: #0a121d;
+  border: 1px solid #162536;
 }
 
-.glass-panel-glow {
-  background: rgba(20, 30, 60, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  box-shadow: 0 0 25px rgba(16, 185, 129, 0.08);
+.military-card-active {
+  background-color: #07171d;
+  border: 1px solid #00e599;
+  box-shadow: 0 0 20px rgba(0, 229, 153, 0.15);
 }
 
-/* Pulsing subtle dot */
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
+.military-btn-emerald {
+  background-color: #00e599;
+  color: #000000;
+  font-weight: 800;
+  box-shadow: 0 0 25px rgba(0, 229, 153, 0.35);
+  transition: all 0.2s ease-in-out;
 }
 
-.animate-pulse-dot {
-  animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.military-btn-emerald:hover {
+  background-color: #00c985;
+  box-shadow: 0 0 30px rgba(0, 229, 153, 0.5);
+  transform: translateY(-1px);
 }
+

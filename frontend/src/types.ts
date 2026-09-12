@@ -95,12 +95,13 @@ export interface EvaluationItemData {
 export interface PerQuestionEvidence {
   No: number;
   "Question ID": string;
+  Question?: string;
   Category: string;
   "Assessed Dimension": string;
   Score: string;
-  Confidence: string;
+  Confidence?: string;
   Indicators: string;
-  Weaknesses: string;
+  Weaknesses?: string;
 }
 
 export interface RadarDataPoint {

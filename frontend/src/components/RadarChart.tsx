@@ -6,16 +6,26 @@ interface RadarChartProps {
   size?: number;
 }
 
-export const RadarChart: React.FC<RadarChartProps> = ({ data, size = 380 }) => {
+const formatDimensionLabel = (subject: string): string => {
+  const clean = subject.replace(/\n/g, ' ').trim();
+  if (clean.includes('Intellect')) return 'Intellect';
+  if (clean.includes('Emotional')) return 'Emotional Composure';
+  if (clean.includes('Social')) return 'Social Adaptability';
+  if (clean.includes('Communication') || clean.includes('Expression')) return 'Expression';
+  if (clean.includes('Motivation')) return 'Motivation';
+  return clean;
+};
+
+export const RadarChart: React.FC<RadarChartProps> = ({ data, size = 320 }) => {
   if (!data || data.length === 0) return null;
 
   const center = size / 2;
-  const radius = size * 0.38;
+  const radius = size * 0.35;
   const totalAxes = data.length;
   const angleSlice = (Math.PI * 2) / totalAxes;
 
-  // Concentric levels (20%, 40%, 60%, 80%, 100%)
-  const levels = [0.2, 0.4, 0.6, 0.8, 1.0];
+  // Concentric levels (25%, 50%, 75%, 100%)
+  const levels = [0.25, 0.5, 0.75, 1.0];
 
   // Coordinates for level rings
   const getCoordinates = (angle: number, r: number) => {
@@ -25,29 +35,25 @@ export const RadarChart: React.FC<RadarChartProps> = ({ data, size = 380 }) => {
     };
   };
 
-  // Build the polygon points for candidate scores
+  // Build polygon points for candidate scores
   const scorePoints = data.map((d, i) => {
     const angle = i * angleSlice;
-    const r = (d.score / 100) * radius;
+    const r = (Math.max(10, Math.min(100, d.score)) / 100) * radius;
     const coords = getCoordinates(angle, r);
     return `${coords.x},${coords.y}`;
   }).join(' ');
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center p-2">
       <svg width={size} height={size} className="overflow-visible select-none">
         <defs>
-          <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#10B981" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#059669" stopOpacity="0.05" />
-          </radialGradient>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
+          <filter id="radarEmeraldGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
         </defs>
 
-        {/* Concentric Web Rings */}
+        {/* Concentric Pentagonal Web Rings */}
         {levels.map((lvl, idx) => {
           const ringPoints = Array.from({ length: totalAxes }).map((_, i) => {
             const angle = i * angleSlice;
@@ -56,28 +62,17 @@ export const RadarChart: React.FC<RadarChartProps> = ({ data, size = 380 }) => {
           }).join(' ');
 
           return (
-            <g key={idx}>
-              <polygon
-                points={ringPoints}
-                fill="none"
-                stroke="#1E293B"
-                strokeWidth={idx === levels.length - 1 ? "1.5" : "0.75"}
-                strokeDasharray={idx === levels.length - 1 ? "none" : "3,3"}
-              />
-              <text
-                x={center + 4}
-                y={center - radius * lvl + 10}
-                fill="#475569"
-                fontSize="9"
-                fontFamily="monospace"
-              >
-                {Math.round(lvl * 100)}
-              </text>
-            </g>
+            <polygon
+              key={idx}
+              points={ringPoints}
+              fill="none"
+              stroke="#1a2736"
+              strokeWidth="1"
+            />
           );
         })}
 
-        {/* Axis Spokes from Center */}
+        {/* Axis Spokes from Center to outer vertices */}
         {data.map((_, i) => {
           const angle = i * angleSlice;
           const target = getCoordinates(angle, radius);
@@ -88,60 +83,49 @@ export const RadarChart: React.FC<RadarChartProps> = ({ data, size = 380 }) => {
               y1={center}
               x2={target.x}
               y2={target.y}
-              stroke="#1E293B"
+              stroke="#1a2736"
               strokeWidth="1"
             />
           );
         })}
 
-        {/* Candidate Score Filled Polygon */}
+        {/* Candidate Score Filled Polygon with Neon Emerald Accent */}
         <polygon
           points={scorePoints}
-          fill="url(#radarGlow)"
-          stroke="#10B981"
-          strokeWidth="2.5"
-          filter="url(#glow)"
+          fill="rgba(0, 229, 153, 0.18)"
+          stroke="#00e599"
+          strokeWidth="2"
+          filter="url(#radarEmeraldGlow)"
         />
 
-        {/* Data Vertices (Dots) and Score Tags */}
+        {/* Data Vertices (Dots) and Labels */}
         {data.map((d, i) => {
           const angle = i * angleSlice;
-          const r = (d.score / 100) * radius;
+          const r = (Math.max(10, Math.min(100, d.score)) / 100) * radius;
           const point = getCoordinates(angle, r);
-          const labelPoint = getCoordinates(angle, radius + 26);
+          const labelPoint = getCoordinates(angle, radius + 22);
 
           return (
             <g key={i}>
               <circle
                 cx={point.x}
                 cy={point.y}
-                r="4.5"
-                fill="#10B981"
-                stroke="#0B132B"
-                strokeWidth="2"
+                r="3.5"
+                fill="#00e599"
+                stroke="#060b11"
+                strokeWidth="1.5"
               />
               <text
                 x={labelPoint.x}
                 y={labelPoint.y}
                 textAnchor="middle"
                 dominantBaseline="central"
-                fill="#CBD5E1"
+                fill="#8da2ba"
                 fontSize="11"
-                fontWeight="600"
+                fontFamily="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+                fontWeight="500"
               >
-                {d.subject.split('\n')[0]}
-              </text>
-              <text
-                x={labelPoint.x}
-                y={labelPoint.y + 13}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fill="#10B981"
-                fontSize="10"
-                fontFamily="monospace"
-                fontWeight="bold"
-              >
-                {d.score.toFixed(0)}%
+                {formatDimensionLabel(d.subject || d.dimension)}
               </text>
             </g>
           );
@@ -150,3 +134,4 @@ export const RadarChart: React.FC<RadarChartProps> = ({ data, size = 380 }) => {
     </div>
   );
 };
+

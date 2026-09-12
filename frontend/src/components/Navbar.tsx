@@ -23,25 +23,20 @@ export const Navbar: React.FC<NavbarProps> = ({
   const isLlmConnected = status?.llm_status.badge === 'success';
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-background/90 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b border-[#162536] bg-[#060b11]/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand / Logo */}
-        <div className="flex items-center space-x-3">
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 shadow-lg shadow-emerald-950/40 border border-emerald-400/30">
-            <Shield className="w-5 h-5 text-white" />
-            <span className="absolute -top-1 -right-1 flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-            </span>
+        <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab('interview')}>
+          <div className="flex items-center justify-center w-10 h-10 rounded-lg border border-[#00e599]/40 bg-[#00e599]/10 text-[#00e599] shadow-[0_0_15px_rgba(0,229,153,0.15)]">
+            <Shield className="w-5 h-5 text-[#00e599]" />
           </div>
           <div>
-            <div className="flex items-center space-x-2">
-              <span className="text-lg font-bold tracking-tight text-white">MY_ISSB_Evaluator</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold tracking-wider uppercase">
-                v2.0 Defensible
-              </span>
+            <div className="text-[10px] font-mono tracking-[0.25em] text-slate-400 uppercase font-semibold leading-none">
+              ISSB
             </div>
-            <p className="text-xs text-slate-400 hidden sm:block">AI Interview Simulation & Psychometric Rubrics</p>
+            <div className="text-sm font-bold tracking-tight text-white mt-1">
+              Interview Simulator
+            </div>
           </div>
         </div>
 
@@ -105,32 +100,32 @@ export const Navbar: React.FC<NavbarProps> = ({
           )}
         </nav>
 
-        {/* Right Action & Status (Dev Only) */}
-        {showDevTools && (
-          <div className="flex items-center space-x-3">
-            {/* LLM Status Pill */}
-            <button
-              onClick={onOpenSettings}
-              className={`hidden lg:flex items-center space-x-2 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
-                isLlmConnected
-                  ? 'bg-emerald-950/50 text-emerald-400 border-emerald-500/30 hover:border-emerald-500/50'
-                  : 'bg-amber-950/50 text-amber-400 border-amber-500/30 hover:border-amber-500/50'
-              }`}
-            >
-              <span className={`w-2 h-2 rounded-full ${isLlmConnected ? 'bg-emerald-400' : 'bg-amber-400'}`}></span>
-              <span>{isLlmConnected ? 'Frontier LLM Active' : 'Heuristic Engine'}</span>
-            </button>
-
-            {/* Settings Trigger */}
-            <button
-              onClick={onOpenSettings}
-              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/80 transition-colors border border-slate-700/50"
-              title="Configure LLM & Providers"
-            >
-              <Settings className="w-4 h-4" />
-            </button>
+        {/* Right Status Badge from Lovable UI */}
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3 text-xs font-mono">
+            <span className="text-slate-400 tracking-wider hidden sm:inline-block">
+              CANDIDATE · CSAC
+            </span>
+            <div className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-[#0a121d] border border-[#162536]">
+              <span className={`w-1.5 h-1.5 rounded-full ${isLlmConnected ? 'bg-[#00e599]' : 'bg-amber-400'}`}></span>
+              <span className={`text-[10px] uppercase font-bold tracking-wider ${isLlmConnected ? 'text-[#00e599]' : 'text-amber-400'}`}>
+                {isLlmConnected ? 'LIVE INFERENCE' : 'OFFLINE DEMO'}
+              </span>
+            </div>
           </div>
-        )}
+
+          {showDevTools && (
+            <div className="flex items-center space-x-2 border-l border-[#162536] pl-3">
+              <button
+                onClick={onOpenSettings}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                title="Configure LLM"
+              >
+                <Settings className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

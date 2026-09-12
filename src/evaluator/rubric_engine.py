@@ -56,6 +56,7 @@ class PerAnswerEvidence:
     evidence_text: str
     citations: List[str]
     source_ids: List[str] = field(default_factory=list)
+    question_text: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -70,6 +71,7 @@ class PerAnswerEvidence:
             "evidence_text": self.evidence_text,
             "citations": self.citations,
             "source_ids": self.source_ids,
+            "question_text": self.question_text,
         }
 
 
@@ -265,6 +267,7 @@ class RubricEvaluationEngine:
                 evidence_text=answer[:120],
                 citations=citations,
                 source_ids=source_ids,
+                question_text=question_text,
             )
 
         # 3. Check for relevance to the question and RAG context
@@ -375,6 +378,7 @@ class RubricEvaluationEngine:
             evidence_text=answer[:140] + ("..." if len(answer) > 140 else ""),
             citations=citations,
             source_ids=source_ids,
+            question_text=question_text,
         )
 
     def evaluate_interview_session(

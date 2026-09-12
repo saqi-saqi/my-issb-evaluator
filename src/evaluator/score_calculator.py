@@ -271,11 +271,12 @@ def format_evidence_table(per_question_evidence: List[Dict[str, Any]]) -> List[D
         table.append({
             "No": idx,
             "Question ID": item.get("question_id", f"Q{idx}"),
+            "Question": item.get("question_text") or item.get("question") or "Situational prompt evaluation",
             "Category": item.get("category", "").replace("_", " ").title(),
             "Assessed Dimension": item.get("dimension", ""),
             "Score": f"{item.get('score', 0):.0f}%",
             "Evidence Confidence": item.get("evidence_confidence", "MEDIUM"),
-            "Indicators": ", ".join(item.get("positive_indicators", [])[:2]) or "Baseline response",
+            "Indicators": ", ".join(item.get("positive_indicators", [])[:2]) or "Standard, Scored",
             "Weaknesses": ", ".join(item.get("weaknesses", [])) or "None observed",
         })
     return table
