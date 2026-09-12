@@ -1,5 +1,13 @@
 # MY_ISSB_Evaluator
 
+[![CI - Build & Test](https://github.com/saqi-saqi/my-issb-evaluator/actions/workflows/ci.yml/badge.svg)](https://github.com/saqi-saqi/my-issb-evaluator/actions)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688?logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-3-38B2AC?logo=tailwind-css&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 > **Defensible Multi-Tier RAG & Behavioral Interview Evaluation System for Pakistan Inter Services Selection Board (ISSB) Preparation**
 
 ---
@@ -161,10 +169,11 @@ Open your browser at: **`http://localhost:5173`**
 
 ---
 
-### Alternative Interfaces
-- **Streamlit App**: `python -m streamlit run app.py`
-- **Terminal CLI**: `python cli.py`
-- **Run Tests**: `python -m pytest tests/ -v` (56 automated tests pass in ~35s)
+### 🧪 Automated Tests & Quality Verification
+Run the comprehensive test suite verifying the core engine, RAG retriever, scoring rubrics, learning engine, and FastAPI endpoints:
+```bash
+python -m pytest tests/test_core_consolidated.py -v
+```
 
 ---
 
