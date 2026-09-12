@@ -140,7 +140,7 @@ export async function getLearningFeedback(
   });
   if (!res.ok) throw new Error('Failed to fetch learning feedback');
   const data = await res.json();
-  return data.learning_phase;
+  return data.learning_phase || data;
 }
 
 export async function submitRetryAnswer(

@@ -17,24 +17,32 @@ MY_ISSB_Evaluator
 │
 ├── frontend/                       # Modern Lovable-Style Web UI (React 18 + Vite + Tailwind CSS)
 │   ├── src/components/
-│   │   ├── Navbar.tsx              # Tactical header with insignia & LLM status badge
+│   │   ├── Navbar.tsx              # Tactical header with insignia & Groq status badge
 │   │   ├── InterviewRoom.tsx       # Live interrogation room with animated follow-up probe cards
-│   │   ├── EvaluationReport.tsx    # 15-section report with radar chart & evidence table
-│   │   ├── RadarChart.tsx          # High-fidelity SVG Polar Radar Assessment
-│   │   ├── RagExplorer.tsx         # Multi-tier RAG search with provenance filters
-│   │   ├── QuestionBankExplorer.tsx# 13-category question browser
-│   │   └── SettingsModal.tsx       # Live LLM provider configuration & connectivity test
+│   │   ├── EvaluationReport.tsx    # Consolidated 6-section report with radar chart & evidence table
+│   │   ├── RadarChart.tsx          # High-fidelity SVG Polar Radar Assessment (14 OLQs)
+│   │   ├── LearningPhaseCard.tsx   # Practice techniques, retry evaluation & before/after delta
+│   │   ├── RagExplorer.tsx         # Multi-tier RAG search with provenance filters (Dev Tools)
+│   │   ├── QuestionBankExplorer.tsx# 13-category question browser (Dev Tools)
+│   │   └── SettingsModal.tsx       # Live Groq API key & model connectivity test
 │   └── package.json
 │
 ├── backend/                        # FastAPI REST API Backend
-│   ├── api.py                      # REST endpoints for interview, RAG, questions, settings
+│   ├── main.py                     # Streamlined 7-endpoint REST API
+│   ├── api.py                      # Re-export compatibility layer
 │   └── __init__.py
 │
-├── question_bank/                  # 47 Structured Questions across 13 Categories (JSON)
-│   ├── personal.json, education.json, family.json, motivation.json
-│   ├── leadership.json, decision_making.json, stress.json, situational.json
-│   ├── general_knowledge.json, teamwork.json, communication.json
-│   ├── confidence.json, responsibility.json
+├── core/                           # Consolidated Python AI & Evaluation Engine
+│   ├── ai.py                       # High-speed Groq inference client (generate_text, generate_json)
+│   ├── questions.py                # QuestionBank loader & calibrated sequence builder
+│   ├── rag.py                      # Multi-tier TF-IDF retriever with provenance citations
+│   ├── scoring.py                  # Deterministic 14-OLQ & 5-dimension scoring engine
+│   ├── evaluator.py                # 2-Pass rubric evaluator (evidence extraction + single narrative LLM call)
+│   ├── interview.py                # InterviewService state machine with adaptive probing triggers
+│   └── learning.py                 # LearningService for coaching feedback & before/after retry deltas
+│
+├── question_bank/                  # Curated Question Bank
+│   └── questions.json              # 47 Structured Questions across 13 Categories in a unified JSON array
 │
 ├── knowledge_base/                 # Multi-Tier Grounded Knowledge Base
 │   ├── official/                   # Level 1: Official ISSB Selection System & Guidelines
@@ -48,19 +56,9 @@ MY_ISSB_Evaluator
 │   ├── follow_up.md                # Targeted probing follow-up template
 │   └── evaluator.md                # Senior assessor rubric evaluation template
 │
-├── src/
-│   ├── question_bank/              # Loader, schema validator & sequence builder
-│   ├── rag/                        # Document chunker & metadata-filtered retriever
-│   ├── evaluator/                  # Observable indicators rubric engine & scoring
-│   ├── interview/                  # State machine & conversational orchestrator
-│   ├── llm/                        # Multi-provider adapter (Gemini, Groq, Ollama, OpenAI)
-│   └── prompts/                    # Template loader with fallback resilience
-│
-├── tests/                          # 30 comprehensive automated tests (100% passing)
-├── app.py                          # Streamlit interactive application
-├── cli.py                          # Terminal CLI interactive practice
+├── tests/                          # Automated tests covering core engine, RAG, and API
 ├── run_web.bat / run_web.ps1       # One-click launcher for FastAPI + Lovable React UI
-└── requirements.txt
+└── requirements.txt                # Streamlined production dependencies
 ```
 
 ---

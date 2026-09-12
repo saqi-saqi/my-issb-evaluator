@@ -54,9 +54,13 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
 
     try {
       const res = await submitRetryAnswer(sessionId, questionId, retryInput.trim());
-      setComparisonResult(res.before_after);
-      setCurrentLearning(res.new_learning);
-      if (onRetryComplete) {
+      if (res?.before_after) {
+        setComparisonResult(res.before_after);
+      }
+      if (res?.new_learning) {
+        setCurrentLearning(res.new_learning);
+      }
+      if (onRetryComplete && res?.before_after) {
         onRetryComplete(res.before_after);
       }
     } catch (err: any) {
@@ -66,8 +70,8 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
     }
   };
 
-  const getPriorityBadge = (priority: string) => {
-    switch (priority) {
+  const getPriorityBadge = (priority: string = 'MEDIUM') => {
+    switch (priority?.toUpperCase()) {
       case 'HIGH':
         return (
           <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-500/10 text-rose-400 border border-rose-500/30 flex items-center space-x-1">
@@ -90,6 +94,9 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
         );
     }
   };
+
+  const strengths = currentLearning?.strengths || [];
+  const improvementAreas = currentLearning?.improvement_areas || [];
 
   return (
     <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-emerald-500/30 bg-slate-900/90 shadow-2xl space-y-6 my-6 relative overflow-hidden">
@@ -126,13 +133,13 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
           <Lightbulb className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
           <div>
             <p className="font-semibold text-slate-100 mb-1">Coach Observation</p>
-            <p>{currentLearning.overall_assessment}</p>
+            <p>{currentLearning?.overall_assessment || 'Response evaluated. Follow the coaching guidance below to strengthen your expression.'}</p>
           </div>
         </div>
       </div>
 
       {/* Strengths Section */}
-      {currentLearning.strengths.length > 0 && (
+      {strengths.length > 0 && (
         <div className="space-y-3">
           <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center space-x-1.5">
             <CheckCircle className="w-4 h-4" />
@@ -140,29 +147,34 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
           </h3>
 
           <div className="grid grid-cols-1 gap-3">
-            {currentLearning.strengths.map((str, idx) => (
-              <div
-                key={idx}
-                className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 text-sm space-y-1.5"
-              >
-                <div className="flex items-center space-x-2 font-semibold text-emerald-300">
-                  <Award className="w-4 h-4 text-emerald-400" />
-                  <span>{str.area}</span>
+            {strengths.map((str, idx) => {
+              const area = typeof str === 'string' ? 'Observed Trait' : (str?.area || 'Observed Trait');
+              const obs = typeof str === 'string' ? str : (str?.observation || '');
+              const reinf = typeof str === 'object' ? str?.reinforcement : '';
+              return (
+                <div
+                  key={idx}
+                  className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 text-sm space-y-1.5"
+                >
+                  <div className="flex items-center space-x-2 font-semibold text-emerald-300">
+                    <Award className="w-4 h-4 text-emerald-400" />
+                    <span>{area}</span>
+                  </div>
+                  <p className="text-slate-300 text-xs">{obs}</p>
+                  {reinf && (
+                    <p className="text-xs text-slate-400 italic pt-1 border-t border-emerald-900/40">
+                      {reinf}
+                    </p>
+                  )}
                 </div>
-                <p className="text-slate-300 text-xs">{str.observation}</p>
-                {str.reinforcement && (
-                  <p className="text-xs text-slate-400 italic pt-1 border-t border-emerald-900/40">
-                    {str.reinforcement}
-                  </p>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
 
       {/* Improvement Areas Section */}
-      {currentLearning.improvement_areas.length > 0 && (
+      {improvementAreas.length > 0 && (
         <div className="space-y-3">
           <h3 className="text-xs font-bold uppercase tracking-wider text-rose-400 flex items-center space-x-1.5">
             <Target className="w-4 h-4" />
@@ -170,17 +182,17 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
           </h3>
 
           <div className="space-y-4">
-            {currentLearning.improvement_areas.map((ia, idx) => (
+            {improvementAreas.map((ia, idx) => (
               <div
                 key={idx}
                 className="p-5 rounded-xl bg-slate-800/40 border border-slate-700 space-y-3"
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm font-bold text-white">{ia.area}</span>
-                    {getPriorityBadge(ia.priority)}
+                    <span className="text-sm font-bold text-white">{ia?.area || 'Improvement Area'}</span>
+                    {getPriorityBadge(ia?.priority)}
                   </div>
-                  {ia.evidence_ids.length > 0 && (
+                  {ia?.evidence_ids && ia.evidence_ids.length > 0 && (
                     <span className="text-xs font-mono text-slate-500">
                       Grounded: {ia.evidence_ids.join(', ')}
                     </span>
@@ -188,18 +200,24 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
                 </div>
 
                 <div className="text-xs space-y-2 text-slate-300">
-                  <p>
-                    <strong className="text-slate-400">The Problem:</strong> {ia.problem}
-                  </p>
-                  <p>
-                    <strong className="text-slate-400">Why It Matters:</strong> {ia.why_it_matters}
-                  </p>
-                  <p className="text-emerald-300">
-                    <strong className="text-emerald-400">How to Improve:</strong> {ia.how_to_improve}
-                  </p>
+                  {ia?.problem && (
+                    <p>
+                      <strong className="text-slate-400">The Problem:</strong> {ia.problem}
+                    </p>
+                  )}
+                  {ia?.why_it_matters && (
+                    <p>
+                      <strong className="text-slate-400">Why It Matters:</strong> {ia.why_it_matters}
+                    </p>
+                  )}
+                  {ia?.how_to_improve && (
+                    <p className="text-emerald-300">
+                      <strong className="text-emerald-400">How to Improve:</strong> {ia.how_to_improve}
+                    </p>
+                  )}
                 </div>
 
-                {ia.technique && (
+                {ia?.technique && (
                   <div className="p-3 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-mono text-teal-300">
                     <span className="text-slate-500 block mb-0.5 uppercase tracking-wider text-[10px]">
                       Practical Technique Formula:
@@ -208,7 +226,7 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
                   </div>
                 )}
 
-                {ia.example_structure && (
+                {ia?.example_structure && (
                   <div className="p-3 rounded-lg bg-slate-950/80 border border-slate-800 text-xs text-slate-400 font-mono">
                     <span className="text-slate-500 block mb-1 uppercase tracking-wider text-[10px]">
                       Recommended Structure (Template Only):
@@ -234,49 +252,49 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
             </div>
             <span
               className={`px-3 py-1 rounded-full text-xs font-bold font-mono ${
-                comparisonResult.change > 0
+                (comparisonResult?.change || 0) > 0
                   ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                  : comparisonResult.change === 0
+                  : (comparisonResult?.change || 0) === 0
                   ? 'bg-slate-700 text-slate-300'
                   : 'bg-rose-500/20 text-rose-400 border border-rose-500/40'
               }`}
             >
-              {comparisonResult.change > 0 ? `+${comparisonResult.change}` : comparisonResult.change} Points
+              {(comparisonResult?.change || 0) > 0 ? `+${comparisonResult.change}` : (comparisonResult?.change ?? 0)} Points
             </span>
           </div>
 
           <p className="text-xs text-slate-300 leading-relaxed font-sans">
-            {comparisonResult.explanation}
+            {comparisonResult?.explanation || 'Attempt evaluated against observable indicators.'}
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
             <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
               <span className="text-[10px] text-slate-500 block uppercase font-mono">Initial Score</span>
               <span className="text-sm font-bold text-slate-300 font-mono">
-                {comparisonResult.previous_score}
+                {comparisonResult?.previous_score ?? '-'}
               </span>
             </div>
             <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
               <span className="text-[10px] text-slate-500 block uppercase font-mono">Revised Score</span>
               <span className="text-sm font-bold text-emerald-400 font-mono">
-                {comparisonResult.new_score}
+                {comparisonResult?.new_score ?? '-'}
               </span>
             </div>
             <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
               <span className="text-[10px] text-slate-500 block uppercase font-mono">Words (Before / After)</span>
               <span className="text-sm font-bold text-slate-300 font-mono">
-                {comparisonResult.metrics?.before?.word_count ?? '-'} / {comparisonResult.metrics?.after?.word_count ?? '-'}
+                {comparisonResult?.metrics?.before?.word_count ?? '-'} / {comparisonResult?.metrics?.after?.word_count ?? '-'}
               </span>
             </div>
             <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
               <span className="text-[10px] text-slate-500 block uppercase font-mono">Improved Areas</span>
               <span className="text-sm font-bold text-emerald-400 font-mono">
-                {comparisonResult.improved_areas.length}
+                {comparisonResult?.improved_areas?.length ?? 0}
               </span>
             </div>
           </div>
 
-          {comparisonResult.improved_areas.length > 0 && (
+          {comparisonResult?.improved_areas && comparisonResult.improved_areas.length > 0 && (
             <div className="flex flex-wrap items-center gap-1.5 pt-1">
               <span className="text-xs text-slate-400 mr-1">Verified Improvements:</span>
               {comparisonResult.improved_areas.map((area, i) => (
@@ -303,12 +321,12 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
             </h4>
           </div>
           <span className="text-xs text-emerald-400 font-medium">
-            Target: {currentLearning.retry.target_area || 'Clarity & Ownership'}
+            Target: {currentLearning?.retry?.target_area || 'Clarity & Ownership'}
           </span>
         </div>
 
         <p className="text-xs text-slate-300">
-          {currentLearning.retry.instruction || 'Revise your response applying the suggested technique.'}
+          {currentLearning?.retry?.instruction || 'Revise your response applying the suggested technique.'}
         </p>
 
         <form onSubmit={handleRetrySubmit} className="space-y-3 pt-1">
@@ -366,7 +384,7 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
 
       {/* Disclaimer */}
       <p className="text-[11px] text-slate-500 italic text-center pt-2">
-        {currentLearning.disclaimer}
+        {currentLearning?.disclaimer || 'Formative practice guidance generated from observable indicators. Not an official board evaluation.'}
       </p>
     </div>
   );

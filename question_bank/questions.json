@@ -1,0 +1,660 @@
+[
+  {
+    "id": "COM_001",
+    "category": "communication",
+    "question": "Have you ever given a speech or presentation in front of a large audience? Tell me about the experience — how did you prepare and how did it go?",
+    "difficulty": 1,
+    "persona": "both",
+    "intent": "Assesses baseline public speaking exposure and the candidate's self-awareness about their verbal delivery, preparation habits, and comfort with being the center of attention.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "What was the most nervous moment during that speech, and how did you push through it?",
+      "If you noticed the audience losing interest midway, what would you do to re-engage them?",
+      "How do you think your speaking ability compares to your peers — and what are you doing to improve it?"
+    ]
+  },
+  {
+    "id": "COM_002",
+    "category": "communication",
+    "question": "Describe a situation where a miscommunication between you and someone else led to a problem. What happened and how did you fix it?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Probes the candidate's ability to recognize their own role in communication failures, take ownership of misunderstandings, and implement corrective measures.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "Do you think the miscommunication was more your fault or the other person's? What makes you say that?",
+      "After resolving it, did you change how you communicate to prevent similar issues in the future?",
+      "If the other person blamed you entirely for the miscommunication, how would you respond?"
+    ]
+  },
+  {
+    "id": "COM_003",
+    "category": "communication",
+    "question": "Have you ever participated in a formal debate or argument where you had to defend a position you did not personally agree with? How did you approach it?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Evaluates intellectual flexibility, persuasive reasoning ability, and whether the candidate can construct coherent arguments independently of personal bias — a key indicator of cognitive adaptability.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "How did you research and build arguments for a position you disagreed with — what was your strategy?",
+      "Did defending that position change your own views on the topic at all, even slightly?",
+      "If your opponent made a point you privately agreed with, how did you handle that moment during the debate?"
+    ]
+  },
+  {
+    "id": "COM_004",
+    "category": "communication",
+    "question": "Tell me about a time when you had to listen carefully to someone — a teacher, friend, or family member — before responding, even though you wanted to interrupt. What was the situation?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Measures active listening capacity and impulse control in conversation, revealing whether the candidate values understanding others before asserting their own viewpoint.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "What made you hold back from interrupting — was it respect, strategy, or something else?",
+      "After listening fully, did your intended response change from what you originally wanted to say?",
+      "In group settings, do you tend to speak first or listen first — and why do you think that is?"
+    ]
+  },
+  {
+    "id": "COM_005",
+    "category": "communication",
+    "question": "If you were appointed as a squad leader and had to brief your team on a complex mission plan with only five minutes to prepare, how would you structure your communication?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests the candidate's ability to organize thoughts rapidly under time pressure, prioritize critical information, and deliver clear instructions — essential for military communication contexts.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "How would you ensure every team member understood the plan — especially the weaker ones who might hesitate to ask questions?",
+      "If midway through your briefing a team member challenged your plan in front of everyone, how would you handle it?",
+      "What would you do if after the briefing you realized you forgot to mention a critical detail?"
+    ]
+  },
+  {
+    "id": "CON_001",
+    "category": "confidence",
+    "question": "Describe a situation where your peers openly disagreed with your idea or plan. How did you handle the pressure, and what was the outcome?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses self-assurance when facing collective opposition and the candidate's ability to maintain composure under social pressure without becoming defensive or submissive.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "At what point during the disagreement did you feel most uncertain, and what kept you from backing down?",
+      "If your peers had escalated their opposition by mocking your idea publicly, how would your response have changed?",
+      "Looking back, was there a moment you considered abandoning your position just to restore harmony? Why or why not?"
+    ]
+  },
+  {
+    "id": "CON_002",
+    "category": "confidence",
+    "question": "Tell me about a time someone ridiculed you in front of others — perhaps a teacher, senior, or colleague. How did you react in that moment and in the days that followed?",
+    "difficulty": 3,
+    "persona": "psychologist",
+    "intent": "Evaluates emotional resilience and ego stability when subjected to public humiliation, probing whether the candidate internalizes shame or channels it constructively.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Did the ridicule change the way you interacted with that person afterwards, and if so, how?",
+      "How long did the sting of that experience last, and what did you do to move past it?",
+      "If you witnessed the same ridicule happening to a junior or friend, how would you intervene?"
+    ]
+  },
+  {
+    "id": "CON_003",
+    "category": "confidence",
+    "question": "Have you ever publicly defended a viewpoint that most people around you considered wrong or unpopular? Walk me through what happened.",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Measures moral courage and intellectual confidence — the willingness to stand alone for a belief while maintaining respectful engagement with dissenters.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "What evidence or reasoning gave you the conviction to hold your ground despite majority opposition?",
+      "How did you distinguish between being stubbornly rigid and being principled in that situation?",
+      "If defending that position had cost you a friendship or a professional opportunity, would you still have done it?"
+    ]
+  },
+  {
+    "id": "CON_004",
+    "category": "confidence",
+    "question": "Recall a time you made an embarrassing mistake in a public or formal setting — perhaps during a presentation, ceremony, or competition. How did you recover in real time?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Probes the candidate's capacity for rapid emotional recovery and composure restoration after a public failure, revealing self-regulation under acute social stress.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "What was the first thought that went through your mind the instant you realized the mistake?",
+      "Did you use any specific strategy — humor, acknowledgment, redirection — to regain control of the situation?",
+      "How did that experience change your preparation or approach for similar high-visibility situations afterward?"
+    ]
+  },
+  {
+    "id": "CON_005",
+    "category": "confidence",
+    "question": "Imagine you are the only officer in a meeting who believes a planned operation is flawed, but every senior officer supports it. The commanding officer asks if anyone has objections. What do you do and say?",
+    "difficulty": 4,
+    "persona": "deputy_president",
+    "intent": "Tests the candidate's ability to assert professional judgment against hierarchical and social pressure in a high-stakes military context, balancing respect for authority with duty to speak truth.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "If the commanding officer dismisses your objection curtly and moves on, do you raise it again or let it go? Why?",
+      "How would you frame your objection to maximize the chance of being heard without appearing insubordinate?",
+      "If the operation proceeds unchanged and fails as you predicted, how do you handle the aftermath with your seniors and peers?"
+    ]
+  },
+  {
+    "id": "DEC_001",
+    "category": "decision_making",
+    "question": "Walk me through the toughest decision you have had to make in the past two years. What alternatives did you consider and why did you choose that path?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses structured reasoning, awareness of trade-offs, and decisive action.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Did you consult anyone before making that decision?",
+      "Were there unexpected negative consequences that arose later?",
+      "Would you make the exact same choice today with the knowledge you now possess?"
+    ]
+  },
+  {
+    "id": "DEC_002",
+    "category": "decision_making",
+    "question": "You are commanding a small patrol in rough terrain. A civilian approaches you claiming an injured child needs immediate medical evacuation, but diverting your patrol violates your operational timeline for securing a vital bridge. What do you do?",
+    "difficulty": 4,
+    "persona": "deputy_president",
+    "intent": "Evaluates ethical balance, mission primacy, tactical problem-solving, and communication with higher headquarters.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "Can you split your patrol, or does that violate tactical security?",
+      "What if you cannot establish radio contact with headquarters?",
+      "How do you ensure this civilian is not an adversary decoy or trap?"
+    ]
+  },
+  {
+    "id": "DEC_003",
+    "category": "decision_making",
+    "question": "You discover that a close friend who is also a candidate at ISSB is using forbidden notes during a written test. What action do you take?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Tests the intersection of loyalty, honor, friendship, and institutional rules.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Would you confront your friend privately or immediately report to the presiding officer?",
+      "What if your friend begs you, saying their entire family's future depends on passing?",
+      "How does integrity affect the trust between officers in combat?"
+    ]
+  },
+  {
+    "id": "EDU_001",
+    "category": "education",
+    "question": "What led you to choose your field of study in Matric/FSc or A-Levels/Intermediate, and which subject did you enjoy the most?",
+    "difficulty": 1,
+    "persona": "both",
+    "intent": "Evaluates intellectual curiosity, autonomy in decision making, and conceptual clarity.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Was this field primarily your own deliberate choice or suggested by parents/teachers?",
+      "Explain the fundamental scientific or practical concept behind that favorite subject.",
+      "Which subject was your least favorite, and why?"
+    ]
+  },
+  {
+    "id": "EDU_002",
+    "category": "education",
+    "question": "I see your marks in your intermediate examination were lower than matriculation (or vice-versa). What was the actual reason for this difference?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses honesty, locus of control (internal vs blaming examiners/system), and accountability.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Do you believe the grading was unfair, or did your study habits change?",
+      "What adjustments did you make when you realized your performance was dipping?",
+      "How did your family react to your exam results?"
+    ]
+  },
+  {
+    "id": "EDU_003",
+    "category": "education",
+    "question": "Have you ever faced an ethical dilemma in an academic setting—for example, seeing a peer cheat or being asked to share exam answers?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests moral courage, boundary setting, and ethical judgment under peer pressure.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Did you report the incident, speak to the student directly, or remain silent?",
+      "If remaining silent, why didn't you intervene?",
+      "What is your philosophy on loyalty to a friend versus loyalty to an ethical rule?"
+    ]
+  },
+  {
+    "id": "FAM_001",
+    "category": "family",
+    "question": "Describe your family environment, your father's and mother's profession, and what specific responsibilities you handle at home.",
+    "difficulty": 1,
+    "persona": "both",
+    "intent": "Evaluates social grounding, maturity, domestic contribution, and family relationships.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Whom are you closest to among your family members, and why?",
+      "When a family disagreement occurs, what role do you usually play?",
+      "How do your parents guide you when you make an error in judgment?"
+    ]
+  },
+  {
+    "id": "FAM_002",
+    "category": "family",
+    "question": "Has there ever been a time when you strongly disagreed with a major decision made by your parents or elders? How did you express that disagreement?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Assesses respect for authority combined with independent thought and emotional maturity.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Did you obey reluctantly, argue passionately, or present a reasoned case?",
+      "In retrospect, who was right: you or your parents?",
+      "How do you handle situations where you must carry out an order you disagree with?"
+    ]
+  },
+  {
+    "id": "GK_001",
+    "category": "general_knowledge",
+    "question": "What is the primary cause of Pakistan's balance-of-payments challenges, and what are two structural reforms required to resolve them permanently?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Evaluates economic awareness, analytical grasp of macroeconomic issues, and articulate expression.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Why is export competitiveness more sustainable than relying on foreign loans or remittances?",
+      "What role can value-added agricultural technology play in reducing our import bill?",
+      "What is the current official inflation and interest rate trend in Pakistan?"
+    ]
+  },
+  {
+    "id": "GK_002",
+    "category": "general_knowledge",
+    "question": "Explain the geostrategic significance of the Strait of Malacca and the Strait of Hormuz to world maritime trade and Pakistan's energy security.",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Evaluates global geography, maritime awareness, chokepoints, and energy supply line understanding.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "What percentage of the world's petroleum flows through the Strait of Hormuz?",
+      "How does the development of Gwadar Port provide an alternative energy transit corridor?",
+      "Which regional powers maintain naval presence near these choke points?"
+    ]
+  },
+  {
+    "id": "GK_003",
+    "category": "general_knowledge",
+    "question": "Name the five major rivers of Pakistan, their points of origin, and why the Indus Water Treaty of 1960 is of existential strategic significance.",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses foundational national geography, water security, and historical treaty knowledge.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Which rivers were allocated to Pakistan and which to India under the 1960 Treaty?",
+      "Why are dams like Diamer-Bhasha and Mohmand vital for our future water storage capacity?",
+      "What is the impact of climate change on Himalayan glacier melting rates?"
+    ]
+  },
+  {
+    "id": "LEA_001",
+    "category": "leadership",
+    "question": "Tell me about a real situation in your life where you had to lead a group or take responsibility for a team project.",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Evaluates practical leadership experience, team coordination, and outcome orientation.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "What was the single biggest obstacle your group encountered, and how did you resolve it?",
+      "Was there a team member who was not contributing? How specifically did you deal with them?",
+      "Did you take credit for the final result, or how was recognition shared?"
+    ]
+  },
+  {
+    "id": "LEA_002",
+    "category": "leadership",
+    "question": "Suppose your team fails to accomplish an important task strictly because of a tactical misjudgment you made as the leader. How do you address your team and your superiors?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests internal locus of control, moral courage, willingness to shoulder blame, and recovery planning.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "Would you admit the error explicitly in front of your juniors?",
+      "How do you rebuild trust and confidence among team members after such a failure?",
+      "What would you do if a subordinate openly says 'I told you so'?"
+    ]
+  },
+  {
+    "id": "LEA_003",
+    "category": "leadership",
+    "question": "In your view, what is the difference between being a commander and being a leader?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Assesses conceptual depth regarding leadership psychology, empathy, moral authority vs positional authority.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Can an officer command obedience through rank alone in modern warfare?",
+      "Which historical Pakistani military figure best exemplifies this leadership philosophy to you?",
+      "How do you win the hearts and minds of soldiers under your command?"
+    ]
+  },
+  {
+    "id": "MOT_001",
+    "category": "motivation",
+    "question": "Why do you specifically want to join the Pakistan Armed Forces instead of pursuing a lucrative civilian corporate career or civil services?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Evaluates intrinsic vs extrinsic motivation, depth of thought, and authenticity.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "If you are offered a high-paying software or engineering job abroad tomorrow, would you still join?",
+      "What if you are not selected at ISSB? What is your concrete alternative plan?",
+      "Which specific arm or branch are you applying for, and what do they actually do in peace and war?"
+    ]
+  },
+  {
+    "id": "MOT_002",
+    "category": "motivation",
+    "question": "Military service demands grueling physical discipline, postings in remote or hazardous areas, and the potential sacrifice of life. Have you prepared yourself mentally and physically for this reality?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests realistic awareness of military hardships versus romanticized Hollywood/ISPR drama perceptions.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "Tell me about the hardest physical challenge or exertion you have endured in your own life.",
+      "How does your mother feel about you joining a combat arm where life is at risk?",
+      "What gives a military officer the moral courage to lead men under hostile artillery fire?"
+    ]
+  },
+  {
+    "id": "MOT_003",
+    "category": "motivation",
+    "question": "Suppose you are commissioned into an arm or corps that was your last preference (e.g. Services / Ordnance instead of Infantry / Armoured). How would you feel and perform?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Assesses professional loyalty, resilience, adaptability, and ego management.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "Would you feel demotivated or resentful toward the system?",
+      "Why are logistic and service arms indispensable to modern combat operations?",
+      "How would you motivate your subordinates if you were unhappy with your own branch?"
+    ]
+  },
+  {
+    "id": "PER_001",
+    "category": "personal",
+    "question": "Tell me about yourself, highlighting your daily routine and how you spend your free time.",
+    "difficulty": 1,
+    "persona": "both",
+    "intent": "Assesses self-expression, active vs passive lifestyle, time management, and clarity of thought.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "What is the most productive part of your day, and why?",
+      "If you had two extra hours every day, how would you invest them?",
+      "Do you follow this routine consistently on weekends as well?"
+    ]
+  },
+  {
+    "id": "PER_002",
+    "category": "personal",
+    "question": "What are your three greatest personal strengths, and what is one genuine weakness you are actively working on?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Evaluates self-awareness, honesty, avoidance of clichéd fake weaknesses ('I am too hardworking'), and realistic self-appraisal.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Give me a specific recent instance where that weakness caused an inconvenience or problem.",
+      "What concrete steps did you take this past month to address that weakness?",
+      "How do your close friends perceive this trait?"
+    ]
+  },
+  {
+    "id": "PER_003",
+    "category": "personal",
+    "question": "What is the biggest personal mistake or regret in your life so far, and how did you recover from it?",
+    "difficulty": 3,
+    "persona": "psychologist",
+    "intent": "Evaluates moral integrity, emotional resilience, learning capability, and non-defensiveness.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Did you openly apologize or admit your mistake to the people affected at the time?",
+      "If you could travel back in time, what would you do differently?",
+      "Did that incident change how you treat other people when they make mistakes?"
+    ]
+  },
+  {
+    "id": "PER_004",
+    "category": "personal",
+    "question": "Which sports or physical activities do you participate in regularly, and what role do you typically play in the team?",
+    "difficulty": 1,
+    "persona": "deputy_president",
+    "intent": "Evaluates physical orientation, competitive spirit, teamwork, and stamina.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Have you ever represented your school, college, or club at a competitive tournament?",
+      "How do you handle defeat after a hard-fought match?",
+      "If your captain makes a tactical blunder during a match, how do you react?"
+    ]
+  },
+  {
+    "id": "RES_001",
+    "category": "responsibility",
+    "question": "Tell me about a time you made a serious mistake that affected others. How did you handle it — did you own it immediately, or did it take time?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses the candidate's instinct for personal accountability and transparency when their actions cause tangible harm, revealing honesty under consequence pressure.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "What stopped you — or what would have stopped you — from shifting blame to circumstances or other people?",
+      "How did the affected people react when you took responsibility, and did their reaction match what you expected?",
+      "If owning the mistake had resulted in a formal punishment or demotion, would you still have come forward? Why?"
+    ]
+  },
+  {
+    "id": "RES_002",
+    "category": "responsibility",
+    "question": "Have you ever witnessed a civic problem in your community — illegal dumping, unsafe road conditions, corruption at a local office — and taken personal action to address it? Describe what you did.",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Evaluates the candidate's sense of civic duty and initiative — whether they see community problems as someone else's job or as a personal call to action.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "What motivated you to act when most people around you chose to ignore the problem?",
+      "Did you face any resistance or backlash for getting involved, and how did you handle it?",
+      "If your efforts produced no visible result after weeks of trying, would you have continued or moved on? Explain your reasoning."
+    ]
+  },
+  {
+    "id": "RES_003",
+    "category": "responsibility",
+    "question": "Describe a situation where you were entrusted with managing money or resources — for a family event, a club, or a project. How did you ensure accountability and transparency?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Probes financial responsibility and trustworthiness — whether the candidate treats others' resources with the same discipline as their own and maintains transparent records.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "Was there a moment when you were tempted to cut corners or use the funds loosely because no one was closely monitoring? What did you do?",
+      "How did you report back to the people who entrusted you — proactively or only when asked?",
+      "If you discovered a small accounting error in your own favor at the end, how would you handle it?"
+    ]
+  },
+  {
+    "id": "RES_004",
+    "category": "responsibility",
+    "question": "Imagine you discover that a close friend in your unit has been falsifying attendance records. Reporting him could end his career; staying silent makes you complicit. What do you do?",
+    "difficulty": 4,
+    "persona": "psychologist",
+    "intent": "Tests moral courage and the candidate's hierarchy of loyalties — whether personal bonds override institutional integrity, and how they navigate the emotional cost of doing right.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "Would you confront your friend privately first, or go directly to the chain of command? What guides that choice?",
+      "If your friend begs you to stay silent and promises to stop, does that change your decision? Why or why not?",
+      "How would you cope with the guilt or social fallout if your report leads to his dismissal?"
+    ]
+  },
+  {
+    "id": "RES_005",
+    "category": "responsibility",
+    "question": "Describe a time when a group you were part of faced a crisis or urgent task but no one was stepping up to lead or take charge. What did you do?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Assesses the candidate's willingness to assume responsibility in a leadership vacuum — whether they wait for direction or self-mobilize when the situation demands it.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "What was the first action you took once you decided to step in, and how did you prioritize tasks?",
+      "How did the rest of the group respond to your initiative — did anyone resist, and how did you handle that?",
+      "After the crisis passed, did you continue in the leadership role or hand it back? What influenced that decision?"
+    ]
+  },
+  {
+    "id": "SIT_001",
+    "category": "situational",
+    "question": "You are traveling on a remote mountain road with your family late at night. You come across a vehicle overturned in a ravine with injured passengers, but your own car has only a quarter tank of fuel and no mobile network. What is your sequence of actions?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Evaluates practical crisis prioritization, safety of dependents, triage, and resourcefulness.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "Do you leave your family in the car while you climb down the ravine?",
+      "How do you secure medical help without running out of fuel?",
+      "If one injured person is bleeding heavily, how do you provide first aid with what is available?"
+    ]
+  },
+  {
+    "id": "SIT_002",
+    "category": "situational",
+    "question": "During an outdoor military planning exercise, two candidates in your group start a physical scuffle over who should lead. The clock is ticking with only 10 minutes left to present the solution to the GTO. What do you do?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Assesses intervention courage, de-escalation, focus on mission accomplishment, and peer influence.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "Do you call the GTO over immediately, or handle it within the group?",
+      "How do you get both individuals back to contributing before the timer expires?",
+      "If neither agrees to present, what is your next move?"
+    ]
+  },
+  {
+    "id": "SIT_003",
+    "category": "situational",
+    "question": "You are placed in charge of a budget to organize your college sports gala. Three days before the event, the main equipment supplier cancels the delivery and prices everywhere else have doubled. How do you ensure the event proceeds successfully?",
+    "difficulty": 2,
+    "persona": "deputy_president",
+    "intent": "Tests contingency planning, negotiation, resource mobilization, and calm under crisis.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Which sports events would you trim or adapt if budget cannot be expanded?",
+      "How do you communicate the change to the college administration without inducing panic?",
+      "What preventive measures should have been in the contract initially?"
+    ]
+  },
+  {
+    "id": "STR_001",
+    "category": "stress",
+    "question": "What would you do if your team members strongly and vocalize their disagreement with your decision during a high-stakes group task?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Assesses non-defensiveness, patience, persuasion, de-escalation, and composure.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Would you shout to assert authority, or how would you get them to listen?",
+      "What if their proposed alternative plan is actually better than yours? Would you adopt it?",
+      "How do you handle a team member who refuses to work after an argument?"
+    ]
+  },
+  {
+    "id": "STR_002",
+    "category": "stress",
+    "question": "I've been observing your answers, and frankly, you sound too rehearsed and textbook. Are you pretending to be someone you are not just to get recommended?",
+    "difficulty": 4,
+    "persona": "both",
+    "intent": "Provocative pressure probe: tests whether candidate becomes nervous, angry, combative, or remains poised, respectful, and authentic.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Why should the board believe you are genuine rather than well-coached by an academy?",
+      "If you are rejected this time, what would that prove about your true personality?",
+      "Tell me one thing about yourself that you consciously tried to hide today."
+    ]
+  },
+  {
+    "id": "STR_003",
+    "category": "stress",
+    "question": "Suppose you are subjected to harsh criticism in front of your peers by a superior officer for a mistake you did not commit. How do you respond in that moment?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Evaluates military decorum, emotional stability, composure under humiliation, and proper chain-of-command redress.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Would you interrupt the senior officer to defend your innocence?",
+      "When and how is it appropriate to present the true facts of the incident?",
+      "How would you manage internal resentment so it doesn't affect your duty?"
+    ]
+  },
+  {
+    "id": "TEA_001",
+    "category": "teamwork",
+    "question": "Describe a time when you worked on a group project where not everyone contributed equally. What role did you play and how did the team handle it?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Assesses the candidate's ability to navigate unequal effort distribution in teams, revealing their tolerance for ambiguity, initiative-taking, and peer accountability style.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "Did you address the unequal contribution directly with the person, or did you choose to compensate silently? Why?",
+      "If the same situation happened in a military team where lives depended on equal effort, how would your approach change?",
+      "Looking back, what would you do differently to ensure fair contribution from the start?"
+    ]
+  },
+  {
+    "id": "TEA_002",
+    "category": "teamwork",
+    "question": "Have you ever had a serious disagreement with a teammate during a group assignment or activity? Walk me through what happened and how it was resolved.",
+    "difficulty": 2,
+    "persona": "deputy_president",
+    "intent": "Evaluates conflict resolution skills, emotional regulation under interpersonal friction, and whether the candidate prioritizes task completion over personal ego.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "At what point during the disagreement did you realize it needed to be resolved, and what was the first step you took?",
+      "Did the disagreement affect your personal relationship with that teammate afterwards? How did you handle that?",
+      "If a senior member of the team had sided against you, would you have accepted the decision or continued pushing your point?"
+    ]
+  },
+  {
+    "id": "TEA_003",
+    "category": "teamwork",
+    "question": "Tell me about a situation where you had to follow someone else's lead even though you disagreed with their plan. How did you handle it?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Probes followership quality — whether the candidate can subordinate personal judgment to group cohesion and support a leader's decision even when unconvinced.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "Did you voice your disagreement before committing to the plan, or did you stay quiet? What motivated that choice?",
+      "When the plan was being executed, did you give your full effort or did part of you hold back?",
+      "If the plan failed, how did you respond — did you say 'I told you so' or did you help recover without blame?"
+    ]
+  },
+  {
+    "id": "TEA_004",
+    "category": "teamwork",
+    "question": "Can you give an example of a collective goal you worked towards with a team — in sports, academics, or any organized activity? What was your specific contribution?",
+    "difficulty": 1,
+    "persona": "psychologist",
+    "intent": "Explores the candidate's understanding of collective achievement versus individual credit, and their ability to articulate personal contribution within a larger effort.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "If someone else on the team received more recognition than you for the outcome, how would that make you feel?",
+      "Was there a moment where the team's goal conflicted with something you personally wanted? How did you handle it?",
+      "What did you learn about yourself from that team experience that you still carry today?"
+    ]
+  },
+  {
+    "id": "TEA_005",
+    "category": "teamwork",
+    "question": "Imagine you are placed in a group task during ISSB and two members start arguing loudly, stalling the group's progress. What would you do?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests real-time social mediation instinct under pressure, revealing whether the candidate can de-escalate peer conflict while keeping the group focused on task completion.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Would you try to mediate between them yourself, or would you ask the group to intervene collectively? Why?",
+      "If one of the arguing members was clearly right but being aggressive, would you support their point or ask them to calm down first?",
+      "What if your attempt to calm them down made one of them turn hostile towards you — how would you react?"
+    ]
+  }
+]
