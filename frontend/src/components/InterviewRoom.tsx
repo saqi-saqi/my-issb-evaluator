@@ -61,6 +61,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({ onSessionComplete 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [isPreparingReport, setIsPreparingReport] = useState(false);
 
   const handleStart = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -452,11 +453,24 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({ onSessionComplete 
           </p>
           <div className="pt-4">
             <button
-              onClick={() => onSessionComplete(session.session_id)}
-              className="px-6 py-3 military-btn-emerald rounded-xl transition-all flex items-center space-x-2 mx-auto font-mono text-xs uppercase tracking-wider"
+              onClick={() => {
+                setIsPreparingReport(true);
+                onSessionComplete(session.session_id);
+              }}
+              disabled={isPreparingReport}
+              className="px-6 py-3 military-btn-emerald rounded-xl transition-all flex items-center space-x-2 mx-auto font-mono text-xs uppercase tracking-wider disabled:opacity-75"
             >
-              <Award className="w-4 h-4" />
-              <span>VIEW PERFORMANCE DASHBOARD</span>
+              {isPreparingReport ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                  <span>SYNTHESIZING REPORT DOSSIER...</span>
+                </>
+              ) : (
+                <>
+                  <Award className="w-4 h-4" />
+                  <span>VIEW PERFORMANCE DASHBOARD</span>
+                </>
+              )}
             </button>
           </div>
         </div>

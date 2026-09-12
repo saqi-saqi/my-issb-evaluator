@@ -13,6 +13,7 @@ export const App: React.FC = () => {
   const [status, setStatus] = useState<SystemStatus | null>(null);
   const [report, setReport] = useState<EvaluationReportData | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isReportLoading, setIsReportLoading] = useState(false);
   const [showDevTools, setShowDevTools] = useState<boolean>(() => {
     return localStorage.getItem('issb_show_dev_tools') === 'true';
   });
@@ -36,12 +37,15 @@ export const App: React.FC = () => {
   }, []);
 
   const handleSessionComplete = async (sessionId: string) => {
+    setIsReportLoading(true);
+    setActiveTab('report');
     try {
       const data = await fetchReport(sessionId);
       setReport(data);
-      setActiveTab('report');
     } catch (err) {
       console.error('Failed to load completed report:', err);
+    } finally {
+      setIsReportLoading(false);
     }
   };
 
@@ -64,6 +68,7 @@ export const App: React.FC = () => {
         {activeTab === 'report' && (
           <EvaluationReport
             report={report}
+            isLoading={isReportLoading}
             onRetake={() => setActiveTab('interview')}
           />
         )}

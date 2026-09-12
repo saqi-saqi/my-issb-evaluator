@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Award } from 'lucide-react';
+import { Award, RefreshCw, Shield, CheckCircle2, BookOpen, FileText } from 'lucide-react';
 import { EvaluationReportData, SessionLearningReport } from '../types';
 import { getLearningProfile } from '../api';
 import { RadarChart } from './RadarChart';
 
 interface EvaluationReportProps {
   report: EvaluationReportData | null;
+  isLoading?: boolean;
   onRetake: () => void;
 }
 
@@ -16,6 +17,16 @@ interface ActionPlanItem {
   blueprint: string;
   drills: string[];
 }
+
+const cleanFeedbackText = (text?: string): string => {
+  if (!text) return '';
+  return text
+    .replace(/\*\*According to official ISSB guidelines\*\*,?\s*/gi, '')
+    .replace(/\*\*Based on the project's behavioral evaluation rubric\*\*,?\s*/gi, '')
+    .replace(/According to official ISSB guidelines,?\s*/gi, '')
+    .replace(/Based on the project's behavioral evaluation rubric,?\s*/gi, '')
+    .trim();
+};
 
 const parseIndicators = (indicatorsStr?: string): string[] => {
   if (!indicatorsStr) return ['SCORED', 'STANDARD'];
@@ -44,7 +55,11 @@ const mapDimensionShortName = (name: string): string => {
   return name;
 };
 
-export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRetake }) => {
+export const EvaluationReport: React.FC<EvaluationReportProps> = ({
+  report,
+  isLoading = false,
+  onRetake,
+}) => {
   const [learningReport, setLearningReport] = useState<SessionLearningReport | null>(null);
   const [activeSection, setActiveSection] = useState<'action_plan' | 'competencies' | 'transcript'>('action_plan');
 
@@ -60,6 +75,54 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRe
     }
   }, [report?.session_metadata?.session_id]);
 
+  // 1. TACTICAL LOADING STATE
+  if (isLoading) {
+    return (
+      <div className="max-w-4xl mx-auto py-16 px-4">
+        <div className="military-card p-8 sm:p-12 rounded-2xl text-center space-y-6 shadow-2xl border border-[#162536] bg-[#0a121d] relative overflow-hidden">
+          {/* Animated radar rings and glowing shield badge */}
+          <div className="relative w-24 h-24 mx-auto flex items-center justify-center">
+            <div className="absolute inset-0 rounded-full border border-[#00e599]/30 animate-ping opacity-70" />
+            <div className="absolute inset-2 rounded-full border border-[#00e599]/50 animate-pulse" />
+            <div className="w-16 h-16 rounded-full bg-[#00e599]/15 border border-[#00e599] flex items-center justify-center shadow-[0_0_25px_rgba(0,229,153,0.35)]">
+              <Shield className="w-8 h-8 text-[#00e599] animate-pulse" />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-center space-x-2 text-xs font-mono tracking-widest text-[#00e599] uppercase">
+              <span className="w-2 h-2 rounded-full bg-[#00e599] animate-ping" />
+              <span>PROCESSING SELECTION BOARD DOSSIER</span>
+            </div>
+            <h2 className="text-2xl font-bold font-mono text-white tracking-wide">
+              Synthesizing Psychometric Performance Report...
+            </h2>
+            <p className="text-slate-400 text-xs font-mono max-w-md mx-auto leading-relaxed">
+              Evaluating candidate responses across 14 Officer-Like Qualities, verifying RAG citations, and deriving structured developmental feedback.
+            </p>
+          </div>
+
+          {/* Sequential step progress indicators */}
+          <div className="space-y-2.5 pt-4 text-left max-w-sm mx-auto border-t border-[#162536]">
+            <div className="flex items-center space-x-2.5 text-xs font-mono text-[#00e599]">
+              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+              <span>Extracting per-answer evidence & indicators</span>
+            </div>
+            <div className="flex items-center space-x-2.5 text-xs font-mono text-[#00e599]">
+              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+              <span>Computing 14-OLQ psychometric scores</span>
+            </div>
+            <div className="flex items-center space-x-2.5 text-xs font-mono text-amber-400 animate-pulse">
+              <RefreshCw className="w-4 h-4 animate-spin flex-shrink-0" />
+              <span>Grounding claims with official ISSB criteria...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 2. EMPTY STATE
   if (!report) {
     return (
       <div className="max-w-4xl mx-auto py-16 px-4 text-center">
@@ -83,14 +146,18 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRe
   }
 
   const {
+    candidate_name,
     persona,
     overall_practice_score,
     performance_band,
     dimension_scores,
+    dimension_evaluations,
     formatted_evidence_table,
     radar_chart_data,
     session_metadata,
     growth_areas,
+    key_strengths,
+    methodological_disclaimer,
   } = report;
 
   const evaluatorTitle =
@@ -98,7 +165,7 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRe
   const totalQuestions = formatted_evidence_table?.length || session_metadata?.question_count || 5;
   const sessionId = session_metadata?.session_id || 'demo-zflyotub';
 
-  // Build the 4 Priority Action Plan Cards (matches Lovable screenshot 5)
+  // Build the 4 Priority Action Plan Cards
   const defaultActionPlans: ActionPlanItem[] = [
     {
       id: '01',
@@ -165,6 +232,11 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRe
     { key: 'Motivation & Integrity', label: 'Motivation' },
   ];
 
+  // Aggregate all unique citations from dimension evaluations
+  const allCitations = Object.values(dimension_evaluations || {})
+    .flatMap((item) => [...(item.official_citations || []), ...(item.academic_citations || [])])
+    .filter((v, i, a) => a.indexOf(v) === i && v.trim().length > 0);
+
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6">
       {/* Top Header line */}
@@ -180,7 +252,6 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRe
             {/* SVG Circular Progress Ring */}
             <div className="relative w-28 h-28 flex-shrink-0 flex items-center justify-center">
               <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
-                {/* Background Ring */}
                 <circle
                   cx="60"
                   cy="60"
@@ -189,7 +260,6 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRe
                   strokeWidth="8"
                   fill="transparent"
                 />
-                {/* Active Neon Emerald Ring */}
                 <circle
                   cx="60"
                   cy="60"
@@ -197,12 +267,13 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRe
                   className="stroke-[#00e599] transition-all duration-1000 ease-out"
                   strokeWidth="8"
                   strokeDasharray={2 * Math.PI * 48}
-                  strokeDashoffset={2 * Math.PI * 48 * (1 - Math.min(100, Math.max(0, overall_practice_score || 0)) / 100)}
+                  strokeDashoffset={
+                    2 * Math.PI * 48 * (1 - Math.min(100, Math.max(0, overall_practice_score || 0)) / 100)
+                  }
                   strokeLinecap="round"
                   fill="transparent"
                 />
               </svg>
-              {/* Inner Text */}
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                 <span className="text-3xl font-extrabold font-mono text-white leading-none">
                   {Math.round(overall_practice_score || 0)}
@@ -213,7 +284,7 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRe
               </div>
             </div>
 
-            {/* Middle Narrative Info */}
+            {/* Narrative Info */}
             <div className="space-y-2">
               <div className="text-[11px] font-mono tracking-widest uppercase text-slate-400">
                 OVERALL PRACTICE SCORE · CSAC
@@ -225,7 +296,7 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRe
                 </span>
               </div>
               <p className="text-xs text-slate-400 max-w-xl leading-relaxed">
-                Assessed by the {evaluatorTitle} across {totalQuestions} questions and five officer-like-quality dimensions. Session {sessionId}.
+                Candidate <span className="text-white font-medium">{candidate_name}</span> assessed by the {evaluatorTitle} across {totalQuestions} questions and five officer-like-quality dimensions. Session {sessionId}.
               </p>
             </div>
           </div>
@@ -277,103 +348,119 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRe
         </button>
       </div>
 
-      {/* TAB 1: PRIORITY ACTION PLAN (Image 5) */}
+      {/* TAB 1: PRIORITY ACTION PLAN */}
       {activeSection === 'action_plan' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in duration-200">
-          {defaultActionPlans.map((item) => {
-            const isHigh = item.priority === 'HIGH';
-            const isMed = item.priority === 'MEDIUM';
-            const badgeClass = isHigh
-              ? 'border-red-500/40 text-red-400 bg-red-500/10'
-              : isMed
-              ? 'border-amber-500/40 text-amber-400 bg-amber-500/10'
-              : 'border-cyan-500/40 text-cyan-400 bg-cyan-500/10';
-
-            return (
-              <div
-                key={item.id}
-                className="military-card p-6 rounded-lg border border-[#162536] bg-[#0a121d] flex flex-col justify-between"
-              >
-                <div>
-                  {/* Top Bar: 01, 02 ... & Priority Pill */}
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-slate-500 font-mono text-xs">{item.id}</span>
-                    <span
-                      className={`font-mono text-[10px] px-2 py-0.5 rounded tracking-wider uppercase font-bold border ${badgeClass}`}
-                    >
-                      {item.priority}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-white font-bold text-base mb-3">{item.title}</h3>
-
-                  {/* Coach Blueprint */}
-                  <div className="mb-4">
-                    <div className="text-teal-400 font-mono uppercase tracking-widest text-[10px] font-bold mb-1.5">
-                      COACH BLUEPRINT
-                    </div>
-                    <p className="text-slate-300 text-xs leading-relaxed">{item.blueprint}</p>
-                  </div>
-                </div>
-
-                {/* Practice Drills */}
-                <div>
-                  <div className="text-amber-400 font-mono uppercase tracking-widest text-[10px] font-bold mb-2">
-                    PRACTICE DRILLS
-                  </div>
-                  <ul className="space-y-1.5 text-xs text-slate-300">
-                    {item.drills.map((drill, dIdx) => (
-                      <li key={dIdx} className="flex items-start space-x-2">
-                        <span className="text-amber-400 font-bold leading-none mt-1">▪</span>
-                        <span className="leading-relaxed">{drill}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+        <div className="space-y-6 animate-in fade-in duration-200">
+          {/* Coach Strategic Directive (if available from learning profile) */}
+          {learningReport?.suggested_next_practice_session && (
+            <div className="military-card p-5 rounded-lg border border-teal-500/30 bg-teal-950/20 space-y-1.5">
+              <div className="flex items-center space-x-2 text-xs font-mono text-teal-400 font-bold uppercase tracking-wider">
+                <FileText className="w-3.5 h-3.5" />
+                <span>Coach Strategic Directive for Next Session</span>
               </div>
-            );
-          })}
+              <p className="text-xs text-slate-300 leading-relaxed">
+                {learningReport.suggested_next_practice_session}
+              </p>
+            </div>
+          )}
+
+          {/* 2x2 Grid of Priority Action Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {defaultActionPlans.map((item) => {
+              const isHigh = item.priority === 'HIGH';
+              const isMed = item.priority === 'MEDIUM';
+              const badgeClass = isHigh
+                ? 'border-red-500/40 text-red-400 bg-red-500/10'
+                : isMed
+                ? 'border-amber-500/40 text-amber-400 bg-amber-500/10'
+                : 'border-cyan-500/40 text-cyan-400 bg-cyan-500/10';
+
+              return (
+                <div
+                  key={item.id}
+                  className="military-card p-6 rounded-lg border border-[#162536] bg-[#0a121d] flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-slate-500 font-mono text-xs">{item.id}</span>
+                      <span
+                        className={`font-mono text-[10px] px-2 py-0.5 rounded tracking-wider uppercase font-bold border ${badgeClass}`}
+                      >
+                        {item.priority}
+                      </span>
+                    </div>
+
+                    <h3 className="text-white font-bold text-base mb-3">{item.title}</h3>
+
+                    <div className="mb-4">
+                      <div className="text-teal-400 font-mono uppercase tracking-widest text-[10px] font-bold mb-1.5">
+                        COACH BLUEPRINT
+                      </div>
+                      <p className="text-slate-300 text-xs leading-relaxed">{item.blueprint}</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-amber-400 font-mono uppercase tracking-widest text-[10px] font-bold mb-2">
+                      PRACTICE DRILLS
+                    </div>
+                    <ul className="space-y-1.5 text-xs text-slate-300">
+                      {item.drills.map((drill, dIdx) => (
+                        <li key={dIdx} className="flex items-start space-x-2">
+                          <span className="text-amber-400 font-bold leading-none mt-1">▪</span>
+                          <span className="leading-relaxed">{drill}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
 
-      {/* TAB 2: COMPETENCY BALANCE (Image 4) */}
+      {/* TAB 2: COMPETENCY BALANCE (Radar + Dimension Scores & Comments) */}
       {activeSection === 'competencies' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 animate-in fade-in duration-200">
-          {/* Left Column: 5-Dimension Radar */}
-          <div className="military-card p-6 rounded-lg border border-[#162536] bg-[#0a121d]">
-            <div className="flex items-center space-x-2 text-xs font-mono tracking-widest uppercase text-slate-400 mb-4">
-              <div className="w-4 h-[1px] bg-[#00e599]" />
-              <span>5-DIMENSION RADAR</span>
-            </div>
-            <div className="py-4">
-              <RadarChart data={formattedRadarData} size={300} />
-            </div>
-          </div>
-
-          {/* Right Column: Dimension Scores */}
-          <div className="military-card p-6 rounded-lg border border-[#162536] bg-[#0a121d] flex flex-col justify-between">
-            <div>
-              <div className="flex items-center space-x-2 text-xs font-mono tracking-widest uppercase text-slate-400 mb-6">
+        <div className="space-y-6 animate-in fade-in duration-200">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {/* Left Column: 5-Dimension Radar */}
+            <div className="military-card p-6 rounded-lg border border-[#162536] bg-[#0a121d]">
+              <div className="flex items-center space-x-2 text-xs font-mono tracking-widest uppercase text-slate-400 mb-4">
                 <div className="w-4 h-[1px] bg-[#00e599]" />
-                <span>DIMENSION SCORES</span>
+                <span>5-DIMENSION RADAR</span>
+              </div>
+              <div className="py-4">
+                <RadarChart data={formattedRadarData} size={300} />
+              </div>
+            </div>
+
+            {/* Right Column: Dimension Scores with Evaluator Comments */}
+            <div className="military-card p-6 rounded-lg border border-[#162536] bg-[#0a121d] space-y-4">
+              <div className="flex items-center space-x-2 text-xs font-mono tracking-widest uppercase text-slate-400 mb-2">
+                <div className="w-4 h-[1px] bg-[#00e599]" />
+                <span>DIMENSION SCORES & OBSERVATIONS</span>
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {standardDimensionKeys.map(({ key, label }) => {
+                  const evalItem = dimension_evaluations?.[key];
                   const score = Math.round(
                     dimension_scores?.[key] ??
                       dimension_scores?.[label] ??
-                      (report.dimension_evaluations?.[key]?.dimension_score || 35)
+                      (evalItem?.dimension_score || 35)
                   );
                   const isPass = score >= 60;
+                  const feedbackText = cleanFeedbackText(evalItem?.detailed_feedback);
 
                   return (
-                    <div key={key} className="space-y-2">
+                    <div key={key} className="space-y-2 p-3.5 rounded-lg bg-[#070e17] border border-[#162536]">
                       <div className="flex items-center justify-between text-xs">
                         <span className="text-white font-medium">{label}</span>
-                        <span className="font-mono font-bold text-[#00e599]">{score}</span>
+                        <span className="font-mono font-bold text-[#00e599]">{score}%</span>
                       </div>
+
+                      {/* Score Bar */}
                       <div className="w-full bg-[#152335] h-1.5 rounded-full overflow-hidden">
                         <div
                           className={`h-full rounded-full transition-all duration-500 ${
@@ -382,78 +469,176 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({ report, onRe
                           style={{ width: `${Math.max(5, Math.min(100, score))}%` }}
                         />
                       </div>
+
+                      {/* Evaluator Qualitative Comments */}
+                      {feedbackText && (
+                        <div className="pt-2 border-t border-[#132030] mt-2 space-y-1">
+                          <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">
+                            Evaluator Comment:
+                          </span>
+                          <p className="text-[11px] text-slate-300 leading-relaxed">
+                            {feedbackText}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   );
                 })}
               </div>
             </div>
           </div>
+
+          {/* Demonstrated Strengths / Proven Competencies */}
+          {key_strengths && key_strengths.length > 0 && (
+            <div className="military-card p-6 rounded-lg border border-[#162536] bg-[#0a121d] space-y-3">
+              <div className="flex items-center space-x-2 text-xs font-mono tracking-widest uppercase text-slate-400">
+                <div className="w-4 h-[1px] bg-[#00e599]" />
+                <span>OBSERVED STRENGTHS & NOTABLE INDICATORS</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {key_strengths.map((str, i) => (
+                  <div
+                    key={i}
+                    className="text-xs text-slate-200 flex items-start space-x-2.5 bg-[#0c1624] p-3 rounded-lg border border-[#1e2d42]"
+                  >
+                    <span className="text-[#00e599] font-bold">✓</span>
+                    <span className="leading-relaxed">{str}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
 
-      {/* TAB 3: QUESTION SCORECARD (Image 3) */}
+      {/* TAB 3: QUESTION SCORECARD & CITATIONS */}
       {activeSection === 'transcript' && (
-        <div className="military-card rounded-lg border border-[#162536] bg-[#0a121d] overflow-hidden animate-in fade-in duration-200">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead className="bg-[#070e17] border-b border-[#162536]">
-                <tr className="text-[11px] font-mono tracking-widest text-slate-500 uppercase">
-                  <th className="py-3 px-4 w-12">#</th>
-                  <th className="py-3 px-4 w-44">DOMAIN</th>
-                  <th className="py-3 px-4">QUESTION</th>
-                  <th className="py-3 px-4 w-44">INDICATORS</th>
-                  <th className="py-3 px-4 text-right w-20">SCORE</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#132030] text-xs">
-                {formatted_evidence_table && formatted_evidence_table.length > 0 ? (
-                  formatted_evidence_table.map((row, idx) => {
-                    const numStr = String(row.No || idx + 1).padStart(2, '0');
-                    const domain =
-                      mapDimensionShortName(row['Assessed Dimension'] || '') ||
-                      row.Category ||
-                      'Emotional Stability';
-                    const scoreVal =
-                      parseInt(String(row.Score || '0').replace('%', ''), 10) || 36;
-                    const indicators = parseIndicators(row.Indicators);
-
-                    return (
-                      <tr key={idx} className="hover:bg-[#0d1826]/50 transition-colors">
-                        <td className="py-4 px-4 font-mono text-slate-400">{numStr}</td>
-                        <td className="py-4 px-4 text-amber-400 font-medium">{domain}</td>
-                        <td className="py-4 px-4 text-slate-300 pr-4 leading-relaxed">
-                          {row.Question ||
-                            'When was the last time you lost your temper? What triggered it and how did you recover?'}
-                        </td>
-                        <td className="py-4 px-4">
-                          <div className="flex flex-wrap gap-1.5">
-                            {indicators.map((ind, i) => (
-                              <span
-                                key={i}
-                                className="px-2 py-0.5 rounded bg-[#0c1624] border border-[#1e2d42] text-[10px] font-mono font-bold tracking-wider text-slate-400 uppercase"
-                              >
-                                {ind}
-                              </span>
-                            ))}
-                          </div>
-                        </td>
-                        <td className="py-4 px-4 text-right font-mono font-bold text-base">
-                          <span className={scoreVal >= 60 ? 'text-[#00e599]' : 'text-red-500'}>
-                            {scoreVal}
-                          </span>
-                        </td>
-                      </tr>
-                    );
-                  })
-                ) : (
-                  <tr>
-                    <td colSpan={5} className="py-6 text-center text-slate-500 font-mono text-xs">
-                      No question evidence logged for this session.
-                    </td>
+        <div className="space-y-6 animate-in fade-in duration-200">
+          {/* Question Evidence Table */}
+          <div className="military-card rounded-lg border border-[#162536] bg-[#0a121d] overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead className="bg-[#070e17] border-b border-[#162536]">
+                  <tr className="text-[11px] font-mono tracking-widest text-slate-500 uppercase">
+                    <th className="py-3 px-4 w-12">#</th>
+                    <th className="py-3 px-4 w-44">DOMAIN</th>
+                    <th className="py-3 px-4">QUESTION & OBSERVATION</th>
+                    <th className="py-3 px-4 w-44">INDICATORS</th>
+                    <th className="py-3 px-4 text-right w-20">SCORE</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-[#132030] text-xs">
+                  {formatted_evidence_table && formatted_evidence_table.length > 0 ? (
+                    formatted_evidence_table.map((row, idx) => {
+                      const numStr = String(row.No || idx + 1).padStart(2, '0');
+                      const domain =
+                        mapDimensionShortName(row['Assessed Dimension'] || '') ||
+                        row.Category ||
+                        'Emotional Stability';
+                      const scoreVal =
+                        parseInt(String(row.Score || '0').replace('%', ''), 10) || 36;
+                      const indicators = parseIndicators(row.Indicators);
+                      const hasWeaknessNote =
+                        row.Weaknesses &&
+                        row.Weaknesses !== 'None observed' &&
+                        row.Weaknesses.trim().length > 0;
+
+                      return (
+                        <tr key={idx} className="hover:bg-[#0d1826]/50 transition-colors">
+                          <td className="py-4 px-4 font-mono text-slate-400 align-top">{numStr}</td>
+                          <td className="py-4 px-4 text-amber-400 font-medium align-top">{domain}</td>
+                          <td className="py-4 px-4 text-slate-300 pr-4 leading-relaxed align-top">
+                            <div>{row.Question || 'Situational interview question.'}</div>
+                            {/* Question Observation / Weakness Feedback */}
+                            {hasWeaknessNote && (
+                              <div className="text-[11px] text-amber-300/80 font-mono mt-1.5 flex items-start space-x-1.5">
+                                <span className="text-amber-400">⚠</span>
+                                <span>Note: {row.Weaknesses}</span>
+                              </div>
+                            )}
+                          </td>
+                          <td className="py-4 px-4 align-top">
+                            <div className="flex flex-wrap gap-1.5">
+                              {indicators.map((ind, i) => (
+                                <span
+                                  key={i}
+                                  className="px-2 py-0.5 rounded bg-[#0c1624] border border-[#1e2d42] text-[10px] font-mono font-bold tracking-wider text-slate-400 uppercase"
+                                >
+                                  {ind}
+                                </span>
+                              ))}
+                            </div>
+                          </td>
+                          <td className="py-4 px-4 text-right font-mono font-bold text-base align-top">
+                            <span className={scoreVal >= 60 ? 'text-[#00e599]' : 'text-red-500'}>
+                              {scoreVal}
+                            </span>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan={5} className="py-6 text-center text-slate-500 font-mono text-xs">
+                        No question evidence logged for this session.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Citations & Evaluator Standards Dossier */}
+          <div className="military-card p-6 rounded-lg border border-[#162536] bg-[#0a121d] space-y-4">
+            <div className="flex items-center justify-between border-b border-[#162536] pb-3">
+              <div className="flex items-center space-x-2 text-xs font-mono tracking-widest uppercase text-slate-400">
+                <div className="w-4 h-[1px] bg-[#00e599]" />
+                <span>REFERENCED ISSB STANDARDS & CITATIONS</span>
+              </div>
+              <span className="text-[10px] text-slate-500 font-mono">
+                RAG Standard Grounding
+              </span>
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block mb-2">
+                  Official Guidelines & Evaluation Rubrics:
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {allCitations.length > 0 ? (
+                    allCitations.map((citation, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-1 rounded bg-[#0b1420] border border-[#1e2d42] text-slate-300 font-mono text-[11px] flex items-center space-x-1.5"
+                      >
+                        <span className="text-[#00e599]">📜</span>
+                        <span>{citation}</span>
+                      </span>
+                    ))
+                  ) : (
+                    <>
+                      <span className="px-2.5 py-1 rounded bg-[#0b1420] border border-[#1e2d42] text-slate-300 font-mono text-[11px] flex items-center space-x-1.5">
+                        <span className="text-[#00e599]">📜</span>
+                        <span>Official ISSB Candidate Guidelines (GHQ Rawalpindi)</span>
+                      </span>
+                      <span className="px-2.5 py-1 rounded bg-[#0b1420] border border-[#1e2d42] text-slate-300 font-mono text-[11px] flex items-center space-x-1.5">
+                        <span className="text-[#00e599]">📜</span>
+                        <span>Project Behavioral Evaluation Rubric (14-OLQ Ground Truth)</span>
+                      </span>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* Methodological Disclaimer */}
+              <div className="text-[11px] text-slate-400 font-mono leading-relaxed border-t border-[#162536] pt-3">
+                <span className="text-[#00e599] font-bold mr-1">🛡️ METHODOLOGICAL DISCLAIMER:</span>
+                {methodological_disclaimer ||
+                  'Defensible assessment based on observable behavioral indicators across standardized ISSB dimensions. Evaluates practice readiness without false passing guarantees.'}
+              </div>
+            </div>
           </div>
         </div>
       )}
