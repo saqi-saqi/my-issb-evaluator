@@ -19,8 +19,8 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_GROQ_MODEL = "llama-3.3-70b-versatile"
-FALLBACK_GROQ_MODEL = "llama-3.1-8b-instant"
+DEFAULT_GROQ_MODEL = "openai/gpt-oss-120b"
+FALLBACK_GROQ_MODEL = "openai/gpt-oss-20b"
 
 
 class AIClient:
@@ -34,7 +34,8 @@ class AIClient:
         timeout: float = 30.0,
     ):
         self.api_key = (api_key or os.getenv("GROQ_API_KEY", "")).strip()
-        self.model = (model or os.getenv("GROQ_MODEL", DEFAULT_GROQ_MODEL)).strip()
+        env_model = os.getenv("GROQ_MODEL") or os.getenv("LLM_MODEL") or DEFAULT_GROQ_MODEL
+        self.model = (model or env_model).strip()
         self.fallback_model = fallback_model
         self.timeout = timeout
         self._client = None
@@ -57,17 +58,32 @@ class AIClient:
 
     def test_connection(self) -> tuple[bool, str]:
         """Tests live connectivity to the Groq API."""
-        if not self._client:
+        if not self.api_key:
             return False, "Groq API key is not configured in .env (GROQ_API_KEY)"
+        if not self._client:
+            self._init_client()
+            if not self._client:
+                return False, "Failed to initialize Groq SDK"
         try:
             resp = self._client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": "ping"}],
-                max_tokens=5,
+                max_tokens=60,
             )
-            content = resp.choices[0].message.content or ""
             return True, f"Connected to Groq ({self.model})"
         except Exception as e:
+            # Try fallback model
+            if self.fallback_model and self.fallback_model != self.model:
+                try:
+                    self._client.chat.completions.create(
+                        model=self.fallback_model,
+                        messages=[{"role": "user", "content": "ping"}],
+                        max_tokens=60,
+                    )
+                    self.model = self.fallback_model
+                    return True, f"Connected to Groq via fallback ({self.fallback_model})"
+                except Exception:
+                    pass
             return False, f"Groq connection error: {str(e)}"
 
     def generate_text(
