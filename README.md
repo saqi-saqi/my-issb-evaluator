@@ -76,32 +76,97 @@ MY_ISSB_Evaluator
 
 ---
 
-## 🚀 Running the Application
+## 🚀 Quick Start Guide (Run on Any Laptop)
 
-### Option 1: Modern Lovable Web UI (FastAPI + React 18) [Recommended]
-Run the unified launcher:
+### 📋 Prerequisites
+- **Python**: 3.10, 3.11, or 3.12 installed ([python.org](https://www.python.org/downloads/))
+- **Node.js**: v18+ or v20+ with npm installed ([nodejs.org](https://nodejs.org/))
+- **Git**: Installed on your system
+
+---
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/saqi-saqi/my-issb-evaluator.git
+cd my-issb-evaluator
+```
+
+---
+
+### Step 2: Setup Python Backend
+Create and activate a virtual environment, then install requirements:
+
+**Windows (PowerShell / Command Prompt):**
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+**macOS / Linux:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+---
+
+### Step 3: Install Frontend Dependencies
+```bash
+cd frontend
+npm install
+cd ..
+```
+
+---
+
+### Step 4 (Optional): Configure LLM API Key
+The simulator works **completely out of the box in offline mode** without any API key.
+To enable live, dynamic LLM inference:
+1. Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   # On Windows: copy .env.example .env
+   ```
+2. Open `.env` and paste your free Groq API key:
+   ```env
+   GROQ_API_KEY=gsk_your_key_here
+   ```
+   *(You can get a free, ultra-fast Groq key in 30 seconds at [console.groq.com](https://console.groq.com))*
+
+---
+
+### Step 5: Launch the Application
+
+#### Option A: One-Click Launcher (Windows)
 ```powershell
 .\run_web.ps1
-# or double-click run_web.bat
-```
-- **Backend API**: `http://localhost:8000/docs`
-- **Frontend UI**: `http://localhost:5173`
-
-### Option 2: Streamlit Interactive App
-```powershell
-python -m streamlit run app.py
+# or simply double-click run_web.bat
 ```
 
-### Option 3: Terminal CLI
-```powershell
-python cli.py
-```
+#### Option B: Manual Launch (Windows, macOS, Linux)
+Open two terminal windows in the project root:
 
-### Option 4: Run Automated Tests
-```powershell
-python -m pytest tests/ -v
-```
-*(All 30 tests pass in ~4 seconds)*
+- **Terminal 1 (FastAPI Backend)**:
+  ```bash
+  python -m uvicorn backend.api:app --host 0.0.0.0 --port 8000 --reload
+  ```
+- **Terminal 2 (Lovable React Frontend)**:
+  ```bash
+  cd frontend
+  npm run dev
+  ```
+
+Open your browser at: **`http://localhost:5173`**
+*(Backend Swagger API docs available at `http://localhost:8000/docs`)*
+
+---
+
+### Alternative Interfaces
+- **Streamlit App**: `python -m streamlit run app.py`
+- **Terminal CLI**: `python cli.py`
+- **Run Tests**: `python -m pytest tests/ -v` (56 automated tests pass in ~35s)
 
 ---
 
