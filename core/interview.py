@@ -16,6 +16,7 @@ from core.evaluator import EvaluationReport, PerAnswerEvidence, RubricEvaluator
 from core.learning import LearningService
 from core.questions import Question, QuestionBank
 from core.rag import KnowledgeRetriever
+from core.storage import StorageManager
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +30,7 @@ class InterviewSession:
     current_index: int = 0
     answers: Dict[str, str] = field(default_factory=dict)
     follow_up_answers: Dict[str, str] = field(default_factory=dict)
-    evidence_records: List[PerAnswerEvidence] = field(default_factory=dict)  # list of PerAnswerEvidence
+    evidence_records: List[PerAnswerEvidence] = field(default_factory=list)
     current_followup: Optional[str] = None
     completed: bool = False
 
@@ -43,9 +44,67 @@ class InterviewSession:
     def total_questions(self) -> int:
         return len(self.questions)
 
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "session_id": self.session_id,
+            "candidate_name": self.candidate_name,
+            "persona": self.persona,
+            "current_index": self.current_index,
+            "answers": self.answers,
+            "follow_up_answers": self.follow_up_answers,
+            "evidence_records": [e.to_dict() for e in self.evidence_records],
+            "current_followup": self.current_followup,
+            "completed": self.completed,
+            "questions": [q.to_dict() for q in self.questions],
+        }
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> InterviewSession:
+        questions = [
+            Question(
+                id=q["id"],
+                category=q.get("category", "general"),
+                question=q.get("question", ""),
+                difficulty=int(q.get("difficulty", 1)),
+                persona=q.get("persona", "both"),
+                intent=q.get("intent", ""),
+                evaluation_dimension=q.get("evaluation_dimension", "general"),
+                follow_up_pool=q.get("follow_up_pool", []),
+            )
+            for q in data.get("questions", [])
+        ]
+        evidence = [
+            PerAnswerEvidence(
+                question_id=e["question_id"],
+                question_text=e["question_text"],
+                category=e["category"],
+                dimension=e["dimension"],
+                score=float(e["score"]),
+                confidence=float(e.get("confidence", 0.8)),
+                evidence_confidence=e.get("evidence_confidence", "MEDIUM"),
+                positive_indicators=e.get("positive_indicators", []),
+                weaknesses=e.get("weaknesses", []),
+                evidence_text=e.get("evidence_text", ""),
+                citations=e.get("citations", []),
+            )
+            for e in data.get("evidence_records", [])
+        ]
+        return cls(
+            session_id=data["session_id"],
+            candidate_name=data.get("candidate_name", "Candidate"),
+            persona=data.get("persona", "deputy_president"),
+            questions=questions,
+            current_index=data.get("current_index", 0),
+            answers=data.get("answers", {}),
+            follow_up_answers=data.get("follow_up_answers", {}),
+            evidence_records=evidence,
+            current_followup=data.get("current_followup"),
+            completed=bool(data.get("completed", False)),
+        )
+
 
 class InterviewService:
-    """Consolidated orchestrator managing the full interview lifecycle."""
+    """Consolidated orchestrator managing the full interview lifecycle with SQLite persistence."""
 
     def __init__(
         self,
@@ -54,12 +113,16 @@ class InterviewService:
         evaluator: Optional[RubricEvaluator] = None,
         learning: Optional[LearningService] = None,
         ai: Optional[AIClient] = None,
+        storage: Optional[StorageManager] = None,
     ):
         self.qb = question_bank or QuestionBank()
         self.retriever = retriever or KnowledgeRetriever()
         self.ai = ai or ai_client
+        self.storage = storage or StorageManager()
         self.evaluator = evaluator or RubricEvaluator(retriever=self.retriever, ai=self.ai)
-        self.learning = learning or LearningService(ai=self.ai)
+        self.learning = learning or LearningService(ai=self.ai, storage=self.storage)
+        if hasattr(self.learning, "storage") and self.learning.storage is None:
+            self.learning.storage = self.storage
         self.sessions: Dict[str, InterviewSession] = {}
 
     def start_session(
@@ -80,11 +143,20 @@ class InterviewService:
             evidence_records=[],
         )
         self.sessions[session_id] = session
+        self.storage.save_session(session.to_dict())
+        self.learning.initialize_profile(session_id, session.candidate_name)
         logger.info("Session %s started for %s with %d questions", session_id, candidate_name, len(questions))
         return session
 
     def get_session(self, session_id: str) -> Optional[InterviewSession]:
-        return self.sessions.get(session_id)
+        if session_id in self.sessions:
+            return self.sessions[session_id]
+        saved = self.storage.get_session(session_id)
+        if saved:
+            sess = InterviewSession.from_dict(saved)
+            self.sessions[session_id] = sess
+            return sess
+        return None
 
     def submit_primary_answer(self, session: InterviewSession, answer: str) -> Tuple[bool, Optional[str]]:
         """
@@ -153,6 +225,8 @@ class InterviewService:
             session.completed = True
             logger.info("Session %s marked completed", session.session_id)
 
+        self.storage.save_session(session.to_dict())
+
     def _get_follow_up_probe(self, question: Question, answer: str, persona: str) -> str:
         """Selects from pre-curated pool or dynamically generates probe via Groq."""
         if question.follow_up_pool:
@@ -173,5 +247,7 @@ Do not reveal scoring criteria. Max 25 words.
             persona=session.persona,
             evidence_list=session.evidence_records,
         )
-        self.learning.record_session(session.session_id, session.candidate_name, report.to_dict())
+        report_dict = report.to_dict()
+        self.learning.record_session(session.session_id, session.candidate_name, report_dict)
+        self.storage.save_report(session.session_id, session.candidate_name, report_dict)
         return report

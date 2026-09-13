@@ -13,6 +13,7 @@ from typing import Any, Dict, List, Optional
 
 from core.ai import AIClient, ai_client
 from core.evaluator import PerAnswerEvidence
+from core.storage import StorageManager
 
 logger = logging.getLogger(__name__)
 
@@ -112,8 +113,9 @@ class BeforeAfterComparison:
 class LearningService:
     """Manages candidate improvement coaching, retry evaluations, and learning profiles."""
 
-    def __init__(self, ai: Optional[AIClient] = None):
+    def __init__(self, ai: Optional[AIClient] = None, storage: Optional[StorageManager] = None):
         self.ai = ai or ai_client
+        self.storage = storage
         self.profiles: Dict[str, Dict[str, Any]] = {}
 
     def generate_feedback(self, evidence: PerAnswerEvidence) -> Dict[str, Any]:
@@ -323,7 +325,7 @@ class LearningService:
     def initialize_profile(self, session_id: str, candidate_name: str) -> None:
         """Initializes a new profile for a candidate session."""
         if session_id not in self.profiles:
-            self.profiles[session_id] = {
+            profile_data = {
                 "session_id": session_id,
                 "candidate_name": candidate_name or "Candidate",
                 "overall_score": 70.0,
@@ -337,6 +339,9 @@ class LearningService:
                 "practice_history": [],
                 "weakness_counts": {},
             }
+            self.profiles[session_id] = profile_data
+            if self.storage:
+                self.storage.save_profile(session_id, profile_data)
 
     def record_retry(
         self,
@@ -356,12 +361,14 @@ class LearningService:
             if area not in prof["improving_areas"]:
                 prof["improving_areas"].append(area)
         prof["practice_history"].append(comparison.to_dict())
+        if self.storage:
+            self.storage.save_profile(session_id, prof)
 
     def record_session(self, session_id: str, candidate_name: str, report_dict: Dict[str, Any]) -> None:
         """Stores or updates session learning profile."""
         current_improving = self.profiles.get(session_id, {}).get("improving_areas", ["Expression", "Reasoning"])
         history = self.profiles.get(session_id, {}).get("practice_history", [])
-        self.profiles[session_id] = {
+        profile_data = {
             "session_id": session_id,
             "candidate_name": candidate_name,
             "overall_score": report_dict.get("overall_practice_score", 0),
@@ -375,19 +382,26 @@ class LearningService:
             "practice_history": history,
             "weakness_counts": {},
         }
+        self.profiles[session_id] = profile_data
+        if self.storage:
+            self.storage.save_profile(session_id, profile_data)
 
     def get_profile(self, session_id: str) -> Dict[str, Any]:
-        return self.profiles.get(
-            session_id,
-            {
-                "session_id": session_id,
-                "candidate_name": "Candidate",
-                "overall_score": 70,
-                "strengths": ["Authentic engagement"],
-                "recurring_weaknesses": [],
-                "improving_areas": [],
-                "priority_areas": [],
-                "practice_history": [],
-                "weakness_counts": {},
-            },
-        )
+        if session_id in self.profiles:
+            return self.profiles[session_id]
+        if self.storage:
+            saved = self.storage.get_profile(session_id)
+            if saved:
+                self.profiles[session_id] = saved
+                return saved
+        return {
+            "session_id": session_id,
+            "candidate_name": "Candidate",
+            "overall_score": 70,
+            "strengths": ["Authentic engagement"],
+            "recurring_weaknesses": [],
+            "improving_areas": [],
+            "priority_areas": [],
+            "practice_history": [],
+            "weakness_counts": {},
+        }
