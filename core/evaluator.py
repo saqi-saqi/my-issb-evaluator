@@ -79,6 +79,7 @@ class EvaluationReport:
             "dimension_scores": self.dimension_scores,
             "fourteen_olq_scores": self.fourteen_olq_scores,
             "per_question_evidence": [e.to_dict() for e in self.per_question_evidence],
+            "formatted_evidence_table": [e.to_dict() for e in self.per_question_evidence],
             "executive_summary": self.executive_summary,
             "key_strengths": self.key_strengths,
             "primary_shortcomings": self.primary_shortcomings,
@@ -239,6 +240,8 @@ class RubricEvaluator:
             score += 12.0
             ev_conf = "HIGH"
             num_conf = 0.90
+        elif word_count >= 15:
+            weaknesses.append("Lacked explicit personal ownership or individual accountability; recommend highlighting your specific personal decisions.")
 
         if has_example:
             positives.append("Grounded assertions in concrete personal experiences or specific examples.")

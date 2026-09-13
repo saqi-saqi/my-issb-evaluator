@@ -69,7 +69,7 @@ class InterviewService:
         num_questions: int = 5,
     ) -> InterviewSession:
         """Initializes a new session with calibrated progression sequence."""
-        session_id = str(uuid.uuid4())[:8]
+        session_id = str(uuid.uuid4())
         questions = self.qb.build_interview_sequence(persona=persona, num_questions=num_questions)
 
         session = InterviewSession(

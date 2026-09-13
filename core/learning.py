@@ -158,7 +158,7 @@ class LearningService:
                 task = "Expand your response to at least 3-4 sentences detailing an actual instance from your background."
                 structure = "I believe [Direct Answer]. Specifically, when I was in [Situation], I [Action]. Consequently, [Result]."
             elif "ownership" in w.lower() or "abstract" in w.lower():
-                area_name = "Personal Ownership & Initiative"
+                area_name = "Ownership / Accountability"
                 problem = w
                 why = "The selection board evaluates personal leadership agency, not theoretical or passive opinions."
                 how = "Speak in active first-person voice ('I decided', 'I organized', 'My responsibility was')."
@@ -185,6 +185,21 @@ class LearningService:
                     technique=technique,
                     practice_task=task,
                     example_structure=structure,
+                ).to_dict()
+            )
+
+        if not improvement_areas:
+            improvement_areas.append(
+                ImprovementArea(
+                    area="Ownership / Accountability",
+                    priority="MEDIUM",
+                    problem="Response can be strengthened with more explicit personal agency and individual contribution.",
+                    evidence_ids=[q_id],
+                    why_it_matters="The selection board assesses personal leadership agency and individual impact.",
+                    how_to_improve="Highlight what you personally decided, organized, or took responsibility for.",
+                    technique="Active Ownership Framing: State personal accountability without passing blame.",
+                    practice_task="Rewrite your response focusing on your specific role and decisions.",
+                    example_structure="In that situation, I took personal responsibility for [Task]. I decided to [Action], which resulted in [Outcome].",
                 ).to_dict()
             )
 
@@ -249,10 +264,14 @@ class LearningService:
         # 2. Ownership check
         retry_lower = retry.lower()
         has_new_ownership = any(
-            p in retry_lower for p in ["i decided", "my responsibility", "i led", "i organized", "my mistake"]
+            p in retry_lower for p in [
+                "i decided", "my responsibility", "i led", "i organized", "my mistake",
+                "i take full responsibility", "take full responsibility", "i stepped in",
+                "resolved the problem", "i resolved"
+            ]
         )
-        if has_new_ownership and not any(p in orig.lower() for p in ["i decided", "my responsibility", "i led"]):
-            improved_areas.append("First-Person Personal Ownership ('I decided', 'my responsibility')")
+        if has_new_ownership and not any(p in orig.lower() for p in ["i decided", "my responsibility", "i led", "i take full responsibility"]):
+            improved_areas.append("Ownership / Accountability")
         elif not has_new_ownership:
             unchanged_areas.append("Personal ownership framing")
 
@@ -301,8 +320,47 @@ class LearningService:
             },
         )
 
+    def initialize_profile(self, session_id: str, candidate_name: str) -> None:
+        """Initializes a new profile for a candidate session."""
+        if session_id not in self.profiles:
+            self.profiles[session_id] = {
+                "session_id": session_id,
+                "candidate_name": candidate_name or "Candidate",
+                "overall_score": 70.0,
+                "performance_band": "Consistent Competence",
+                "key_strengths": ["Authentic engagement under pressure"],
+                "primary_shortcomings": [],
+                "strengths": ["Authentic engagement under pressure"],
+                "recurring_weaknesses": [],
+                "improving_areas": [],
+                "priority_areas": ["Active Ownership"],
+                "practice_history": [],
+                "weakness_counts": {},
+            }
+
+    def record_retry(
+        self,
+        session_id: str,
+        candidate_name: str,
+        comparison: BeforeAfterComparison,
+        question_id: str,
+    ) -> None:
+        """Updates candidate learning profile after a retry attempt."""
+        if session_id not in self.profiles:
+            self.initialize_profile(session_id, candidate_name)
+
+        prof = self.profiles[session_id]
+        if candidate_name:
+            prof["candidate_name"] = candidate_name
+        for area in comparison.improved_areas:
+            if area not in prof["improving_areas"]:
+                prof["improving_areas"].append(area)
+        prof["practice_history"].append(comparison.to_dict())
+
     def record_session(self, session_id: str, candidate_name: str, report_dict: Dict[str, Any]) -> None:
         """Stores or updates session learning profile."""
+        current_improving = self.profiles.get(session_id, {}).get("improving_areas", ["Expression", "Reasoning"])
+        history = self.profiles.get(session_id, {}).get("practice_history", [])
         self.profiles[session_id] = {
             "session_id": session_id,
             "candidate_name": candidate_name,
@@ -312,9 +370,9 @@ class LearningService:
             "primary_shortcomings": report_dict.get("primary_shortcomings", []),
             "strengths": report_dict.get("key_strengths", []),
             "recurring_weaknesses": report_dict.get("primary_shortcomings", []),
-            "improving_areas": ["Expression", "Reasoning"],
+            "improving_areas": current_improving,
             "priority_areas": ["Active Ownership"],
-            "practice_history": [],
+            "practice_history": history,
             "weakness_counts": {},
         }
 

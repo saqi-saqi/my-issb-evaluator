@@ -98,6 +98,7 @@ def get_system_status() -> Dict[str, Any]:
     return {
         "status": "online",
         "question_bank_total": len(qb.questions),
+        "categories_total": len(qb.categories),
         "knowledge_base_chunks": len(retriever.chunks),
         "llm_provider": "Groq",
         "llm_model": ai_client.model,
@@ -118,6 +119,7 @@ def start_interview(req: StartInterviewRequest) -> Dict[str, Any]:
         persona=req.persona,
         num_questions=req.num_questions,
     )
+    interview_service.learning.initialize_profile(session.session_id, session.candidate_name)
     first_q = session.current_question
     if not first_q:
         raise HTTPException(status_code=500, detail="Failed to initialize question sequence")
@@ -254,6 +256,12 @@ def submit_retry_answer(req: RetryAnswerRequest) -> Dict[str, Any]:
         original_answer=orig_answer,
         retry_answer=req.retry_answer,
         original_score=orig_score,
+    )
+    interview_service.learning.record_retry(
+        session_id=session.session_id,
+        candidate_name=session.candidate_name,
+        comparison=comparison,
+        question_id=req.question_id,
     )
     profile = interview_service.learning.get_profile(req.session_id)
     new_learning = interview_service.learning.generate_feedback(evidence) if evidence else {}
