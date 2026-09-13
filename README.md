@@ -16,7 +16,7 @@
 
 The system strictly adheres to the principle that **Question Bank ≠ RAG Knowledge Base**:
 - **Question Bank (`question_bank/`)**: 47 Structured JSON questions controlling *what* the interviewer asks across 13 calibrated progression blueprints (Biographical/Rapport → Academics → Communication → Motivation → Teamwork → Leadership → Confidence → Stress → Responsibility → Situational → Decision Making → General Awareness).
-- **RAG Knowledge Base (`knowledge_base/`)**: Multi-tiered repository with strict source provenance controlling *what benchmarks and criteria* are retrieved to evaluate responses.
+- **RAG Knowledge Base (`knowledge_base/`)**: Multi-tiered repository with strict source provenance controlling *what benchmarks and criteria* are retrieved to evaluate responses. Retrieved criteria from Level 3 evaluation rubrics directly ground scoring, observable positive indicators, shortcomings, and qualitative narrative synthesis.
 - **Controlled Flow**:
   $$\text{Question Bank} \xrightarrow{\text{Retrieve Target Q}} \text{LLM / Orchestrator} \xrightarrow{\text{Ask Naturally}} \text{Candidate Answer} \xrightarrow{\text{Probing Follow-up}} \text{RAG Evaluation Rubric} \xrightarrow{\text{Python Engine}} \text{15-Section Performance Report}$$
 
@@ -43,28 +43,34 @@ MY_ISSB_Evaluator
 ├── core/                           # Consolidated Python AI & Evaluation Engine
 │   ├── ai.py                       # High-speed Groq inference client (generate_text, generate_json)
 │   ├── questions.py                # QuestionBank loader & calibrated sequence builder
-│   ├── rag.py                      # Multi-tier TF-IDF retriever with provenance citations
+│   ├── rag.py                      # Multi-tier TF-IDF retriever with provenance citations across all 5 tiers
+│   ├── rag_benchmark.py            # Quantitative RAG quality benchmark (Recall@K, MRR, Provenance)
 │   ├── scoring.py                  # Deterministic 14-OLQ & 5-dimension scoring engine
-│   ├── evaluator.py                # 2-Pass rubric evaluator (evidence extraction + single narrative LLM call)
+│   ├── evaluator.py                # 2-Pass rubric evaluator (load-bearing RAG evidence + single narrative LLM call)
+│   ├── storage.py                  # Lightweight SQLite persistence for sessions & learning profiles
 │   ├── interview.py                # InterviewService state machine with adaptive probing triggers
 │   └── learning.py                 # LearningService for coaching feedback & before/after retry deltas
+│
+├── data/                           # Local SQLite storage & benchmark datasets
+│   ├── issb_evaluator.db           # Persistent SQLite database (sessions & profiles, gitignored)
+│   └── rag_eval_dataset.json       # 30-query gold-standard evaluation dataset for RAG benchmark
 │
 ├── question_bank/                  # Curated Question Bank
 │   └── questions.json              # 47 Structured Questions across 13 Categories in a unified JSON array
 │
 ├── knowledge_base/                 # Multi-Tier Grounded Knowledge Base
-│   ├── official/                   # Level 1: Official ISSB Selection System & Guidelines
-│   ├── academic/                   # Level 2: Peer-Reviewed Leadership & Stress Literature
-│   ├── evaluation/                 # Level 3: Observable Indicators Rubrics
-│   ├── preparation/                # Level 3: Prep Guidance & Practical Tips
-│   └── current_affairs/            # Level 4: Dated Pakistan Economy, Defense & Geopolitics
+│   ├── official/                   # Level 1: Official ISSB Selection System & Guidelines (.txt)
+│   ├── academic/                   # Level 2: Peer-Reviewed Leadership & Stress Literature (.md)
+│   ├── evaluation/                 # Level 3: Observable Indicators Rubrics (.md)
+│   ├── preparation/                # Level 3: Prep Guidance & Practical Tips (.txt)
+│   └── current_affairs/            # Level 4: Dated Pakistan Economy, Defense & Geopolitics (.json)
 │
 ├── prompts/                        # Isolated Markdown Prompt Templates
 │   ├── interviewer.md              # Interviewer persona template
 │   ├── follow_up.md                # Targeted probing follow-up template
 │   └── evaluator.md                # Senior assessor rubric evaluation template
 │
-├── tests/                          # Automated tests covering core engine, RAG, and API
+├── tests/                          # Automated tests covering core engine, RAG, API, storage, and scoring
 ├── run_web.bat / run_web.ps1       # One-click launcher for FastAPI + Lovable React UI
 └── requirements.txt                # Streamlined production dependencies
 ```
@@ -170,9 +176,14 @@ Open your browser at: **`http://localhost:5173`**
 ---
 
 ### 🧪 Automated Tests & Quality Verification
-Run the comprehensive test suite verifying the core engine, RAG retriever, scoring rubrics, learning engine, and FastAPI endpoints:
+Run the comprehensive test suite verifying the core engine, RAG retriever, scoring rubrics, SQLite persistence, learning engine, and FastAPI endpoints:
 ```bash
-python -m pytest tests/test_core_consolidated.py -v
+python -m pytest tests/ -v
+```
+
+Run the deterministic 5-tier RAG benchmark:
+```bash
+python -m core.rag_benchmark
 ```
 
 ---

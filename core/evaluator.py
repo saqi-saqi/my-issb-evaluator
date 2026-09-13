@@ -133,6 +133,107 @@ class RubricEvaluator:
 
         return positives, weaknesses
 
+    def _detect_indicators(
+        self,
+        combined_text: str,
+        question_text: str,
+        category: str,
+        dimension: str,
+        rubric_text: str,
+    ) -> Dict[str, Any]:
+        """
+        Detects ownership, concrete examples, logical reasoning, and teamwork.
+        Uses LLM rubric scoring pass when available; otherwise uses robust semantic pattern and concept matching.
+        """
+        # 1. Option A: Structured LLM scoring pass when Groq is available
+        if self.ai.is_available():
+            try:
+                prompt = f"""
+You are an expert military psychology assessor for ISSB.
+Evaluate candidate response against the retrieved rubric criteria.
+Question: "{question_text}"
+Category: {category} | Target Dimension: {dimension}
+Candidate Response: "{combined_text}"
+
+Retrieved Rubric Criteria:
+{rubric_text[:600] if rubric_text else "General ISSB Leadership & Personal Accountability standards."}
+
+Evaluate if the candidate demonstrates:
+1. ownership: Personal agency, accountability, or responsibility (even if paraphrased).
+2. example: Grounding in concrete personal experiences or specific real-life situations.
+3. reasoning: Structured causal thinking ('because', 'therefore', logical progression).
+4. teamwork: Collaborative team orientation or peer alignment.
+
+Return JSON:
+{{
+  "has_ownership": true,
+  "has_example": true,
+  "has_reasoning": true,
+  "has_teamwork": true,
+  "positive_indicators": ["1-2 concise observations grounded in rubric"],
+  "weaknesses": ["1 concise constructive gap if applicable"]
+}}
+"""
+                res = self.ai.generate_json(prompt, system="You are an expert military psychology assessor for ISSB.", temperature=0.1)
+                if res and isinstance(res, dict) and "has_ownership" in res:
+                    return {
+                        "has_ownership": bool(res.get("has_ownership")),
+                        "has_example": bool(res.get("has_example")),
+                        "has_reasoning": bool(res.get("has_reasoning")),
+                        "has_teamwork": bool(res.get("has_teamwork")),
+                        "llm_positives": res.get("positive_indicators", []),
+                        "llm_weaknesses": res.get("weaknesses", []),
+                        "mode": "llm_grounded",
+                    }
+            except Exception as e:
+                logger.warning("LLM indicator scoring fallback to semantic matcher: %s", e)
+
+        # 2. Option B: Semantic Offline Pattern & Concept Matcher
+        # Ownership: First-person agentic actions, accountability, responsibility
+        ownership_patterns = [
+            r"\b(i\s+took|i\s+decided|my\s+fault|my\s+mistake|i\s+led|i\s+organized|i\s+took\s+responsibility|i\s+resolved)\b",
+            r"\b(i|my)\s+(stepped\s+in|assumed|accepted|initiated|managed|directed|spearheaded|oversaw|coordinated|handled|confronted|fixed|owned|chose|acted|arranged|volunteered|tackled)\b",
+            r"\b(personally\s+(assumed|handled|stepped|led|took|managed|resolved))\b",
+            r"\b(full\s+responsibility|take\s+responsibility|took\s+responsibility|admit\s+my|acknowledged\s+my)\b",
+            r"\b(accountab(le|ility)|responsib(le|ility))\b",
+            r"\bmy\s+(duty|role|task|obligation|lapse|charge|judgment)\b",
+            r"\b(held\s+myself|stood\s+up|claimed\s+responsibility)\b",
+        ]
+        has_ownership = any(re.search(pat, combined_text) for pat in ownership_patterns)
+
+        # Examples: Specific experiences, situational narrative anchors
+        example_patterns = [
+            r"\b(for\s+example|specifically|for\s+instance|in\s+particular|namely)\b",
+            r"\b(in\s+my\s+college|during\s+my|when\s+i\s+was|in\s+our\s+team|at\s+my\s+university|in\s+my\s+school|in\s+my\s+workplace)\b",
+            r"\b(on\s+one\s+occasion|back\s+in|while\s+serving|in\s+our\s+project|during\s+the\s+tournament|during\s+a\s+crisis)\b",
+            r"\b(last\s+year|two\s+months\s+ago|at\s+that\s+time|in\s+that\s+situation)\b",
+        ]
+        has_example = any(re.search(pat, combined_text) for pat in example_patterns)
+
+        # Reasoning: Causal logic and structural progression
+        reasoning_patterns = [
+            r"\b(because|therefore|as\s+a\s+result|consequently|firstly|secondly|furthermore)\b",
+            r"\b(the\s+reason\s+was|which\s+led\s+to|in\s+order\s+to|due\s+to|hence|thus)\b",
+        ]
+        has_reasoning = any(re.search(pat, combined_text) for pat in reasoning_patterns)
+
+        # Teamwork: Collaborative mission alignment and peer engagement
+        teamwork_patterns = [
+            r"\b(we\s|our\s+team|together|helped|colleague|colleagues|group\s+goal)\b",
+            r"\b(collaborat(ed|ive|ion)|cooperat(ed|ive|ion)|peers?|squad|united|mutual\s+support)\b",
+        ]
+        has_teamwork = any(re.search(pat, combined_text) for pat in teamwork_patterns)
+
+        return {
+            "has_ownership": has_ownership,
+            "has_example": has_example,
+            "has_reasoning": has_reasoning,
+            "has_teamwork": has_teamwork,
+            "llm_positives": [],
+            "llm_weaknesses": [],
+            "mode": "semantic_offline",
+        }
+
     # -------------------------------------------------------------------------
     # PASS 1: Per-Answer Evidence Calculation
     # -------------------------------------------------------------------------
@@ -186,22 +287,23 @@ class RubricEvaluator:
             or any(p in combined_text for p in ["dont care", "dont want to", "i decline", "no idea"])
         )
 
-        has_ownership = any(
-            p in combined_text
-            for p in ["i took", "i decided", "my fault", "my mistake", "i led", "i organized", "i took responsibility", "i resolved"]
+        # Indicator detection: LLM rubric pass when online, semantic concept matcher when offline
+        rubric_text = "\n".join(c.get("text", "") for c in (rubric_chunks or general_chunks))
+        indicators = self._detect_indicators(
+            combined_text=combined_text,
+            question_text=question_text,
+            category=category,
+            dimension=dimension,
+            rubric_text=rubric_text,
         )
-        has_example = any(
-            p in combined_text
-            for p in ["for example", "specifically", "in my college", "during my", "when i was", "for instance", "in our team"]
-        )
-        has_reasoning = any(
-            p in combined_text
-            for p in ["because", "reason", "therefore", "as a result", "firstly", "secondly"]
-        )
-        has_teamwork = any(
-            p in combined_text
-            for p in ["we ", "our team", "together", "helped", "colleague", "group goal"]
-        )
+        has_ownership = indicators["has_ownership"]
+        has_example = indicators["has_example"]
+        has_reasoning = indicators["has_reasoning"]
+        has_teamwork = indicators["has_teamwork"]
+        if indicators.get("llm_positives"):
+            positives.extend(indicators["llm_positives"])
+        if indicators.get("llm_weaknesses"):
+            weaknesses.extend(indicators["llm_weaknesses"])
 
         if is_evasive and not has_ownership:
             weaknesses.append("Severely brief or evasive reply; provided no supporting context or personal narrative.")
