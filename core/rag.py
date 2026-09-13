@@ -7,6 +7,7 @@ Operates across all 5 tiers: official, academic, evaluation, preparation, and cu
 from __future__ import annotations
 
 from dataclasses import dataclass
+import json
 import logging
 from pathlib import Path
 import re
@@ -54,6 +55,8 @@ class KnowledgeChunk:
             "text": self.text,
             "source_file": self.source_file,
             "tier": self.tier,
+            "source_type": self.tier,
+            "topic": Path(self.source_file).stem.replace("_", " ").lower(),
             "title": self.title,
             "citation": self.citation,
         }
@@ -87,13 +90,26 @@ class KnowledgeRetriever:
             if not tier_dir.exists():
                 continue
 
-            for file_path in tier_dir.rglob("*.md"):
+            # Load Markdown and text documents
+            text_files = list(tier_dir.rglob("*.md")) + list(tier_dir.rglob("*.txt"))
+            for file_path in text_files:
                 try:
                     content = file_path.read_text(encoding="utf-8")
                     title = file_path.stem.replace("_", " ").title()
 
+                    # Extract title from frontmatter if available
+                    body = content
+                    if body.startswith("---"):
+                        parts = body.split("---", 2)
+                        if len(parts) >= 3:
+                            yaml_block = parts[1]
+                            body = parts[2].strip()
+                            for line in yaml_block.splitlines():
+                                if ":" in line and line.strip().startswith("title:"):
+                                    title = line.split(":", 1)[1].strip().strip("'\"")
+
                     # Simple header-based or paragraph chunking
-                    sections = re.split(r"\n(?=#{1,3}\s+)", content)
+                    sections = re.split(r"\n(?=#{1,3}\s+)", body)
                     for sec in sections:
                         sec_clean = sec.strip()
                         if len(sec_clean) < 40:
@@ -108,6 +124,32 @@ class KnowledgeRetriever:
                                 title=title,
                             )
                         )
+                except Exception as e:
+                    logger.warning("Error reading %s: %s", file_path, e)
+
+            # Load JSON dossiers (current affairs)
+            for file_path in tier_dir.rglob("*.json"):
+                try:
+                    with open(file_path, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                        topics = data.get("topics", [])
+                        for t in topics:
+                            t_title = t.get("title", file_path.stem.replace("_", " ").title())
+                            summary = t.get("summary", "")
+                            key_facts = "\n- ".join(t.get("key_facts", []))
+                            sec_clean = f"Title: {t_title}\nSummary: {summary}\nKey Facts:\n- {key_facts}".strip()
+                            if len(sec_clean) < 40:
+                                continue
+                            chunk_count += 1
+                            self.chunks.append(
+                                KnowledgeChunk(
+                                    id=f"{tier_name}_{chunk_count:04d}",
+                                    text=sec_clean,
+                                    source_file=str(file_path.relative_to(self.kb_dir)),
+                                    tier=tier_name,
+                                    title=t_title,
+                                )
+                            )
                 except Exception as e:
                     logger.warning("Error reading %s: %s", file_path, e)
 

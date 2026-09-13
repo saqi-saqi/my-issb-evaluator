@@ -162,7 +162,7 @@ python -m pytest tests/ -v
 - `test_structured_evaluation.py` (3/3 passed)
 - `test_unresponsive_evaluation.py` (4/4 passed)
 
-### 2. RAG Quality Benchmark (`python -m src.rag.benchmark`)
+### 2. RAG Quality Benchmark (`python -m core.rag_benchmark`)
 Evaluated across 30 gold-standard queries (26 in-domain + 4 adversarial out-of-domain queries):
 
 | Metric | Target Gate | Measured Result | Status |
