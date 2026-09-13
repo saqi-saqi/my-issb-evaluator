@@ -95,6 +95,43 @@ class RubricEvaluator:
         self.retriever = retriever or KnowledgeRetriever()
         self.ai = ai or ai_client
 
+    def _extract_rubric_criteria(
+        self, chunks: List[Dict[str, Any]]
+    ) -> Tuple[List[Dict[str, str]], List[Dict[str, str]]]:
+        """Parses observable positive indicators and potential weaknesses from retrieved rubric chunks."""
+        positives: List[Dict[str, str]] = []
+        weaknesses: List[Dict[str, str]] = []
+
+        for chunk in chunks:
+            text = chunk.get("text", "")
+            current_section = None
+            for line in text.splitlines():
+                line_str = line.strip()
+                if "Observable Positive Indicators" in line_str:
+                    current_section = "positive"
+                    continue
+                elif "Observable Potential Weaknesses" in line_str:
+                    current_section = "weakness"
+                    continue
+                elif line_str.startswith("## "):
+                    current_section = None
+                    continue
+
+                if line_str.startswith("- ") and current_section:
+                    item_text = line_str[2:].strip()
+                    if ":" in item_text:
+                        name, desc = item_text.split(":", 1)
+                        entry = {"name": name.strip(), "description": desc.strip()}
+                    else:
+                        entry = {"name": item_text, "description": item_text}
+
+                    if current_section == "positive":
+                        positives.append(entry)
+                    elif current_section == "weakness":
+                        weaknesses.append(entry)
+
+        return positives, weaknesses
+
     # -------------------------------------------------------------------------
     # PASS 1: Per-Answer Evidence Calculation
     # -------------------------------------------------------------------------
@@ -117,9 +154,26 @@ class RubricEvaluator:
         positives: List[str] = []
         weaknesses: List[str] = []
 
-        # Retrieve grounding RAG benchmarks
-        rag_chunks = self.retriever.retrieve(f"{question_text} {category}", top_k=2)
-        citations = [c["citation"] for c in rag_chunks]
+        # Retrieve grounding RAG benchmarks (evaluation tier first, plus general context)
+        rubric_chunks = self.retriever.retrieve(
+            f"{category} {dimension} evaluation rubric",
+            top_k=2,
+            tier="evaluation",
+        )
+        general_chunks = self.retriever.retrieve(f"{question_text} {category}", top_k=2)
+
+        # Combine unique citations for frontend evidence display
+        seen_citations = set()
+        citations: List[str] = []
+        for c in (rubric_chunks + general_chunks):
+            cit = c.get("citation", "")
+            if cit and cit not in seen_citations:
+                seen_citations.add(cit)
+                citations.append(cit)
+        citations = citations[:3]
+
+        # Extract observable criteria directly from retrieved rubric text
+        rubric_positives, rubric_weaknesses = self._extract_rubric_criteria(rubric_chunks or general_chunks)
 
         # Monosyllabic / evasive checks
         monosyllabic = {"yes", "no", "yeah", "nope", "dont know", "skip", "idk", "pass", "ok", "fine"}
@@ -200,6 +254,49 @@ class RubricEvaluator:
         if has_teamwork:
             positives.append("Demonstrated collaborative team orientation and shared mission alignment.")
             score += 5.0
+
+        # Grounding evaluation: match candidate answer against retrieved rubric criteria
+        rubric_positive_matches: List[str] = []
+        rubric_weakness_matches: List[str] = []
+        stop_words = {
+            "a", "an", "the", "and", "or", "in", "on", "at", "to", "for", "of", "with", "by", "as",
+            "is", "was", "are", "were", "be", "been", "being", "have", "has", "had", "do", "does",
+            "did", "shall", "will", "should", "would", "may", "might", "must", "can", "could",
+            "their", "his", "her", "its", "our", "your", "my", "this", "that", "these", "those"
+        }
+
+        for p_crit in rubric_positives:
+            name_words = {w for w in re.findall(r"\b[a-z]{3,}\b", p_crit["name"].lower()) if w not in stop_words}
+            desc_words = {w for w in re.findall(r"\b[a-z]{4,}\b", p_crit["description"].lower()) if w not in stop_words}
+            quotes = [q.lower().strip('"\'') for q in re.findall(r'"([^"]+)"', p_crit["description"])]
+            quote_matched = any(q in combined_text for q in quotes if len(q) > 3)
+            target_words = name_words | desc_words
+            overlap_count = sum(1 for w in target_words if re.search(r"\b" + re.escape(w) + r"\b", combined_text))
+            if quote_matched or overlap_count >= 2:
+                rubric_positive_matches.append(f"[Rubric Standard] {p_crit['name']}: {p_crit['description']}")
+
+        for w_crit in rubric_weaknesses:
+            name_words = {w for w in re.findall(r"\b[a-z]{3,}\b", w_crit["name"].lower()) if w not in stop_words}
+            desc_words = {w for w in re.findall(r"\b[a-z]{4,}\b", w_crit["description"].lower()) if w not in stop_words}
+            quotes = [q.lower().strip('"\'') for q in re.findall(r'"([^"]+)"', w_crit["description"])]
+            quote_matched = any(q in combined_text for q in quotes if len(q) > 3)
+            target_words = name_words | desc_words
+            overlap_count = sum(1 for w in target_words if re.search(r"\b" + re.escape(w) + r"\b", combined_text))
+            if quote_matched or overlap_count >= 2:
+                rubric_weakness_matches.append(f"[Rubric Concern] {w_crit['name']}: {w_crit['description']}")
+
+        # Score adjustment influenced directly by retrieved rubric benchmarks
+        if rubric_positive_matches:
+            rubric_bonus = min(15.0, len(rubric_positive_matches) * 6.0)
+            score += rubric_bonus
+            positives.extend(rubric_positive_matches)
+            ev_conf = "HIGH"
+            num_conf = min(0.95, num_conf + 0.05)
+
+        if rubric_weakness_matches:
+            rubric_penalty = min(15.0, len(rubric_weakness_matches) * 6.0)
+            score -= rubric_penalty
+            weaknesses.extend(rubric_weakness_matches)
 
         score = max(15.0, min(100.0, round(score, 1)))
 
@@ -311,15 +408,37 @@ class RubricEvaluator:
         positives: List[str],
         weaknesses: List[str],
     ) -> Dict[str, Any]:
-        """Executes a single concise Groq LLM call to synthesize the qualitative report."""
+        """Executes a single concise Groq LLM call to synthesize the qualitative report grounded in retrieved benchmarks."""
+        # Retrieve benchmark rubric excerpts for the candidate's weakest dimension(s)
+        benchmark_excerpts = []
+        if dimension_scores:
+            lowest_dims = sorted(dimension_scores.items(), key=lambda x: x[1])[:2]
+            for dim_name, _ in lowest_dims:
+                b_chunks = self.retriever.retrieve(f"{dim_name} assessment rubric criteria", top_k=2, tier="evaluation")
+                if not b_chunks:
+                    b_chunks = self.retriever.retrieve(f"{dim_name} competencies", top_k=1, tier="academic")
+                for bc in b_chunks:
+                    cit = bc.get("citation", "[Evaluation Rubric]")
+                    text_snip = bc.get("text", "")[:350].strip()
+                    benchmark_excerpts.append(f"{cit}:\n{text_snip}")
+
+        benchmark_block = (
+            "\n\n".join(benchmark_excerpts)
+            if benchmark_excerpts
+            else "Standard ISSB Officer Like Quality criteria and behavioral indicators."
+        )
+
         prompt = f"""
-You are a senior ISSB assessor. Synthesize a structured, constructive qualitative evaluation report.
+You are a senior ISSB assessor. Synthesize a structured, constructive qualitative evaluation report grounded in the benchmark criteria below.
 Candidate: {candidate_name}
 Interviewer Persona: {persona}
 Overall Practice Score: {overall_score:.1f}% ({band_tier})
 
 Dimension Breakdown:
 {chr(10).join(f"- {k}: {v:.1f}%" for k, v in dimension_scores.items())}
+
+Benchmark Evaluation Rubric Criteria:
+{benchmark_block}
 
 Observed Strengths:
 {chr(10).join(f"- {p}" for p in set(positives[:6])) if positives else "- None recorded"}
@@ -329,10 +448,10 @@ Observed Shortcomings:
 
 Return a JSON object with exactly these keys:
 {{
-  "executive_summary": "Concise 2-3 sentence overview of candidate performance, communication demeanor, and readiness.",
+  "executive_summary": "Concise 2-3 sentence overview of candidate performance grounded in the benchmark criteria.",
   "key_strengths": ["3-4 specific strengths demonstrated"],
-  "primary_shortcomings": ["2-3 specific behavioral gaps to work on"],
-  "actionable_recommendations": ["3 practical coaching tips for real ISSB"]
+  "primary_shortcomings": ["2-3 specific behavioral gaps relative to the benchmark criteria"],
+  "actionable_recommendations": ["3 practical coaching tips based on the benchmark criteria"]
 }}
 """
         res = self.ai.generate_json(prompt, system="You are an expert military psychology assessor for ISSB.")
