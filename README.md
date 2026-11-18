@@ -1,5 +1,7 @@
 # MY_ISSB_Evaluator
 
+[Hosted deployment target](https://render.com/) · Free-tier single-service deployment via the included `render.yaml`
+
 [![CI - Build & Test](https://github.com/saqi-saqi/my-issb-evaluator/actions/workflows/ci.yml/badge.svg)](https://github.com/saqi-saqi/my-issb-evaluator/actions)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688?logo=fastapi&logoColor=white)
@@ -15,7 +17,7 @@
 ## 🎖️ Architecture Overview
 
 The system strictly adheres to the principle that **Question Bank ≠ RAG Knowledge Base**:
-- **Question Bank (`question_bank/`)**: 47 Structured JSON questions controlling *what* the interviewer asks across 13 calibrated progression blueprints (Biographical/Rapport → Academics → Communication → Motivation → Teamwork → Leadership → Confidence → Stress → Responsibility → Situational → Decision Making → General Awareness).
+- **Question Bank (`question_bank/`)**: 125 structured JSON questions controlling *what* the interviewer asks across 13 calibrated progression blueprints.
 - **RAG Knowledge Base (`knowledge_base/`)**: Multi-tiered repository with strict source provenance controlling *what benchmarks and criteria* are retrieved to evaluate responses. Retrieved criteria from Level 3 evaluation rubrics directly ground scoring, observable positive indicators, shortcomings, and qualitative narrative synthesis.
 - **Controlled Flow**:
   $$\text{Question Bank} \xrightarrow{\text{Retrieve Target Q}} \text{LLM / Orchestrator} \xrightarrow{\text{Ask Naturally}} \text{Candidate Answer} \xrightarrow{\text{Probing Follow-up}} \text{RAG Evaluation Rubric} \xrightarrow{\text{Python Engine}} \text{15-Section Performance Report}$$
@@ -56,7 +58,7 @@ MY_ISSB_Evaluator
 │   └── rag_eval_dataset.json       # 30-query gold-standard evaluation dataset for RAG benchmark
 │
 ├── question_bank/                  # Curated Question Bank
-│   └── questions.json              # 47 Structured Questions across 13 Categories in a unified JSON array
+│   └── questions.json              # 125 structured questions across 13 categories
 │
 ├── knowledge_base/                 # Multi-Tier Grounded Knowledge Base
 │   ├── official/                   # Level 1: Official ISSB Selection System & Guidelines (.txt)
@@ -71,7 +73,7 @@ MY_ISSB_Evaluator
 │   └── evaluator.md                # Senior assessor rubric evaluation template
 │
 ├── tests/                          # Automated tests covering core engine, RAG, API, storage, and scoring
-├── run_web.bat / run_web.ps1       # One-click launcher for FastAPI + Lovable React UI
+├── run.bat                         # One-click launcher for FastAPI + Lovable React UI
 └── requirements.txt                # Streamlined production dependencies
 ```
 
@@ -85,6 +87,23 @@ MY_ISSB_Evaluator
    - Quotes from Level 1 are marked: `According to official ISSB guidelines...`
    - Inferences from Level 2/3 are marked: `Based on the project's behavioral evaluation rubric...`
 4. **Official Board Caveat**: The final recommendation at ISSB is made collectively by the Board Conference at official centres. This system is framed as formative practice coaching.
+
+The retriever is a local TF-IDF multi-tier implementation. The older `RAG_AND_KNOWLEDGE_BASE_DOSSIER.md` describes a possible hybrid/ChromaDB/RRF roadmap, not the current runtime architecture.
+
+## 🚢 Deploy with Docker or Render
+
+Build and run the complete same-origin service:
+
+```bash
+docker build -t issb-evaluator .
+docker run --rm -p 8000:8000 -e GROQ_API_KEY=your_key issb-evaluator
+```
+
+For Render, create a Web Service from this repository using `render.yaml`, set `GROQ_API_KEY` as a secret, and deploy. The free instance uses local SQLite; its filesystem may be reset on redeploy, so upgrade to managed Postgres before relying on long-term history.
+
+## 🤝 Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the focused test/build workflow. This project is a practice aid, not an official ISSB assessment or selection predictor.
 
 ---
 
@@ -153,8 +172,8 @@ To enable live, dynamic LLM inference:
 
 #### Option A: One-Click Launcher (Windows)
 ```powershell
-.\run_web.ps1
-# or simply double-click run_web.bat
+.\run.bat
+# or simply double-click run.bat
 ```
 
 #### Option B: Manual Launch (Windows, macOS, Linux)

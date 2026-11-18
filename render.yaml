@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: issb-evaluator
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/status
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: ALLOW_LLM_OVERRIDE
+        value: "false"
+      - key: ALLOWED_ORIGINS
+        value: ""
