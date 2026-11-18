@@ -1,10 +1,10 @@
 import React from 'react';
-import { Shield, Award, BookOpen, Database, Settings, Terminal, Radio } from 'lucide-react';
+import { Shield, Award, BookOpen, Database, Settings, Terminal, Radio, TrendingUp } from 'lucide-react';
 import { SystemStatus } from '../types';
 
 interface NavbarProps {
-  activeTab: 'interview' | 'report' | 'rag' | 'questions';
-  setActiveTab: (tab: 'interview' | 'report' | 'rag' | 'questions') => void;
+  activeTab: 'interview' | 'report' | 'progress' | 'rag' | 'questions';
+  setActiveTab: (tab: 'interview' | 'report' | 'progress' | 'rag' | 'questions') => void;
   status: SystemStatus | null;
   onOpenSettings: () => void;
   hasReport: boolean;
@@ -24,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-[#162536] bg-[#060b11]/90 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-16 py-2 flex flex-wrap items-center gap-2 justify-between">
         {/* Brand / Logo */}
         <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab('interview')}>
           <div className="flex items-center justify-center w-10 h-10 rounded-lg border border-[#00e599]/40 bg-[#00e599]/10 text-[#00e599] shadow-[0_0_15px_rgba(0,229,153,0.15)]">
@@ -41,9 +41,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Navigation Tabs */}
-        <nav className="flex items-center space-x-1 sm:space-x-2">
+        <nav className="flex flex-wrap items-center gap-1 sm:gap-2">
           <button
             onClick={() => setActiveTab('interview')}
+            aria-label="Interview"
             className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
               activeTab === 'interview'
                 ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shadow-sm'
@@ -51,11 +52,24 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Radio className="w-4 h-4" />
-            <span>Interview</span>
+            <span className="hidden sm:inline">Interview</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('progress')}
+            aria-label="Progress"
+            className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+              activeTab === 'progress'
+                ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+            }`}
+          >
+            <TrendingUp className="w-4 h-4" />
+            <span className="hidden sm:inline">Progress</span>
           </button>
 
           <button
             onClick={() => setActiveTab('report')}
+            aria-label="Report"
             className={`relative flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
               activeTab === 'report'
                 ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shadow-sm'
@@ -63,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Award className="w-4 h-4" />
-            <span>Report</span>
+            <span className="hidden sm:inline">Report</span>
             {hasReport && (
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             )}
@@ -104,7 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-3 text-xs font-mono">
             <span className="text-slate-400 tracking-wider hidden sm:inline-block">
-              CANDIDATE · CSAC
+              PRACTICE MODE
             </span>
             <div className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-[#0a121d] border border-[#162536]">
               <span className={`w-1.5 h-1.5 rounded-full ${isLlmConnected ? 'bg-[#00e599]' : 'bg-amber-400'}`}></span>
@@ -114,8 +128,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
 
-          {showDevTools && (
-            <div className="flex items-center space-x-2 border-l border-[#162536] pl-3">
+          <div className="flex items-center space-x-2 border-l border-[#162536] pl-3">
               <button
                 onClick={onOpenSettings}
                 className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
@@ -123,8 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <Settings className="w-4 h-4" />
               </button>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </header>

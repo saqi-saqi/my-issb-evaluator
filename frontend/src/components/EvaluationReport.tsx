@@ -163,7 +163,7 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({
   const evaluatorTitle =
     persona === 'deputy_president' ? 'Deputy President' : 'Senior Psychologist';
   const totalQuestions = formatted_evidence_table?.length || session_metadata?.question_count || 5;
-  const sessionId = session_metadata?.session_id || 'demo-zflyotub';
+  const sessionId = session_metadata?.session_id || 'current session';
 
   // Build the 4 Priority Action Plan Cards
   const defaultActionPlans: ActionPlanItem[] = [
@@ -315,7 +315,7 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({
       </div>
 
       {/* Segmented Navigation Tabs */}
-      <div className="inline-flex p-1 rounded-md bg-[#060b11] border border-[#162536] mb-6">
+      <div className="flex flex-wrap gap-1 w-full p-1 rounded-md bg-[#060b11] border border-[#162536] mb-6">
         <button
           onClick={() => setActiveSection('action_plan')}
           className={`px-4 py-2 text-xs font-mono tracking-wider font-semibold rounded uppercase transition-all ${
@@ -350,7 +350,7 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({
 
       {/* TAB 1: PRIORITY ACTION PLAN */}
       {activeSection === 'action_plan' && (
-        <div className="space-y-6 animate-in fade-in duration-200">
+        <div className="space-y-6">
           {/* Coach Strategic Directive (if available from learning profile) */}
           {learningReport?.suggested_next_practice_session && (
             <div className="military-card p-5 rounded-lg border border-teal-500/30 bg-teal-950/20 space-y-1.5">
@@ -422,7 +422,7 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({
 
       {/* TAB 2: COMPETENCY BALANCE (Radar + Dimension Scores & Comments) */}
       {activeSection === 'competencies' && (
-        <div className="space-y-6 animate-in fade-in duration-200">
+        <div className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Left Column: 5-Dimension Radar */}
             <div className="military-card p-6 rounded-lg border border-[#162536] bg-[#0a121d]">
@@ -513,7 +513,7 @@ export const EvaluationReport: React.FC<EvaluationReportProps> = ({
 
       {/* TAB 3: QUESTION SCORECARD & CITATIONS */}
       {activeSection === 'transcript' && (
-        <div className="space-y-6 animate-in fade-in duration-200">
+        <div className="space-y-6">
           {/* Question Evidence Table */}
           <div className="military-card rounded-lg border border-[#162536] bg-[#0a121d] overflow-hidden">
             <div className="overflow-x-auto">

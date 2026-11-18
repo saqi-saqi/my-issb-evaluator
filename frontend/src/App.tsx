@@ -5,11 +5,12 @@ import { EvaluationReport } from './components/EvaluationReport';
 import { RagExplorer } from './components/RagExplorer';
 import { QuestionBankExplorer } from './components/QuestionBankExplorer';
 import { SettingsModal } from './components/SettingsModal';
+import { MyProgress } from './components/MyProgress';
 import { EvaluationReportData, SystemStatus } from './types';
 import { fetchReport, fetchStatus } from './api';
 
 export const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'interview' | 'report' | 'rag' | 'questions'>('interview');
+  const [activeTab, setActiveTab] = useState<'interview' | 'report' | 'progress' | 'rag' | 'questions'>('interview');
   const [status, setStatus] = useState<SystemStatus | null>(null);
   const [report, setReport] = useState<EvaluationReportData | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -34,6 +35,12 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     loadStatus();
+    const lastSessionId = localStorage.getItem('issb_last_session_id');
+    if (lastSessionId) {
+      fetchReport(lastSessionId)
+        .then((data) => setReport(data))
+        .catch(() => localStorage.removeItem('issb_last_session_id'));
+    }
   }, []);
 
   const handleSessionComplete = async (sessionId: string) => {
@@ -42,6 +49,7 @@ export const App: React.FC = () => {
     try {
       const data = await fetchReport(sessionId);
       setReport(data);
+      localStorage.setItem('issb_last_session_id', sessionId);
     } catch (err) {
       console.error('Failed to load completed report:', err);
     } finally {
@@ -73,17 +81,35 @@ export const App: React.FC = () => {
           />
         )}
 
+        {activeTab === 'progress' && (
+          <MyProgress
+            onOpenReport={(data) => {
+              setReport(data);
+              setActiveTab('report');
+            }}
+          />
+        )}
+
         {activeTab === 'rag' && <RagExplorer />}
 
         {activeTab === 'questions' && <QuestionBankExplorer />}
       </main>
 
+      <footer className="px-4 py-4 text-center text-[11px] text-slate-500">
+        <button
+          type="button"
+          className="hover:text-emerald-400 underline underline-offset-2"
+          onClick={() => handleToggleDevTools(!showDevTools)}
+        >
+          {showDevTools ? 'Hide developer tools' : 'Developer tools'}
+        </button>
+      </footer>
+
       <SettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
         onSettingsChanged={loadStatus}
-        showDevTools={showDevTools}
-        onToggleDevTools={handleToggleDevTools}
+        serverManaged={status ? !status.llm_override_allowed : true}
       />
     </div>
   );

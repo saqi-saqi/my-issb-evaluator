@@ -29,13 +29,17 @@ export const QuestionBankExplorer: React.FC = () => {
     setExpandedQId((prev) => (prev === id ? null : id));
   };
 
+  const totalQuestions = categories.reduce((acc, c) => acc + c.count, 0);
+
   return (
     <div className="max-w-5xl mx-auto py-8 px-4 space-y-6">
       <div>
         <div className="flex items-center space-x-2 mb-1">
-          <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20 font-mono">
-            47 Curated Items
-          </span>
+          {totalQuestions > 0 && (
+            <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20 font-mono">
+              {totalQuestions} Curated Items
+            </span>
+          )}
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
           Curated ISSB Question Bank Browser
@@ -97,7 +101,7 @@ export const QuestionBankExplorer: React.FC = () => {
           return (
             <div
               key={q.id}
-              className="glass-panel rounded-2xl border border-slate-800 hover:border-slate-700 transition-all overflow-hidden"
+              className="military-card rounded-2xl border border-slate-800 hover:border-slate-700 transition-all overflow-hidden"
             >
               <div
                 onClick={() => toggleExpand(q.id)}

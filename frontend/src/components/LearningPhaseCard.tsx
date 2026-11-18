@@ -99,7 +99,7 @@ export const LearningPhaseCard: React.FC<LearningPhaseCardProps> = ({
   const improvementAreas = currentLearning?.improvement_areas || [];
 
   return (
-    <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-emerald-500/30 bg-slate-900/90 shadow-2xl space-y-6 my-6 relative overflow-hidden">
+    <div className="military-card p-6 sm:p-8 rounded-2xl border border-emerald-500/30 bg-slate-900/90 shadow-2xl space-y-6 my-6 relative overflow-hidden">
       {/* Decorative gradient glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
 

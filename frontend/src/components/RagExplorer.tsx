@@ -85,7 +85,7 @@ export const RagExplorer: React.FC = () => {
       </div>
 
       {/* Search & Filter Controls */}
-      <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
+      <div className="military-card p-5 rounded-2xl border border-slate-800 space-y-4">
         <form onSubmit={handleSearch} className="flex gap-2">
           <div className="relative flex-1">
             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -164,7 +164,7 @@ export const RagExplorer: React.FC = () => {
             <p className="text-xs">Querying knowledge indices...</p>
           </div>
         ) : results.length === 0 ? (
-          <div className="glass-panel p-8 rounded-2xl text-center text-slate-400 border border-slate-800">
+          <div className="military-card p-8 rounded-2xl text-center text-slate-400 border border-slate-800">
             <BookOpen className="w-8 h-8 mx-auto mb-2 opacity-50" />
             <p className="text-sm">No knowledge chunks matched this query.</p>
           </div>
@@ -172,7 +172,7 @@ export const RagExplorer: React.FC = () => {
           results.map((chunk, i) => (
             <div
               key={i}
-              className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 hover:border-slate-700 transition-colors"
+              className="military-card p-5 rounded-2xl border border-slate-800 space-y-3 hover:border-slate-700 transition-colors"
             >
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center space-x-2">

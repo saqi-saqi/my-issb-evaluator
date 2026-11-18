@@ -28,10 +28,10 @@ interface InterviewRoomProps {
 
 export const InterviewRoom: React.FC<InterviewRoomProps> = ({ onSessionComplete }) => {
   // Setup State
-  const [candidateName, setCandidateName] = useState('Cadet Muhammad Ali');
+  const [candidateName, setCandidateName] = useState('');
   const [targetBranch, setTargetBranch] = useState('Pakistan Army (PMA Long Course)');
   const [persona, setPersona] = useState<'deputy_president' | 'psychologist'>('deputy_president');
-  const [numQuestions, setNumQuestions] = useState(4);
+  const [numQuestions, setNumQuestions] = useState(5);
 
   // Active Session State
   const [session, setSession] = useState<StartInterviewResponse | null>(null);
@@ -72,7 +72,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({ onSessionComplete 
     setErrorMsg(null);
     setLoading(true);
     try {
-      const data = await startInterview(candidateName.trim(), persona, numQuestions);
+      const data = await startInterview(candidateName.trim(), persona, numQuestions, targetBranch);
       setSession(data);
       setCurrentQuestionData(data.current_question);
       setConversationHistory([]);
@@ -272,7 +272,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({ onSessionComplete 
                     value={candidateName}
                     onChange={(e) => setCandidateName(e.target.value)}
                     placeholder="e.g. Ahmed Raza"
-                    className="w-full px-4 py-3 bg-[#060b11] border border-[#1b2d42] rounded-xl text-white text-sm focus:outline-none focus:border-[#00e599] transition-all placeholder-slate-600 font-medium"
+                    className="w-full px-4 py-3 bg-[#060b11] border border-[#1b2d42] rounded-xl text-white text-base focus:outline-none focus:border-[#00e599] transition-all placeholder-slate-600 font-medium"
                     required
                   />
                 </div>
@@ -356,7 +356,20 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({ onSessionComplete 
                 {/* 03 · NUMBER OF QUESTIONS */}
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">
-                    03 · NUMBER OF QUESTIONS
+                    03 · TARGET BRANCH
+                  </label>
+                  <input
+                    type="text"
+                    value={targetBranch}
+                    onChange={(e) => setTargetBranch(e.target.value)}
+                    className="w-full px-4 py-3 bg-[#060b11] border border-[#1b2d42] rounded-xl text-white text-base focus:outline-none focus:border-[#00e599] transition-all"
+                  />
+                </div>
+
+                {/* 04 · NUMBER OF QUESTIONS */}
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">
+                    04 · NUMBER OF QUESTIONS
                   </label>
                   <div className="flex items-center space-x-2">
                     <button
@@ -489,7 +502,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({ onSessionComplete 
             <>
               {/* ACTIVE QUESTION CARD from Image 1 */}
               <div className="military-card p-6 sm:p-7 rounded-2xl space-y-4 shadow-2xl">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center space-x-3.5">
                     <div className="w-12 h-12 rounded-lg border border-[#00e599]/40 bg-[#00e599]/10 text-[#00e599] font-mono font-bold text-base flex items-center justify-center flex-shrink-0">
                       {session.persona === 'deputy_president' ? 'DP' : 'SP'}
@@ -541,7 +554,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({ onSessionComplete 
                     onChange={(e) => setFollowUpInput(e.target.value)}
                     placeholder="Address the probe directly with concrete reasoning and personal ownership..."
                     rows={3}
-                    className="w-full p-4 bg-[#060b11] border border-amber-500/40 rounded-xl text-white text-sm focus:outline-none placeholder-slate-600 leading-relaxed"
+                    className="w-full p-4 bg-[#060b11] border border-amber-500/40 rounded-xl text-white text-base focus:outline-none placeholder-slate-600 leading-relaxed"
                   ></textarea>
 
                   <div className="flex justify-end">
@@ -572,7 +585,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({ onSessionComplete 
                     onChange={(e) => setAnswerInput(e.target.value)}
                     placeholder="Speak as you would to the board. Own your decisions in the first person."
                     rows={5}
-                    className="w-full p-6 bg-transparent text-white text-sm focus:outline-none placeholder-slate-600 leading-relaxed resize-none min-h-[140px]"
+                    className="w-full p-6 bg-transparent text-white text-base focus:outline-none placeholder-slate-600 leading-relaxed resize-none min-h-[140px]"
                   ></textarea>
 
                   <div className="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[#132235] bg-[#070e17]/60">

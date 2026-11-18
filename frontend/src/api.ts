@@ -16,8 +16,19 @@ const BASE_URL = '/api';
 
 export async function fetchStatus(): Promise<SystemStatus> {
   const res = await fetch(`${BASE_URL}/status`);
-  if (!res.ok) throw new Error('Failed to fetch status');
+  if (!res.ok) throw new Error('The service status is temporarily unavailable.');
   return res.json();
+}
+
+async function errorMessage(res: Response, fallback: string): Promise<string> {
+  try {
+    const body = await res.json();
+    const detail = typeof body?.detail === 'string' ? body.detail : body?.message;
+    if (detail) return detail;
+  } catch {
+    // Keep the user-facing fallback for non-JSON responses.
+  }
+  return fallback;
 }
 
 export async function fetchCategories(): Promise<CategoryItem[]> {
@@ -62,8 +73,10 @@ export async function searchRag(
 export async function startInterview(
   candidateName: string,
   persona: string,
-  numQuestions: number
+  numQuestions: number,
+  targetBranch?: string
 ): Promise<StartInterviewResponse> {
+  const candidateId = getCandidateId();
   const res = await fetch(`${BASE_URL}/interview/start`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -71,9 +84,31 @@ export async function startInterview(
       candidate_name: candidateName,
       persona: persona,
       num_questions: numQuestions,
+      target_branch: targetBranch || undefined,
+      candidate_id: candidateId,
     }),
   });
-  if (!res.ok) throw new Error('Failed to initialize interview');
+  if (!res.ok) throw new Error(await errorMessage(res, 'Unable to initialize the interview.'));
+  const data = await res.json();
+  localStorage.setItem('issb_last_session_id', data.session_id);
+  return data;
+}
+
+function getCandidateId(): string {
+  const existing = localStorage.getItem('issb_candidate_id');
+  if (existing) return existing;
+  const generated = typeof crypto.randomUUID === 'function'
+    ? crypto.randomUUID()
+    : `candidate-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  localStorage.setItem('issb_candidate_id', generated);
+  return generated;
+}
+
+export async function fetchProgress(): Promise<any> {
+  const candidateId = localStorage.getItem('issb_candidate_id');
+  if (!candidateId) return null;
+  const res = await fetch(`${BASE_URL}/progress/${encodeURIComponent(candidateId)}`);
+  if (!res.ok) throw new Error(await errorMessage(res, 'Unable to load progress.'));
   return res.json();
 }
 
@@ -86,7 +121,7 @@ export async function submitAnswer(
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ session_id: sessionId, answer }),
   });
-  if (!res.ok) throw new Error('Failed to submit answer');
+  if (!res.ok) throw new Error(await errorMessage(res, 'Unable to submit your answer.'));
   return res.json();
 }
 
@@ -99,13 +134,13 @@ export async function submitFollowUp(
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ session_id: sessionId, follow_up_answer: followUpAnswer }),
   });
-  if (!res.ok) throw new Error('Failed to submit follow-up response');
+  if (!res.ok) throw new Error(await errorMessage(res, 'Unable to submit your follow-up response.'));
   return res.json();
 }
 
 export async function fetchReport(sessionId: string): Promise<EvaluationReportData> {
   const res = await fetch(`${BASE_URL}/interview/report/${sessionId}`);
-  if (!res.ok) throw new Error('Failed to load evaluation report');
+  if (!res.ok) throw new Error(await errorMessage(res, 'Unable to load the evaluation report.'));
   return res.json();
 }
 
@@ -125,7 +160,7 @@ export async function updateLLMSettings(
       base_url: baseUrl,
     }),
   });
-  if (!res.ok) throw new Error('Failed to update LLM configuration');
+  if (!res.ok) throw new Error(await errorMessage(res, 'LLM settings are managed by the server.'));
   return res.json();
 }
 
@@ -138,7 +173,7 @@ export async function getLearningFeedback(
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ session_id: sessionId, question_id: questionId }),
   });
-  if (!res.ok) throw new Error('Failed to fetch learning feedback');
+  if (!res.ok) throw new Error(await errorMessage(res, 'Unable to load coaching feedback.'));
   const data = await res.json();
   return data.learning_phase || data;
 }
@@ -162,7 +197,7 @@ export async function submitRetryAnswer(
       retry_answer: retryAnswer,
     }),
   });
-  if (!res.ok) throw new Error('Failed to submit retry answer');
+  if (!res.ok) throw new Error(await errorMessage(res, 'Unable to submit the retry answer.'));
   return res.json();
 }
 
@@ -174,6 +209,6 @@ export async function getLearningProfile(
   session_learning_report: SessionLearningReport;
 }> {
   const res = await fetch(`${BASE_URL}/learning/profile/${sessionId}`);
-  if (!res.ok) throw new Error('Failed to load learning profile');
+  if (!res.ok) throw new Error(await errorMessage(res, 'Unable to load the learning profile.'));
   return res.json();
 }

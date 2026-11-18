@@ -8,6 +8,7 @@ export interface SystemStatus {
     detail: string;
     badge: 'success' | 'warning' | 'error';
   };
+  llm_override_allowed?: boolean;
 }
 
 export interface CategoryItem {
@@ -60,6 +61,7 @@ export interface StartInterviewResponse {
     raw_question: string;
     natural_prompt: string;
   };
+  target_branch?: string;
 }
 
 export interface AnswerResponse {

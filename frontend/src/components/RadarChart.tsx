@@ -45,7 +45,7 @@ export const RadarChart: React.FC<RadarChartProps> = ({ data, size = 320 }) => {
 
   return (
     <div className="flex flex-col items-center justify-center p-2">
-      <svg width={size} height={size} className="overflow-visible select-none">
+      <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} className="w-full h-auto max-w-full overflow-visible select-none">
         <defs>
           <filter id="radarEmeraldGlow" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="4" result="blur" />

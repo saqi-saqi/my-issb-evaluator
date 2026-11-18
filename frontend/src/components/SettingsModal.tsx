@@ -6,16 +6,14 @@ interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSettingsChanged: () => void;
-  showDevTools: boolean;
-  onToggleDevTools: (enabled: boolean) => void;
+  serverManaged?: boolean;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
   isOpen,
   onClose,
   onSettingsChanged,
-  showDevTools,
-  onToggleDevTools,
+  serverManaged = true,
 }) => {
   const [provider, setProvider] = useState('groq');
   const [apiKey, setApiKey] = useState('');
@@ -60,7 +58,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-      <div className="glass-panel w-full max-w-lg rounded-2xl border border-slate-700 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div className="military-card w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center space-x-2">
@@ -77,6 +75,11 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
         {/* Body */}
         <form onSubmit={handleTestAndSave} className="p-6 space-y-4 text-xs sm:text-sm">
+          {serverManaged && (
+            <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-300 text-xs">
+              LIVE INFERENCE · managed by server. Bring-your-own-key settings are disabled for this deployment.
+            </div>
+          )}
           {testResult && (
             <div
               className={`p-3.5 rounded-xl border flex items-start space-x-2.5 ${
@@ -94,7 +97,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </div>
           )}
 
-          {/* Provider Select */}
+          {!serverManaged && <>{/* Provider Select */}
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
               Select Provider
@@ -172,42 +175,18 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             />
           </div>
 
-          {/* Mode & Navigation Settings */}
-          <div className="pt-3 border-t border-slate-800">
-            <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/70 border border-slate-800">
-              <div className="pr-4">
-                <div className="flex items-center space-x-2">
-                  <span className="text-xs font-semibold text-white">Candidate Practice Mode</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-medium">
-                    Recommended
-                  </span>
-                </div>
-                <p className="text-[11px] text-slate-400 mt-0.5">
-                  Hides internal RAG knowledge and question bank tabs to give candidates a realistic, spoiler-free interview experience.
-                </p>
-              </div>
-              <label className="relative inline-flex items-center cursor-pointer flex-shrink-0">
-                <input
-                  type="checkbox"
-                  checked={!showDevTools}
-                  onChange={(e) => onToggleDevTools(!e.target.checked)}
-                  className="sr-only peer"
-                />
-                <div className="w-10 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-600"></div>
-              </label>
-            </div>
-          </div>
+          </>}
 
           {/* Footer Buttons */}
           <div className="pt-3 flex items-center justify-end space-x-2">
-            <button
+            {!serverManaged && <button
               type="button"
               onClick={onClose}
               className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white rounded-xl"
             >
               Cancel
-            </button>
-            <button
+            </button>}
+            {!serverManaged && <button
               type="submit"
               disabled={loading}
               className="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl transition-all shadow-md shadow-emerald-950/40 flex items-center space-x-1.5 disabled:opacity-50"
@@ -220,7 +199,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               ) : (
                 <span>Test & Apply Configuration</span>
               )}
-            </button>
+            </button>}
           </div>
         </form>
       </div>
