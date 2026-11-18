@@ -656,5 +656,1097 @@
       "If one of the arguing members was clearly right but being aggressive, would you support their point or ask them to calm down first?",
       "What if your attempt to calm them down made one of them turn hostile towards you — how would you react?"
     ]
+  },
+  {
+    "id": "COM_006",
+    "category": "communication",
+    "question": "Explain a complex idea to a younger student. How would you check understanding?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Probes the ability to simplify an idea without distorting it, and whether the candidate takes responsibility for the listener's understanding instead of blaming the audience. Checking understanding reveals empathy and instructional instinct.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "Tell me about an idea you actually had to explain to someone younger or less experienced — how did it go?",
+      "How would you respond if your check-for-understanding questions showed the student still did not get it?",
+      "Which is harder for you: simplifying the idea, or staying patient while it sinks in — and why?"
+    ]
+  },
+  {
+    "id": "COM_007",
+    "category": "communication",
+    "question": "Tell me about a time you changed your communication style for a difficult listener.",
+    "difficulty": 4,
+    "persona": "deputy_president",
+    "intent": "Looks for adaptive communication backed by a real episode: whether the candidate reads their audience, adjusts deliberately, and can describe the specific change rather than claiming generic flexibility.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "What exactly did you change — tone, pace, vocabulary, or the channel itself?",
+      "How did you confirm the new style actually worked?",
+      "Have you kept using that adjusted style since, or was it a one-off adaptation?"
+    ]
+  },
+  {
+    "id": "COM_008",
+    "category": "communication",
+    "question": "How do you deliver respectful disagreement when the group is moving in the wrong direction?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Explores assertiveness balanced with respect: whether the candidate can voice dissent early, frame it around the task rather than personalities, and stay constructive when outnumbered.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "Have you actually done this in a group — what happened when you spoke up?",
+      "How would you handle being overruled after raising your concern?",
+      "Where do you personally draw the line between healthy disagreement and creating conflict?"
+    ]
+  },
+  {
+    "id": "COM_009",
+    "category": "communication",
+    "question": "Describe a written message that prevented confusion in a team task.",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Tests whether the candidate values precision in written communication — structure, clarity of instructions, ownership of follow-up — rather than treating writing as an afterthought in team tasks.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "What would have gone wrong if that message had been vague or missing?",
+      "How do you decide what belongs in writing versus what should be said face to face?",
+      "What are your non-negotiables in any written instruction to a team?"
+    ]
+  },
+  {
+    "id": "COM_010",
+    "category": "communication",
+    "question": "How would you brief a team when the available facts are incomplete?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Evaluates clarity under uncertainty: whether the candidate separates knowns from unknowns, states assumptions explicitly, and sets a review point instead of bluffing confidence.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "Have you ever had to brief people with only partial information — how did it go?",
+      "How do you stop incomplete facts from becoming an excuse for inaction?",
+      "What would you do if new facts contradicted your earlier briefing?"
+    ]
+  },
+  {
+    "id": "COM_011",
+    "category": "communication",
+    "question": "What feedback have you received about your listening, and what did you change?",
+    "difficulty": 4,
+    "persona": "psychologist",
+    "intent": "Probes self-awareness and receptiveness to critique: the candidate should name concrete feedback about their listening, own the behaviour it pointed at, and show a deliberate, sustained change.",
+    "evaluation_dimension": "communication",
+    "follow_up_pool": [
+      "Who gave you that feedback, and how did you take it at the time?",
+      "How do you know the change actually stuck — who noticed it?",
+      "What listening habit are you still working on?"
+    ]
+  },
+  {
+    "id": "CON_006",
+    "category": "confidence",
+    "question": "Tell me about a decision you made without immediate support from your peers.",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Measures independent conviction: whether the candidate can act on their own judgment under social pressure, and how they process standing alone in a decision.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "Why were you confident your peers were wrong?",
+      "How did you handle the relationships afterwards if the decision was unpopular?",
+      "What would you have done if the outcome had proved you wrong?"
+    ]
+  },
+  {
+    "id": "CON_007",
+    "category": "confidence",
+    "question": "How do you recover after making a visible mistake in front of others?",
+    "difficulty": 4,
+    "persona": "deputy_president",
+    "intent": "Examines composure after public failure: the speed of acknowledgment, the absence of excuses, and whether the candidate converts embarrassment into visible correction.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "Tell me about an actual public mistake — what did you do in the first minute?",
+      "Does the fear of visible mistakes ever stop you from acting?",
+      "How do you rebuild credibility with the people who saw it?"
+    ]
+  },
+  {
+    "id": "CON_008",
+    "category": "confidence",
+    "question": "Describe a time you volunteered for a responsibility outside your comfort zone.",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Separates claimed initiative from demonstrated initiative: the candidate should describe a genuine stretch, the discomfort it caused, and what they did to close the capability gap.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "What specifically made it outside your comfort zone?",
+      "Looking back, what would you prepare differently before volunteering again?",
+      "Do you volunteer more for visibility or for growth — be honest."
+    ]
+  },
+  {
+    "id": "CON_009",
+    "category": "confidence",
+    "question": "How do you distinguish confidence from overconfidence in a leader?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Tests conceptual clarity and self-application: whether the candidate can define the boundary between confidence and overconfidence, and honestly locate their own behaviour relative to it.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "Which one are you closer to under pressure — and how do you know?",
+      "Give an example of overconfidence you have seen cost a team something.",
+      "How should a subordinate signal overconfidence to a leader?"
+    ]
+  },
+  {
+    "id": "CON_010",
+    "category": "confidence",
+    "question": "What would you do if a junior teammate knew more than you about a task?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Reveals ego management and intellectual honesty: whether the candidate can defer to competence regardless of seniority while still owning the outcome.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "Has this actually happened to you — how did you handle it?",
+      "How do you keep authority without pretending to expertise you lack?",
+      "What would you do if their approach conflicted with orders you had been given?"
+    ]
+  },
+  {
+    "id": "CON_011",
+    "category": "confidence",
+    "question": "Describe a moment when calm body language helped you lead.",
+    "difficulty": 3,
+    "persona": "psychologist",
+    "intent": "Assesses embodied composure: whether the candidate is aware of their non-verbal signals and can link a specific moment of deliberate calm to a measurable effect on others.",
+    "evaluation_dimension": "confidence",
+    "follow_up_pool": [
+      "What was the situation, and what would your body language have looked like if you were tense?",
+      "Do you consciously control your body language, or does it come naturally?",
+      "How do you stay calm in the moments when you genuinely do not feel calm?"
+    ]
+  },
+  {
+    "id": "DEC_004",
+    "category": "decision_making",
+    "question": "Describe a choice where every available option had a serious drawback.",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Probes decision-making under forced trade-offs: whether the candidate frames criteria first, accepts an imperfect outcome deliberately, and owns the downside they chose.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "How did you decide which drawback was most tolerable?",
+      "Did you tell the people affected about the trade-off you were making?",
+      "Would you make the same choice again knowing the result?"
+    ]
+  },
+  {
+    "id": "DEC_005",
+    "category": "decision_making",
+    "question": "How do you rank urgent tasks when you cannot complete them all?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Examines prioritisation logic: whether the candidate ranks by consequence and mission impact rather than by who shouts loudest, and whether they communicate what gets dropped.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "Tell me about a real day when you had to drop something important.",
+      "How do you tell someone that their task is the one being dropped?",
+      "Which type of task do you personally tend to over-prioritise?"
+    ]
+  },
+  {
+    "id": "DEC_006",
+    "category": "decision_making",
+    "question": "Tell me about a decision you later revised after receiving new evidence.",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Tests intellectual flexibility without wavering: whether the candidate treats revision as strength, can distinguish new facts from mere doubt, and communicates the reversal cleanly.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "How did you realise the original decision was wrong?",
+      "Was it hard to admit the change to people who had already acted on it?",
+      "How do you stay open to evidence without becoming a flip-flopper?"
+    ]
+  },
+  {
+    "id": "DEC_007",
+    "category": "decision_making",
+    "question": "What checks do you use before making a high-impact decision?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Looks for a repeatable personal decision process — consultation, worst-case analysis, timing — rather than impulsive confidence dressed up as decisiveness.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "Which of your checks has actually saved you from a bad call?",
+      "What do you do when there is no time for your full process?",
+      "When is it right to skip the checks and simply decide?"
+    ]
+  },
+  {
+    "id": "DEC_008",
+    "category": "decision_making",
+    "question": "How would you act when a superior gives an unclear but urgent instruction?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Balances obedience with initiative: whether the candidate can act on the clear core of an instruction while seeking clarification in parallel, instead of stalling or guessing blindly.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "Have you faced something like this — what did you actually do?",
+      "What happens to the mission if you act on a wrong interpretation?",
+      "How would you raise the ambiguity without sounding insubordinate?"
+    ]
+  },
+  {
+    "id": "DEC_009",
+    "category": "decision_making",
+    "question": "Describe a time you balanced fairness with mission requirements.",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Probes ethical judgment under operational pressure: whether the candidate can weigh individual fairness against collective goals and articulate the principle they used to resolve the tension.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "Who felt shortchanged by your decision, and how did you address it?",
+      "Would your team's view of fairness have changed your choice?",
+      "Is there a point where fairness must lose to the mission? Where is it?"
+    ]
+  },
+  {
+    "id": "EDU_004",
+    "category": "education",
+    "question": "Which subject has most changed the way you think?",
+    "difficulty": 2,
+    "persona": "deputy_president",
+    "intent": "Moves beyond favourite-subject small talk to intellectual growth: whether the candidate can trace a real change in their reasoning to specific content rather than naming a subject for effect.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "How did your thinking work before that subject?",
+      "Give an example where that subject changed a decision you made.",
+      "Does that changed thinking show anywhere outside academics?"
+    ]
+  },
+  {
+    "id": "EDU_005",
+    "category": "education",
+    "question": "Tell me about a study method that failed and how you replaced it.",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Tests learning from evidence: whether the candidate notices poor results honestly, diagnoses why the method failed, and designs a replacement they then verified.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "How long did it take you to admit the method was failing?",
+      "What replaced it, and how did you confirm the replacement worked?",
+      "Are you generally quick or slow to abandon something that is not working?"
+    ]
+  },
+  {
+    "id": "EDU_006",
+    "category": "education",
+    "question": "How do you respond when a teacher or mentor challenges your assumptions?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Reveals intellectual humility versus defensiveness: whether the candidate engages with a challenge on its merit, even when their ego is invested in the original position.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Tell me about a time your assumption was actually overturned.",
+      "When is a mentor wrong to challenge you — and what do you do then?",
+      "Do you ever challenge your mentors back?"
+    ]
+  },
+  {
+    "id": "EDU_007",
+    "category": "education",
+    "question": "Describe how you manage study alongside family or team obligations.",
+    "difficulty": 2,
+    "persona": "deputy_president",
+    "intent": "Examines self-management under competing commitments: planning, honest trade-offs, and whether family or team duties genuinely constrain the candidate's preparation.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "What falls behind first when everything demands time — and is that acceptable to you?",
+      "What system do you use to protect study time?",
+      "Have your results suffered during a busy season — what did you do about it?"
+    ]
+  },
+  {
+    "id": "EDU_008",
+    "category": "education",
+    "question": "What skill are you learning independently, and how do you measure progress?",
+    "difficulty": 1,
+    "persona": "psychologist",
+    "intent": "Tests self-directed learning and internal standards: whether the candidate can learn without a teacher and define objective progress markers instead of vague improvement.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Why did you pick that particular skill?",
+      "What does no-progress look like for you, and what do you do about it?",
+      "How do you test yourself without a syllabus or an examiner?"
+    ]
+  },
+  {
+    "id": "EDU_009",
+    "category": "education",
+    "question": "How would you help a classmate who is falling behind without doing their work?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Weighs compassion against academic integrity: whether the candidate can teach rather than rescue, set limits on their help, and respect the other person's ownership of their own work.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Where exactly is the line between helping and doing the work for them?",
+      "What if they refuse to put in the effort themselves?",
+      "Have you actually helped a struggling classmate — what was the result?"
+    ]
+  },
+  {
+    "id": "FAM_003",
+    "category": "family",
+    "question": "What responsibility do you regularly take at home?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Grounds the service narrative in everyday conduct: whether the candidate carries consistent, unprompted duties at home, which signals responsibility that predates any selection board.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "What happens at home if you don't do it — who covers for you?",
+      "Has any family member ever complained about your contribution?",
+      "How will that responsibility be handled while you are away training?"
+    ]
+  },
+  {
+    "id": "FAM_004",
+    "category": "family",
+    "question": "How has your family shaped your attitude toward service?",
+    "difficulty": 1,
+    "persona": "deputy_president",
+    "intent": "Explores the origin of the service motivation: whether family influence is specific and internalised — values, stories, expectations — or a convenient borrowed narrative.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Which family member influenced you most, and how exactly?",
+      "Did anyone in your family oppose your ambition — how did you respond?",
+      "Apart from family influence, what is your own independent reason to serve?"
+    ]
+  },
+  {
+    "id": "FAM_005",
+    "category": "family",
+    "question": "Describe a disagreement at home that you resolved respectfully.",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Tests conflict resolution inside the closest personal relationships: listening, compromise without surrender of principle, and emotional control with people one cannot walk away from.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "What was the disagreement really about, beneath the surface?",
+      "What did you concede, and what did you hold on to?",
+      "Would your family member describe the resolution the same way you do?"
+    ]
+  },
+  {
+    "id": "FAM_006",
+    "category": "family",
+    "question": "How do you maintain independence while respecting family advice?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Probes healthy individuation: whether the candidate can weigh family counsel respectfully, decide autonomously, and own the consequences without blaming the advice.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Give an example where you went against family advice — what happened?",
+      "How do your parents react when you decide differently from them?",
+      "When would family advice outweigh your own judgment?"
+    ]
+  },
+  {
+    "id": "FAM_007",
+    "category": "family",
+    "question": "What would your family say is your most reliable quality?",
+    "difficulty": 2,
+    "persona": "deputy_president",
+    "intent": "Gathers third-person evidence of character: the answer reveals how accurately the candidate reads how they are perceived at home, and whether the claimed quality shows in daily behaviour.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "What would they say is your least reliable quality?",
+      "Would they describe your contribution at home the same way you just did?",
+      "How do you know what they would say — have you actually asked them?"
+    ]
+  },
+  {
+    "id": "FAM_008",
+    "category": "family",
+    "question": "How would you support your family during an extended demanding training period?",
+    "difficulty": 3,
+    "persona": "psychologist",
+    "intent": "Tests forward planning for real separation: whether the candidate has thought through communication, finances and emotional support for the family, rather than assuming training life is only about themselves.",
+    "evaluation_dimension": "social_behaviour",
+    "follow_up_pool": [
+      "Who would be your family's first point of contact for practical problems?",
+      "How often could you realistically communicate during a demanding course?",
+      "What would you say to them the night before you leave?"
+    ]
+  },
+  {
+    "id": "GK_004",
+    "category": "general_knowledge",
+    "question": "Which national issue should young leaders understand better, and why?",
+    "difficulty": 1,
+    "persona": "deputy_president",
+    "intent": "Checks awareness beyond headlines: whether the candidate can name a substantive national issue, connect it to leadership responsibility, and argue why their generation must own it.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "What are the main causes of that issue?",
+      "What is being done about it now, and by whom?",
+      "If you were advising the government, what would you prioritise and why?"
+    ]
+  },
+  {
+    "id": "GK_005",
+    "category": "general_knowledge",
+    "question": "How do you verify whether a news claim is reliable?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Tests information discipline: whether the candidate has a real verification habit — sources, corroboration, bias awareness — or consumes information passively.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Tell me about a claim you nearly believed and then disproved.",
+      "Which sources do you trust, and why those?",
+      "How do you avoid reading only what confirms the view you already hold?"
+    ]
+  },
+  {
+    "id": "GK_006",
+    "category": "general_knowledge",
+    "question": "Describe a recent scientific or technological development that interests you.",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Gauges genuine intellectual curiosity and currency: whether the candidate follows a development deeply enough to explain the mechanism and implications, not just the buzzword.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "How does that development actually work, at a level you can explain?",
+      "How might it matter for Pakistan's defence or economy?",
+      "What development in this area worries you?"
+    ]
+  },
+  {
+    "id": "GK_007",
+    "category": "general_knowledge",
+    "question": "Why is informed citizenship important for an officer?",
+    "difficulty": 2,
+    "persona": "deputy_president",
+    "intent": "Connects general awareness to the officer's role: whether the candidate sees the military as embedded in the society it defends and needing judgment beyond orders.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Can an officer be professionally excellent yet uninformed — what is the risk?",
+      "What are you doing right now to stay informed?",
+      "Where is the line between an officer's personal opinion and political neutrality?"
+    ]
+  },
+  {
+    "id": "GK_008",
+    "category": "general_knowledge",
+    "question": "How can economic conditions affect national security?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Tests cross-domain reasoning: linking economic weakness to defence funding, social stability and strategic dependence, rather than treating security as a purely military matter.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Give a current example that illustrates your point.",
+      "Which is more damaging to security long-term: economic decline or military weakness?",
+      "What economic indicator would you watch as a future officer, and why?"
+    ]
+  },
+  {
+    "id": "GK_009",
+    "category": "general_knowledge",
+    "question": "What is one historical lesson that should guide present leadership?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Checks historical depth and application: whether the candidate can cite a real historical episode, extract an accurate lesson, and map it onto present leadership decisions.",
+    "evaluation_dimension": "intellect",
+    "follow_up_pool": [
+      "Tell me that episode in your own words.",
+      "Where do leaders today repeat that same mistake?",
+      "How would you apply that lesson in a unit you command?"
+    ]
+  },
+  {
+    "id": "LEA_004",
+    "category": "leadership",
+    "question": "Describe a time you set a standard that others followed.",
+    "difficulty": 1,
+    "persona": "deputy_president",
+    "intent": "Distinguishes titled leadership from behavioural leadership: whether the candidate led by personal example that others copied voluntarily, with observable evidence of the imitation.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "How did you make the standard visible in your own behaviour first?",
+      "Who followed, and how do you know it was because of you?",
+      "What happened to the standard when you stopped watching?"
+    ]
+  },
+  {
+    "id": "LEA_005",
+    "category": "leadership",
+    "question": "How do you lead a capable teammate who resists your plan?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Tests influence without raw authority: whether the candidate engages the resister's reasoning, adapts where justified, and holds the line where not — without humiliation.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "Has a capable person actually resisted you — what did you do?",
+      "When does resistance signal that your plan is wrong?",
+      "How do you keep the disagreement from becoming personal?"
+    ]
+  },
+  {
+    "id": "LEA_006",
+    "category": "leadership",
+    "question": "Tell me about a time you delegated work and monitored it responsibly.",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Separates genuine delegation from abdication: whether the candidate matched tasks to people, stayed informed without micromanaging, and kept accountability for the result.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "How did you decide who got which part of the work?",
+      "What did you do when you found a delegated piece slipping?",
+      "What is your personal failure mode with delegation — over-control or neglect?"
+    ]
+  },
+  {
+    "id": "LEA_007",
+    "category": "leadership",
+    "question": "What is the first thing you do when taking charge of an unfamiliar group?",
+    "difficulty": 4,
+    "persona": "deputy_president",
+    "intent": "Reveals leadership instincts on entry: whether the candidate prioritises understanding the group, its state and its people before imposing change or asserting status.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "How do you quickly learn what the group thinks of you?",
+      "What if you inherit a group that distrusts its leader before you arrive?",
+      "When is it right to change things immediately instead of observing first?"
+    ]
+  },
+  {
+    "id": "LEA_008",
+    "category": "leadership",
+    "question": "Describe how you handled an underperforming teammate.",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Tests corrective leadership with dignity: diagnosis before blame, a direct conversation, support paired with standards, and honest reflection on whether the intervention worked.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "What did you think was causing the underperformance?",
+      "What exactly did you say to them?",
+      "If your support changed nothing, where is the line to firmer action?"
+    ]
+  },
+  {
+    "id": "LEA_009",
+    "category": "leadership",
+    "question": "How do you build trust before asking people to accept risk?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Examines the trust-risk relationship: whether the candidate understands that people accept risk from leaders who share it, keep their word, and demonstrate competence first.",
+    "evaluation_dimension": "leadership",
+    "follow_up_pool": [
+      "Give an example where you asked people to take a risk on your word.",
+      "How do you behave when your own plan puts you at risk too?",
+      "Can a leader demand risks they have never taken themselves?"
+    ]
+  },
+  {
+    "id": "MOT_004",
+    "category": "motivation",
+    "question": "What personal sacrifice would service require from you?",
+    "difficulty": 1,
+    "persona": "deputy_president",
+    "intent": "Tests realism about military life: whether the candidate has genuinely reckoned with separation, danger and lost civilian opportunities, or has only pictured the uniform.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "Which of those sacrifices would weigh on you most?",
+      "Have you discussed that sacrifice with your family?",
+      "What would make the sacrifice feel not worth it?"
+    ]
+  },
+  {
+    "id": "MOT_005",
+    "category": "motivation",
+    "question": "Which part of military life do you expect to find most difficult?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Probes self-knowledge and candour: a realistic candidate names a concrete difficulty and a coping strategy, rather than claiming that nothing will be hard.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "What tells you that this specific part will be hard for you?",
+      "What have you done so far to prepare for it?",
+      "If it proves harder than expected, what keeps you going?"
+    ]
+  },
+  {
+    "id": "MOT_006",
+    "category": "motivation",
+    "question": "Tell me about a long-term goal you pursued after enthusiasm faded.",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Distinguishes durable motivation from excitement: evidence of sustained effort through a boring or frustrating middle phase, driven by discipline rather than mood.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "What kept you going during the phase nobody applauds?",
+      "Did you ever come close to quitting — what stopped you?",
+      "Is military service more like the exciting start or the long middle, for you?"
+    ]
+  },
+  {
+    "id": "MOT_007",
+    "category": "motivation",
+    "question": "How do you respond when recognition goes to someone else?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests humility and team-first orientation under perceived injustice: whether resentment turns toxic, or the candidate can value the work over the credit and say so credibly.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "Has this actually happened to you — how did you react in the moment?",
+      "When is it right to claim your contribution explicitly?",
+      "How do you stop quiet resentment building up over repeated unfairness?"
+    ]
+  },
+  {
+    "id": "MOT_008",
+    "category": "motivation",
+    "question": "What evidence shows that your interest in service is more than an ambition?",
+    "difficulty": 3,
+    "persona": "psychologist",
+    "intent": "Separates tested commitment from aspiration: whether the candidate has exposed themselves to service realities — fitness, reading, cadet or NCC experience, conversations with servicemen — before asking for the uniform.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "What have you concretely done in the last year for this goal?",
+      "What did you learn from that exposure that surprised you?",
+      "If this attempt fails, what will you do — and what does that reveal about you?"
+    ]
+  },
+  {
+    "id": "MOT_009",
+    "category": "motivation",
+    "question": "How would you maintain purpose during repetitive training?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Tests internal drive against monotony: whether the candidate can find meaning in routine drills, use small goals, and resist the cynicism that spreads in unstimulating phases.",
+    "evaluation_dimension": "motivation",
+    "follow_up_pool": [
+      "Have you ever endured a long repetitive phase — school, job, sport?",
+      "What do you tell yourself on the days it feels pointless?",
+      "How do you respond to seniors who dismiss routine as useless?"
+    ]
+  },
+  {
+    "id": "PER_005",
+    "category": "personal",
+    "question": "What personal habit most improves your reliability?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Links daily discipline to trustworthiness: whether the candidate can name a concrete habit, trace it to specific dependability, and sustain it without external enforcement.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "How long have you kept that habit — what was the hardest stretch?",
+      "What happens to your reliability when that habit breaks?",
+      "Which habit do you still fail to keep?"
+    ]
+  },
+  {
+    "id": "PER_006",
+    "category": "personal",
+    "question": "Describe a failure that changed your approach to preparation.",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Tests whether failure produces systemic change: the candidate should connect a real failure to a specific, lasting change in how they prepare, not just to a lesson they recite.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "What exactly did you change in your preparation afterwards?",
+      "Has the same failure recurred since you made the change?",
+      "What does that failure still cost you when you remember it?"
+    ]
+  },
+  {
+    "id": "PER_007",
+    "category": "personal",
+    "question": "What principle guides you when no one is checking your work?",
+    "difficulty": 4,
+    "persona": "deputy_president",
+    "intent": "Probes integrity without supervision: whether the candidate has an articulated internal standard and evidence of applying it when shortcuts were invisible and easy.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "Tell me about a time nobody would have caught a shortcut — what did you do?",
+      "Where does that principle come from?",
+      "Has keeping it ever cost you something practical?"
+    ]
+  },
+  {
+    "id": "PER_008",
+    "category": "personal",
+    "question": "Tell me about an experience that changed your view of yourself.",
+    "difficulty": 3,
+    "persona": "psychologist",
+    "intent": "Tests self-concept depth and reflectiveness: whether the candidate can describe a genuine turning point and articulate the before-and-after of their self-understanding.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "What did you believe about yourself before that experience?",
+      "Was the change comfortable or painful at the time?",
+      "How does that new self-view show in your behaviour today?"
+    ]
+  },
+  {
+    "id": "PER_009",
+    "category": "personal",
+    "question": "How do you decide which criticism to accept?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Reveals evaluative openness: whether the candidate filters criticism by the source's knowledge and the evidence, rather than by how pleasant it sounds or who says it.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "Tell me about criticism you initially rejected and later accepted.",
+      "How do you respond to criticism from someone you dislike?",
+      "What criticism do you still refuse to accept — is that stubbornness or principle?"
+    ]
+  },
+  {
+    "id": "PER_010",
+    "category": "personal",
+    "question": "What is one weakness you are actively managing this year?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests honest self-assessment paired with action: the weakness must be real rather than a disguised strength, current, and attached to a concrete management method with measurable progress.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "How does this weakness actually show up in your daily life?",
+      "What exactly are you doing about it, and how do you measure improvement?",
+      "Why has it persisted until now?"
+    ]
+  },
+  {
+    "id": "RES_006",
+    "category": "responsibility",
+    "question": "Describe a promise you kept despite an unexpected obstacle.",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Tests commitment under cost: whether the candidate treats their word as binding when keeping it becomes expensive, and plans honestly instead of promising lightly.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "What was the obstacle, and what did keeping the promise cost you?",
+      "Have you ever broken a promise instead — what led to that?",
+      "How do you decide what you may promise in the first place?"
+    ]
+  },
+  {
+    "id": "RES_007",
+    "category": "responsibility",
+    "question": "Tell me about a time you admitted an error before it became serious.",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Probes moral courage and timing: whether the candidate surfaces their own mistakes early despite embarrassment, understanding that concealment converts small errors into damage.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "Who did you tell, and what was their reaction?",
+      "What pressure made staying quiet the easier option?",
+      "Have you ever stayed quiet about an error longer than you should have?"
+    ]
+  },
+  {
+    "id": "RES_008",
+    "category": "responsibility",
+    "question": "How do you ensure a shared task does not become nobody's responsibility?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Examines awareness of ownership diffusion: whether the candidate assigns named owners, checks progress, and steps in personally rather than assuming someone else has it covered.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "Tell me about a shared task that actually fell through — what did you learn?",
+      "Do you take up the slack personally, or re-assign it?",
+      "How do you raise accountability without sounding like you distrust the team?"
+    ]
+  },
+  {
+    "id": "RES_009",
+    "category": "responsibility",
+    "question": "Describe a situation where you protected someone else from the consequences of your mistake.",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "A dual probe: tests protective loyalty towards a teammate and, critically, whether the candidate still owned the mistake where accountability mattered — shielding a person is right, hiding the error is not.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "Did you still admit the mistake to whoever was answerable for it?",
+      "What would you have done if protecting them required lying?",
+      "How did the other person respond to what you did?"
+    ]
+  },
+  {
+    "id": "RES_010",
+    "category": "responsibility",
+    "question": "What do you do when a deadline is impossible with the available resources?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests proactive ownership of impossible tasks: renegotiating scope early, escalating with options rather than complaints, and never letting silence disguise a miss.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "When do you raise the flag — at the deadline, or before it?",
+      "What options do you bring with you when you escalate?",
+      "Have you actually faced an impossible deadline — what happened?"
+    ]
+  },
+  {
+    "id": "RES_011",
+    "category": "responsibility",
+    "question": "How do you balance loyalty to a teammate with duty to report a problem?",
+    "difficulty": 4,
+    "persona": "psychologist",
+    "intent": "Probes the integrity-loyalty conflict at its sharpest: whether the candidate can distinguish personal loyalty from complicity, and address wrongdoing without treating honesty as betrayal.",
+    "evaluation_dimension": "responsibility",
+    "follow_up_pool": [
+      "What kind of problem crosses your reporting line immediately?",
+      "Have you faced this in real life — how did you decide?",
+      "How would you face the teammate afterwards?"
+    ]
+  },
+  {
+    "id": "SIT_004",
+    "category": "situational",
+    "question": "Your team loses key equipment before an exercise. What are your first three actions?",
+    "difficulty": 2,
+    "persona": "deputy_president",
+    "intent": "Tests structured emergency response: verification and reporting before improvisation, workarounds that keep the mission alive, and prevention of repeat loss — delivered in a priority order, not a scattered list.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "What makes those three actions the right order?",
+      "If no replacement equipment is available at all, what do you do?",
+      "How do you stop the same loss from happening again?"
+    ]
+  },
+  {
+    "id": "SIT_005",
+    "category": "situational",
+    "question": "Two teammates argue during a time-critical task. How do you restore focus?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Tests rapid de-escalation under time pressure: separating the people from the task, making a provisional call, and deferring full resolution until the mission is safe.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "What if one of them is a close friend of yours?",
+      "Would you address the argument publicly or privately — why?",
+      "The task ends — what do you do about the underlying conflict then?"
+    ]
+  },
+  {
+    "id": "SIT_006",
+    "category": "situational",
+    "question": "You receive conflicting reports about a safety risk. How do you proceed?",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Tests risk reasoning under contradictory information: acting on the conservative interpretation first, verifying from the source, and communicating the uncertainty honestly instead of picking a rumour.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "What is your default when you cannot verify in time?",
+      "Who do you inform about the conflicting reports, and when?",
+      "Have you handled contradictory information before — what did you learn?"
+    ]
+  },
+  {
+    "id": "SIT_007",
+    "category": "situational",
+    "question": "A plan is failing but changing it may create a new risk. What guides your choice?",
+    "difficulty": 4,
+    "persona": "deputy_president",
+    "intent": "Tests decision criteria under double uncertainty: comparing the known failure trajectory against the new risk, deciding by evidence and mission priority rather than sunk cost or panic.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "How do you judge whether the current failure is recoverable?",
+      "Who else should be involved in a change this risky?",
+      "Tell me about a real time you changed a failing plan — or should have and didn't."
+    ]
+  },
+  {
+    "id": "SIT_008",
+    "category": "situational",
+    "question": "You discover a popular shortcut violates procedure. What do you do?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Tests rule-integrity under peer pressure: whether procedure is treated as protective rather than bureaucratic, and whether the candidate can challenge a group habit without moralising.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "What if the shortcut is genuinely more efficient and nobody has been hurt?",
+      "Would you still raise it if seniors quietly approved of it?",
+      "Have you ever used such a shortcut yourself before realising the issue?"
+    ]
+  },
+  {
+    "id": "SIT_009",
+    "category": "situational",
+    "question": "Your team succeeds but one member is unfairly excluded from credit. How do you respond?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Tests fairness in distributing success: whether the candidate corrects the record at appropriate personal cost, and treats credit distribution as a leadership duty rather than politics.",
+    "evaluation_dimension": "decision_making",
+    "follow_up_pool": [
+      "What if correcting it displeases your senior?",
+      "Have you ever been the excluded member — how did that feel?",
+      "How would you make sure credit is distributed fairly in the first place?"
+    ]
+  },
+  {
+    "id": "STR_004",
+    "category": "stress",
+    "question": "Describe the physical signs that tell you stress is affecting your judgment.",
+    "difficulty": 1,
+    "persona": "deputy_president",
+    "intent": "Tests somatic self-awareness: whether the candidate recognises their own physiological stress markers and treats them as data that judgment is degrading, not as weakness to hide.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "What do you do the moment you notice those signs?",
+      "Which sign appears first for you?",
+      "Have you ever missed the signs until it was too late — what happened?"
+    ]
+  },
+  {
+    "id": "STR_005",
+    "category": "stress",
+    "question": "What routine helps you remain effective after poor sleep?",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Tests practical fatigue management: concrete mitigations the candidate has actually used — task ordering, micro-rest, hydration — rather than advice they have only heard.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "How does poor sleep specifically change the quality of your work?",
+      "What is your recovery routine after several bad nights?",
+      "Which task do you deliberately avoid when exhausted — and why that one?"
+    ]
+  },
+  {
+    "id": "STR_006",
+    "category": "stress",
+    "question": "Tell me about a time you stayed courteous under provocation.",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Examines emotional regulation in social conflict: whether courtesy under provocation is deliberate self-control with a describable internal process, not merely a temperament claim.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "What was provoking you, and what did you want to do instead?",
+      "Did you address the provoker afterwards — how?",
+      "Is there a point at which courtesy becomes weakness, in your view?"
+    ]
+  },
+  {
+    "id": "STR_007",
+    "category": "stress",
+    "question": "How do you prioritize when several people demand your attention at once?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests triage under simultaneous pressure: whether the candidate ranks demands by urgency and consequence, communicates delays honestly, and keeps composure as the queue grows.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "State your triage rule in one sentence.",
+      "How do you tell someone demanding attention that they must wait?",
+      "What happens to you internally when the queue keeps growing?"
+    ]
+  },
+  {
+    "id": "STR_008",
+    "category": "stress",
+    "question": "Describe a setback that tested your persistence.",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Measures resilience through a real episode: the depth of the setback, the candidate's lowest point, and the concrete decision to continue rather than a vague claim of grit.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "What was your lowest moment during that period?",
+      "What did persistence actually look like, day to day?",
+      "How do you know when persisting is worse than quitting?"
+    ]
+  },
+  {
+    "id": "STR_009",
+    "category": "stress",
+    "question": "What do you do after a stressful event to learn rather than ruminate?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Distinguishes healthy processing from rumination: whether the candidate has a deliberate review habit — extracting lessons and closing the event mentally — instead of looping on regret.",
+    "evaluation_dimension": "emotional_pattern",
+    "follow_up_pool": [
+      "Give an example of a lesson you extracted from a bad event.",
+      "How do you stop yourself replaying a bad event endlessly?",
+      "Does reviewing it alone work for you, or do you need to talk it through?"
+    ]
+  },
+  {
+    "id": "TEA_006",
+    "category": "teamwork",
+    "question": "Describe a time you helped a teammate succeed without taking over.",
+    "difficulty": 3,
+    "persona": "both",
+    "intent": "Tests enabling teamwork: whether the candidate can calibrate support to the other person's needs and resist the ego pull of taking over, letting the teammate own the success.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "How did you judge how much help was enough — and how much was too much?",
+      "What made it tempting to take over?",
+      "Who got the credit, and did that matter to you?"
+    ]
+  },
+  {
+    "id": "TEA_007",
+    "category": "teamwork",
+    "question": "How do you resolve a role dispute before it damages team performance?",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests early conflict management: whether the candidate addresses role disputes at the task level — duties, boundaries, overlap — before egos harden, and clarifies rather than arbitrates by status.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "What early signs tell you a role dispute is brewing?",
+      "What if both members genuinely deserve the same role?",
+      "Have you actually mediated a role dispute — what was the outcome?"
+    ]
+  },
+  {
+    "id": "TEA_008",
+    "category": "teamwork",
+    "question": "Tell me about a group result that depended on your preparation.",
+    "difficulty": 2,
+    "persona": "psychologist",
+    "intent": "Tests quiet contribution: whether the candidate can identify the invisible preparation behind a visible group success and articulate it without inflating their share of the credit.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "What exactly did you prepare, and over how long?",
+      "How would the result have differed without your part?",
+      "Did the group know how much depended on your preparation — should they have?"
+    ]
+  },
+  {
+    "id": "TEA_009",
+    "category": "teamwork",
+    "question": "How do you include a quiet member in a fast-moving discussion?",
+    "difficulty": 2,
+    "persona": "both",
+    "intent": "Tests inclusive teamwork: whether the candidate notices silence as data, creates safe entry points deliberately, and values the quiet member's contribution over discussion speed.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "Has your invitation actually drawn a quiet member out — what happened?",
+      "What if they still choose not to speak?",
+      "Why does including them matter for the team's result, in your view?"
+    ]
+  },
+  {
+    "id": "TEA_010",
+    "category": "teamwork",
+    "question": "Describe a time you changed your approach for the good of the team.",
+    "difficulty": 3,
+    "persona": "deputy_president",
+    "intent": "Tests the ego-versus-team trade-off: whether the candidate abandoned a preferred personal approach on real evidence of team benefit, and can describe what surrendering it felt like.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "What approach did you give up, and why did you favour it initially?",
+      "Who decided the team needed the change — you, or someone else?",
+      "When should you hold your approach instead of changing it?"
+    ]
+  },
+  {
+    "id": "TEA_011",
+    "category": "teamwork",
+    "question": "What do you do when a teammate's strengths and your own overlap?",
+    "difficulty": 3,
+    "persona": "psychologist",
+    "intent": "Tests competition management inside teams: whether the candidate treats overlapping strengths as redundancy to be managed through division of labour and mutual backup, rather than as rivalry.",
+    "evaluation_dimension": "teamwork",
+    "follow_up_pool": [
+      "Tell me about an actual overlap situation — how did you split the work?",
+      "Does the overlap ever make you compete with them?",
+      "How do you handle it if they are simply better than you at the shared strength?"
+    ]
   }
 ]
