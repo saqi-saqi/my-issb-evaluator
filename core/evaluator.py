@@ -248,8 +248,8 @@ Return JSON:
         follow_up_answer: Optional[str] = None,
     ) -> PerAnswerEvidence:
         """Evaluates a single question turn against observable indicators and RAG context."""
-        ans = (primary_answer or "").strip()
-        fu = (follow_up_answer or "").strip()
+        ans = (primary_answer or "").strip()[:4000]
+        fu = (follow_up_answer or "").strip()[:4000]
         combined_text = f"{ans} {fu}".strip().lower()
         word_count = len(combined_text.split())
 

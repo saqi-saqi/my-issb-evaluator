@@ -7,6 +7,10 @@ Exposes the 7 core FYP endpoints with full input validation and clean error hand
 from __future__ import annotations
 
 import os
+import time
+from collections import defaultdict, deque
+from pathlib import Path
+from threading import Lock
 from typing import Any, Dict, List, Optional
 
 try:
@@ -17,6 +21,7 @@ except ImportError:
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
 from core.ai import ai_client
@@ -30,37 +35,122 @@ app = FastAPI(
     version="2.1.0",
 )
 
-# Enable CORS for local Vite development (port 5173 / 3000)
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv(
+        "ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:3000"
+    ).split(",")
+    if origin.strip()
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=allowed_origins,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+class LLMRateLimitMiddleware:
+    """Small in-process sliding-window limiter for expensive routes."""
+
+    protected_prefixes = (
+        "/api/interview/start",
+        "/api/interview/answer",
+        "/api/interview/followup",
+        "/api/interview/follow-up",
+        "/api/learning/",
+        "/api/interview/report/",
+    )
+
+    def __init__(self, app):
+        self.app = app
+        self.events = defaultdict(deque)
+        self.lock = Lock()
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+        path = scope.get("path", "")
+        if not path.startswith(self.protected_prefixes):
+            await self.app(scope, receive, send)
+            return
+
+        client = scope.get("client")
+        ip = client[0] if client else "unknown"
+        now = time.monotonic()
+        minute_limit = int(os.getenv("LLM_OPS_PER_MINUTE", "30"))
+        daily_limit = int(os.getenv("SESSIONS_PER_DAY", "8"))
+        with self.lock:
+            bucket = self.events[(ip, "minute")]
+            while bucket and now - bucket[0] >= 60:
+                bucket.popleft()
+            if len(bucket) >= minute_limit:
+                retry_after = max(1, int(60 - (now - bucket[0])))
+                await self._send_429(send, retry_after, scope)
+                return
+            bucket.append(now)
+            if path == "/api/interview/start":
+                day_bucket = self.events[(ip, "day")]
+                while day_bucket and now - day_bucket[0] >= 86400:
+                    day_bucket.popleft()
+                if len(day_bucket) >= daily_limit:
+                    retry_after = max(1, int(86400 - (now - day_bucket[0])))
+                    await self._send_429(send, retry_after, scope)
+                    return
+                day_bucket.append(now)
+        await self.app(scope, receive, send)
+
+    @staticmethod
+    async def _send_429(send, retry_after: int, scope=None):
+        headers = [
+            (b"content-type", b"application/json"),
+            (b"retry-after", str(retry_after).encode()),
+        ]
+        # Echo the request origin on 429s so cross-origin frontends can read
+        # the rate-limit detail instead of an opaque CORS failure.
+        origin = None
+        for name, value in (scope or {}).get("headers", []):
+            if name == b"origin":
+                origin = value.decode("latin-1")
+                break
+        if origin and origin in allowed_origins:
+            headers.append((b"access-control-allow-origin", origin.encode("latin-1")))
+        body = b'{"detail":"Rate limit exceeded. Please try again shortly."}'
+        await send({"type": "http.response.start", "status": 429, "headers": headers})
+        await send({"type": "http.response.body", "body": body})
+
+
+app.add_middleware(LLMRateLimitMiddleware)
 
 # Core singletons
 qb = QuestionBank()
 retriever = KnowledgeRetriever()
 interview_service = InterviewService(question_bank=qb, retriever=retriever, ai=ai_client)
+_status_cache: Optional[Dict[str, Any]] = None
+_status_cache_at = 0.0
+_status_cache_lock = Lock()
 
 
 # --- Request Models ---
 
 class StartInterviewRequest(BaseModel):
-    candidate_name: str = Field(default="Candidate", description="Full name of candidate")
+    candidate_name: str = Field(default="Candidate", max_length=200, description="Full name of candidate")
+    target_branch: Optional[str] = Field(default=None, max_length=200)
+    candidate_id: Optional[str] = Field(default=None, max_length=100)
     persona: str = Field(default="deputy_president", description="'deputy_president' or 'psychologist'")
     num_questions: int = Field(default=5, ge=2, le=10, description="Number of questions in session")
 
 
 class SubmitAnswerRequest(BaseModel):
     session_id: str
-    answer: str
+    answer: str = Field(max_length=4000)
 
 
 class SubmitFollowUpRequest(BaseModel):
     session_id: str
-    follow_up_answer: str
+    follow_up_answer: str = Field(max_length=4000)
 
 
 class LearningFeedbackRequest(BaseModel):
@@ -71,7 +161,7 @@ class LearningFeedbackRequest(BaseModel):
 class RetryAnswerRequest(BaseModel):
     session_id: str
     question_id: str
-    retry_answer: str
+    retry_answer: str = Field(max_length=4000)
 
 
 class LLMSettingsRequest(BaseModel):
@@ -94,21 +184,30 @@ class RagSearchRequest(BaseModel):
 @app.get("/api/status")
 def get_system_status() -> Dict[str, Any]:
     """1. System Health & Environment Status."""
-    conn_ok, conn_msg = ai_client.test_connection()
-    return {
-        "status": "online",
-        "question_bank_total": len(qb.questions),
-        "categories_total": len(qb.categories),
-        "knowledge_base_chunks": len(retriever.chunks),
-        "llm_provider": "Groq",
-        "llm_model": ai_client.model,
-        "llm_status": {
-            "provider": "Groq",
-            "model": ai_client.model,
-            "connected": conn_ok,
-            "message": conn_msg,
-        },
-    }
+    global _status_cache, _status_cache_at
+    now = time.monotonic()
+    with _status_cache_lock:
+        if _status_cache is not None and now - _status_cache_at < 60:
+            return _status_cache
+        conn_ok, conn_msg = ai_client.test_connection()
+        _status_cache = {
+            "status": "online",
+            "question_bank_total": len(qb.questions),
+            "categories_total": len(qb.categories),
+            "knowledge_base_chunks": len(retriever.chunks),
+            "llm_provider": "Groq",
+            "llm_model": ai_client.model,
+            "llm_override_allowed": os.getenv("ALLOW_LLM_OVERRIDE", "").lower() in {"1", "true", "yes"},
+            "llm_status": {
+                "provider": "Groq",
+                "model": ai_client.model,
+                "connected": conn_ok,
+                "message": conn_msg,
+                "badge": "success" if conn_ok else "warning",
+            },
+        }
+        _status_cache_at = now
+        return _status_cache
 
 
 @app.post("/api/interview/start")
@@ -118,6 +217,8 @@ def start_interview(req: StartInterviewRequest) -> Dict[str, Any]:
         candidate_name=req.candidate_name,
         persona=req.persona,
         num_questions=req.num_questions,
+        target_branch=req.target_branch,
+        candidate_id=req.candidate_id,
     )
     interview_service.learning.initialize_profile(session.session_id, session.candidate_name)
     first_q = session.current_question
@@ -131,6 +232,8 @@ def start_interview(req: StartInterviewRequest) -> Dict[str, Any]:
         "persona_title": "Deputy President" if session.persona == "deputy_president" else "Senior Psychologist",
         "current_index": session.current_index,
         "total_questions": session.total_questions,
+        "target_branch": session.target_branch,
+        "candidate_id": session.candidate_id,
         "current_question": {
             **first_q.to_dict(),
             "raw_question": first_q.question,
@@ -155,6 +258,8 @@ def submit_primary_answer(req: SubmitAnswerRequest) -> Dict[str, Any]:
         "is_completed": session.completed,
         "current_index": session.current_index,
         "total_questions": session.total_questions,
+        "target_branch": session.target_branch,
+        "candidate_id": session.candidate_id,
     }
 
     if not has_follow_up and not session.completed:
@@ -184,6 +289,8 @@ def submit_follow_up_answer(req: SubmitFollowUpRequest) -> Dict[str, Any]:
         "is_completed": session.completed,
         "current_index": session.current_index,
         "total_questions": session.total_questions,
+        "target_branch": session.target_branch,
+        "candidate_id": session.candidate_id,
     }
 
     if not session.completed:
@@ -205,13 +312,19 @@ def get_interview_report(session_id: str) -> Dict[str, Any]:
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
 
-    report = interview_service.generate_final_report(session)
-    res = report.to_dict()
+    stored_report = interview_service.storage.get_report(session_id)
+    if stored_report is None:
+        report = interview_service.generate_final_report(session)
+        res = report.to_dict()
+    else:
+        res = stored_report
     res["session_metadata"] = {
         "session_id": session.session_id,
         "candidate_name": session.candidate_name,
         "persona": session.persona,
         "total_questions": session.total_questions,
+        "target_branch": session.target_branch,
+        "candidate_id": session.candidate_id,
     }
     return res
 
@@ -285,6 +398,13 @@ def get_learning_profile(session_id: str) -> Dict[str, Any]:
     }
 
 
+@app.get("/api/progress/{candidate_id}")
+def get_candidate_progress(candidate_id: str) -> Dict[str, Any]:
+    if not candidate_id.strip():
+        raise HTTPException(status_code=400, detail="Candidate identity is required")
+    return interview_service.storage.get_progress(candidate_id.strip())
+
+
 # --- Developer / Demonstration Endpoints (For UI Explorers) ---
 
 @app.get("/api/categories")
@@ -306,10 +426,15 @@ def list_questions(
     persona: Optional[str] = None,
     max_difficulty: Optional[int] = None,
 ) -> List[Dict[str, Any]]:
-    return [
+    questions = [
         q.to_dict()
         for q in qb.filter_questions(category=category, persona=persona, max_difficulty=max_difficulty)
     ]
+    if os.getenv("EXPOSE_EVALUATION_META", "").lower() not in {"1", "true", "yes"}:
+        for question in questions:
+            question.pop("intent", None)
+            question.pop("follow_up_pool", None)
+    return questions
 
 
 @app.post("/api/rag/search")
@@ -321,6 +446,8 @@ def search_rag(req: RagSearchRequest) -> List[Dict[str, Any]]:
 @app.post("/api/settings/llm")
 def update_llm_settings(req: LLMSettingsRequest) -> Dict[str, Any]:
     """Update Groq API key or model from SettingsModal."""
+    if os.getenv("ALLOW_LLM_OVERRIDE", "").lower() not in {"1", "true", "yes"}:
+        raise HTTPException(status_code=403, detail="LLM settings are managed by the server")
     if req.api_key:
         ai_client.api_key = req.api_key.strip()
     if req.model_name:
@@ -337,6 +464,19 @@ def update_llm_settings(req: LLMSettingsRequest) -> Dict[str, Any]:
             "message": msg,
         },
     }
+
+
+@app.get("/{full_path:path}")
+def serve_frontend(full_path: str):
+    """Serve the Vite build as a same-origin SPA when it exists."""
+    dist = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+    requested = dist / full_path
+    if full_path and requested.is_file():
+        return FileResponse(requested)
+    index = dist / "index.html"
+    if index.is_file():
+        return FileResponse(index)
+    raise HTTPException(status_code=404, detail="Not found")
 
 
 if __name__ == "__main__":

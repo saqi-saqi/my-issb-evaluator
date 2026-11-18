@@ -322,11 +322,14 @@ class LearningService:
             },
         )
 
-    def initialize_profile(self, session_id: str, candidate_name: str) -> None:
+    def initialize_profile(
+        self, session_id: str, candidate_name: str, candidate_id: Optional[str] = None
+    ) -> None:
         """Initializes a new profile for a candidate session."""
         if session_id not in self.profiles:
             profile_data = {
                 "session_id": session_id,
+                "candidate_id": candidate_id,
                 "candidate_name": candidate_name or "Candidate",
                 "overall_score": 70.0,
                 "performance_band": "Consistent Competence",
@@ -366,10 +369,14 @@ class LearningService:
 
     def record_session(self, session_id: str, candidate_name: str, report_dict: Dict[str, Any]) -> None:
         """Stores or updates session learning profile."""
-        current_improving = self.profiles.get(session_id, {}).get("improving_areas", ["Expression", "Reasoning"])
-        history = self.profiles.get(session_id, {}).get("practice_history", [])
+        existing = self.profiles.get(session_id)
+        if existing is None and self.storage:
+            existing = self.storage.get_profile(session_id)
+        current_improving = (existing or {}).get("improving_areas", ["Expression", "Reasoning"])
+        history = (existing or {}).get("practice_history", [])
         profile_data = {
             "session_id": session_id,
+            "candidate_id": (existing or {}).get("candidate_id"),
             "candidate_name": candidate_name,
             "overall_score": report_dict.get("overall_practice_score", 0),
             "performance_band": report_dict.get("performance_band", {}).get("tier", "Unknown"),

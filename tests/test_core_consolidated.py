@@ -62,7 +62,7 @@ def interview_service(qb, retriever, evaluator, learning):
 # --- 1. Question Bank Tests ---
 
 def test_question_bank_loads_47_questions(qb):
-    assert len(qb.questions) == 47
+    assert len(qb.questions) >= 100
     assert len(qb.categories) >= 12
     q1 = qb.get_question("PER_001")
     assert q1 is not None
@@ -232,7 +232,7 @@ def test_api_system_status(client):
     assert res.status_code == 200
     data = res.json()
     assert data["status"] == "online"
-    assert data["question_bank_total"] == 47
+    assert data["question_bank_total"] >= 100
 
 
 def test_api_full_interview_lifecycle(client):

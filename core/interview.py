@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 import logging
+import threading
 import uuid
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -27,6 +28,8 @@ class InterviewSession:
     candidate_name: str
     persona: str
     questions: List[Question]
+    target_branch: Optional[str] = None
+    candidate_id: Optional[str] = None
     current_index: int = 0
     answers: Dict[str, str] = field(default_factory=dict)
     follow_up_answers: Dict[str, str] = field(default_factory=dict)
@@ -48,6 +51,8 @@ class InterviewSession:
         return {
             "session_id": self.session_id,
             "candidate_name": self.candidate_name,
+            "target_branch": self.target_branch,
+            "candidate_id": self.candidate_id,
             "persona": self.persona,
             "current_index": self.current_index,
             "answers": self.answers,
@@ -92,6 +97,8 @@ class InterviewSession:
         return cls(
             session_id=data["session_id"],
             candidate_name=data.get("candidate_name", "Candidate"),
+            target_branch=data.get("target_branch"),
+            candidate_id=data.get("candidate_id"),
             persona=data.get("persona", "deputy_president"),
             questions=questions,
             current_index=data.get("current_index", 0),
@@ -124,12 +131,20 @@ class InterviewService:
         if hasattr(self.learning, "storage") and self.learning.storage is None:
             self.learning.storage = self.storage
         self.sessions: Dict[str, InterviewSession] = {}
+        self._session_locks: Dict[str, threading.Lock] = {}
+        self._locks_guard = threading.Lock()
+
+    def _session_lock(self, session_id: str) -> threading.Lock:
+        with self._locks_guard:
+            return self._session_locks.setdefault(session_id, threading.Lock())
 
     def start_session(
         self,
         candidate_name: str = "Candidate",
         persona: str = "deputy_president",
         num_questions: int = 5,
+        target_branch: Optional[str] = None,
+        candidate_id: Optional[str] = None,
     ) -> InterviewSession:
         """Initializes a new session with calibrated progression sequence."""
         session_id = str(uuid.uuid4())
@@ -138,13 +153,20 @@ class InterviewService:
         session = InterviewSession(
             session_id=session_id,
             candidate_name=candidate_name.strip() or "Candidate",
+            target_branch=target_branch.strip() if target_branch else None,
+            candidate_id=candidate_id.strip() if candidate_id else None,
             persona=persona,
             questions=questions,
             evidence_records=[],
         )
         self.sessions[session_id] = session
+        self._session_lock(session_id)
         self.storage.save_session(session.to_dict())
-        self.learning.initialize_profile(session_id, session.candidate_name)
+        if session.candidate_id:
+            self.storage.upsert_candidate(session.candidate_id, session.candidate_name)
+        self.learning.initialize_profile(
+            session_id, session.candidate_name, session.candidate_id
+        )
         logger.info("Session %s started for %s with %d questions", session_id, candidate_name, len(questions))
         return session
 
@@ -164,6 +186,10 @@ class InterviewService:
         If answer is excessively brief or vague, generates a targeted probing follow-up.
         Otherwise records evidence and advances to the next question.
         """
+        with self._session_lock(session.session_id):
+            return self._submit_primary_answer_locked(session, answer)
+
+    def _submit_primary_answer_locked(self, session: InterviewSession, answer: str) -> Tuple[bool, Optional[str]]:
         q = session.current_question
         if not q or session.completed:
             return False, None
@@ -190,6 +216,10 @@ class InterviewService:
 
     def submit_follow_up_answer(self, session: InterviewSession, follow_up_answer: str) -> None:
         """Records follow-up answer, completes evaluation for current question, and advances."""
+        with self._session_lock(session.session_id):
+            self._submit_follow_up_answer_locked(session, follow_up_answer)
+
+    def _submit_follow_up_answer_locked(self, session: InterviewSession, follow_up_answer: str) -> None:
         q = session.current_question
         if not q or session.completed:
             return
@@ -242,12 +272,15 @@ Do not reveal scoring criteria. Max 25 words.
 
     def generate_final_report(self, session: InterviewSession) -> EvaluationReport:
         """Runs Pass 2 evaluation, synthesizes final report, and records learning profile."""
-        report = self.evaluator.evaluate_session(
-            candidate_name=session.candidate_name,
-            persona=session.persona,
-            evidence_list=session.evidence_records,
-        )
-        report_dict = report.to_dict()
-        self.learning.record_session(session.session_id, session.candidate_name, report_dict)
-        self.storage.save_report(session.session_id, session.candidate_name, report_dict)
-        return report
+        with self._session_lock(session.session_id):
+            report = self.evaluator.evaluate_session(
+                candidate_name=session.candidate_name,
+                persona=session.persona,
+                evidence_list=session.evidence_records,
+            )
+            report_dict = report.to_dict()
+            self.learning.record_session(session.session_id, session.candidate_name, report_dict)
+            self.storage.save_report(
+                session.session_id, session.candidate_name, report_dict, session.candidate_id
+            )
+            return report
